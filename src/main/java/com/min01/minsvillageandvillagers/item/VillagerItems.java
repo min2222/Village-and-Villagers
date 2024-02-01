@@ -1,0 +1,25 @@
+package com.min01.minsvillageandvillagers.item;
+
+import com.min01.minsvillageandvillagers.MinsVillageAndVillagers;
+import com.min01.minsvillageandvillagers.entity.VillagerEntityTypes;
+
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.common.ForgeSpawnEggItem;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
+
+public class VillagerItems 
+{
+	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MinsVillageAndVillagers.MODID);
+	
+	public static final RegistryObject<Item> HARVESTER_SPAWN_EGG = registerSpawnEgg("harvester_spawn_egg", VillagerEntityTypes.HARVESTER.get(), 0, 0);
+	
+	public static RegistryObject<Item> registerSpawnEgg(String name, EntityType<? extends Mob> type, int color1, int color2)
+	{
+		return ITEMS.register(name, () -> new ForgeSpawnEggItem(() -> type, color1, color2, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+	}
+}
