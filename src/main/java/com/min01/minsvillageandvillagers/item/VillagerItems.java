@@ -1,5 +1,7 @@
 package com.min01.minsvillageandvillagers.item;
 
+import java.util.function.Supplier;
+
 import com.min01.minsvillageandvillagers.MinsVillageAndVillagers;
 import com.min01.minsvillageandvillagers.entity.VillagerEntityTypes;
 
@@ -16,10 +18,10 @@ public class VillagerItems
 {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MinsVillageAndVillagers.MODID);
 	
-	public static final RegistryObject<Item> HARVESTER_SPAWN_EGG = registerSpawnEgg("harvester_spawn_egg", VillagerEntityTypes.HARVESTER.get(), 0, 0);
+	public static final RegistryObject<Item> HARVESTER_SPAWN_EGG = registerSpawnEgg("harvester_spawn_egg", () -> VillagerEntityTypes.HARVESTER.get(), 0, 0);
 	
-	public static RegistryObject<Item> registerSpawnEgg(String name, EntityType<? extends Mob> type, int color1, int color2)
+	public static RegistryObject<Item> registerSpawnEgg(String name, Supplier<EntityType<? extends Mob>> type, int color1, int color2)
 	{
-		return ITEMS.register(name, () -> new ForgeSpawnEggItem(() -> type, color1, color2, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+		return ITEMS.register(name, () -> new ForgeSpawnEggItem(type, color1, color2, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 	}
 }
