@@ -1,14 +1,11 @@
 package com.min01.minsvillageandvillagers.entity.render;
 
-import com.min01.minsvillageandvillagers.MinsVillageAndVillagers;
 import com.min01.minsvillageandvillagers.entity.model.ModelHarvester;
 import com.min01.minsvillageandvillagers.entity.villager.EntityHarvester;
 
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
-import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.resources.ResourceLocation;
 
-public class HarvesterRenderer extends MobRenderer<EntityHarvester, ModelHarvester>
+public class HarvesterRenderer extends AbstractCombatVillagerRenderer<EntityHarvester, ModelHarvester>
 {
 	public HarvesterRenderer(Context p_174304_)
 	{
@@ -16,8 +13,8 @@ public class HarvesterRenderer extends MobRenderer<EntityHarvester, ModelHarvest
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(EntityHarvester p_115812_) 
+	public String getTextureName(EntityHarvester entity) 
 	{
-		return new ResourceLocation(MinsVillageAndVillagers.MODID, "textures/entity/harvester.png");
+		return "harvester";
 	}
 }
