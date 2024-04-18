@@ -153,7 +153,7 @@ public abstract class AbstractCombatVillager extends AbstractVillager
 		super.tick();
 		if(this.getTarget() != null && this.moveToTarget())
 		{
-			this.lookAt(Anchor.FEET, this.getTarget().position());
+			this.lookAt(Anchor.EYES, this.getTarget().getEyePosition());
 			this.getNavigation().moveTo(this.getTarget(), this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
 		}
 	}
