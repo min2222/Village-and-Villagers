@@ -1,7 +1,7 @@
-package com.min01.minsvillageandvillagers.misc;
+package com.min01.minsvillageandvillagers.event;
 
 import com.min01.minsvillageandvillagers.MinsVillageAndVillagers;
-import com.min01.minsvillageandvillagers.entity.VillagerEntityTypes;
+import com.min01.minsvillageandvillagers.entity.VillagerEntities;
 import com.min01.minsvillageandvillagers.entity.model.ModelHarvester;
 import com.min01.minsvillageandvillagers.entity.render.HarvesterRenderer;
 
@@ -17,8 +17,8 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event)
 	{
-		event.registerEntityRenderer(VillagerEntityTypes.HARVESTER.get(), HarvesterRenderer::new);
-		event.registerEntityRenderer(VillagerEntityTypes.THROWN_SAPLING.get(), p_174010_ -> new ThrownItemRenderer<>(p_174010_));
+		event.registerEntityRenderer(VillagerEntities.HARVESTER.get(), HarvesterRenderer::new);
+		event.registerEntityRenderer(VillagerEntities.THROWN_SAPLING.get(), p_174010_ -> new ThrownItemRenderer<>(p_174010_));
 	}
 	
     @SubscribeEvent

@@ -1,4 +1,4 @@
-package com.min01.minsvillageandvillagers.misc;
+package com.min01.minsvillageandvillagers.event;
 
 import com.min01.minsvillageandvillagers.MinsVillageAndVillagers;
 

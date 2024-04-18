@@ -1,6 +1,6 @@
 package com.min01.minsvillageandvillagers;
 
-import com.min01.minsvillageandvillagers.entity.VillagerEntityTypes;
+import com.min01.minsvillageandvillagers.entity.VillagerEntities;
 import com.min01.minsvillageandvillagers.item.VillagerItems;
 
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -15,7 +15,7 @@ public class MinsVillageAndVillagers
 	public MinsVillageAndVillagers()
 	{
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-		VillagerEntityTypes.ENTITY_TYPES.register(bus);
+		VillagerEntities.ENTITY_TYPES.register(bus);
 		VillagerItems.ITEMS.register(bus);
 	}
 }

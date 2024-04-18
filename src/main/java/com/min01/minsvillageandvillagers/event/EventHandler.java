@@ -1,7 +1,7 @@
-package com.min01.minsvillageandvillagers.misc;
+package com.min01.minsvillageandvillagers.event;
 
 import com.min01.minsvillageandvillagers.MinsVillageAndVillagers;
-import com.min01.minsvillageandvillagers.entity.VillagerEntityTypes;
+import com.min01.minsvillageandvillagers.entity.VillagerEntities;
 import com.min01.minsvillageandvillagers.entity.villager.EntityHarvester;
 
 import net.minecraft.world.entity.Mob;
@@ -19,12 +19,12 @@ public class EventHandler
     @SubscribeEvent
     public static void createAttributes(EntityAttributeCreationEvent event) 
     {
-    	event.put(VillagerEntityTypes.HARVESTER.get(), EntityHarvester.createAttributes().build());
+    	event.put(VillagerEntities.HARVESTER.get(), EntityHarvester.createAttributes().build());
     }
     
     @SubscribeEvent
     public static void registerSpawnPlacement(SpawnPlacementRegisterEvent event)
     {
-    	event.register(VillagerEntityTypes.HARVESTER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules, Operation.AND);
+    	event.register(VillagerEntities.HARVESTER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules, Operation.AND);
     }
 }

@@ -3,7 +3,7 @@ package com.min01.minsvillageandvillagers.item;
 import java.util.function.Supplier;
 
 import com.min01.minsvillageandvillagers.MinsVillageAndVillagers;
-import com.min01.minsvillageandvillagers.entity.VillagerEntityTypes;
+import com.min01.minsvillageandvillagers.entity.VillagerEntities;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -18,7 +18,7 @@ public class VillagerItems
 {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MinsVillageAndVillagers.MODID);
 	
-	public static final RegistryObject<Item> HARVESTER_SPAWN_EGG = registerSpawnEgg("harvester_spawn_egg", () -> VillagerEntityTypes.HARVESTER.get(), 0, 0);
+	public static final RegistryObject<Item> HARVESTER_SPAWN_EGG = registerSpawnEgg("harvester_spawn_egg", () -> VillagerEntities.HARVESTER.get(), 0, 0);
 	
 	public static RegistryObject<Item> registerSpawnEgg(String name, Supplier<EntityType<? extends Mob>> type, int color1, int color2)
 	{

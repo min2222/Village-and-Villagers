@@ -1,6 +1,6 @@
 package com.min01.minsvillageandvillagers.entity.villager;
 
-import com.min01.minsvillageandvillagers.entity.VillagerEntityTypes;
+import com.min01.minsvillageandvillagers.entity.VillagerEntities;
 import com.min01.minsvillageandvillagers.entity.projectile.EntityThrownSapling;
 
 import net.minecraft.world.damagesource.DamageSource;
@@ -65,7 +65,7 @@ public class EntityHarvester extends AbstractCombatVillager
 			{
 				if(this.tickCount % 100 == 0)
 				{
-					EntityThrownSapling sapling = new EntityThrownSapling(VillagerEntityTypes.THROWN_SAPLING.get(), this, this.level);
+					EntityThrownSapling sapling = new EntityThrownSapling(VillagerEntities.THROWN_SAPLING.get(), this, this.level);
 					sapling.setPos(this.position().add(0, this.getEyeHeight(), 0));
 					sapling.shootFromRotation(this, this.getXRot(), this.getYRot(), 0.0F, 1.5F, 1.0F);
 					this.level.addFreshEntity(sapling);
