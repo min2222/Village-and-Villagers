@@ -1,8 +1,8 @@
-package com.min01.minsvillageandvillagers.entity.render;
+package com.min01.villageandvillagers.entity.render;
 
-import com.min01.minsvillageandvillagers.MinsVillageAndVillagers;
-import com.min01.minsvillageandvillagers.entity.model.AbstractCombatVillagerModel;
-import com.min01.minsvillageandvillagers.entity.villager.AbstractCombatVillager;
+import com.min01.villageandvillagers.VillageAndVillagers;
+import com.min01.villageandvillagers.entity.model.AbstractCombatVillagerModel;
+import com.min01.villageandvillagers.entity.villager.AbstractCombatVillager;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -32,7 +32,7 @@ public abstract class AbstractCombatVillagerRenderer<T extends AbstractCombatVil
 	@Override
 	public ResourceLocation getTextureLocation(T p_115812_)
 	{
-		return new ResourceLocation(MinsVillageAndVillagers.MODID, "textures/entity/" + this.getTextureName(p_115812_) + ".png");
+		return new ResourceLocation(VillageAndVillagers.MODID, "textures/entity/" + this.getTextureName(p_115812_) + ".png");
 	}
 	
 	public abstract String getTextureName(T entity);

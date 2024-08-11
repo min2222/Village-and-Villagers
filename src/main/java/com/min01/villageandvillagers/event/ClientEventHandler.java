@@ -1,9 +1,9 @@
-package com.min01.minsvillageandvillagers.event;
+package com.min01.villageandvillagers.event;
 
-import com.min01.minsvillageandvillagers.MinsVillageAndVillagers;
-import com.min01.minsvillageandvillagers.entity.VillagerEntities;
-import com.min01.minsvillageandvillagers.entity.model.ModelHarvester;
-import com.min01.minsvillageandvillagers.entity.render.HarvesterRenderer;
+import com.min01.villageandvillagers.VillageAndVillagers;
+import com.min01.villageandvillagers.entity.VillagerEntities;
+import com.min01.villageandvillagers.entity.model.ModelHarvester;
+import com.min01.villageandvillagers.entity.render.HarvesterRenderer;
 
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -11,7 +11,7 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = MinsVillageAndVillagers.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = VillageAndVillagers.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventHandler 
 {
 	@SubscribeEvent

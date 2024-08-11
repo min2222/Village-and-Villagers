@@ -1,9 +1,9 @@
-package com.min01.minsvillageandvillagers.item;
+package com.min01.villageandvillagers.item;
 
 import java.util.function.Supplier;
 
-import com.min01.minsvillageandvillagers.MinsVillageAndVillagers;
-import com.min01.minsvillageandvillagers.entity.VillagerEntities;
+import com.min01.villageandvillagers.VillageAndVillagers;
+import com.min01.villageandvillagers.entity.VillagerEntities;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -16,7 +16,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class VillagerItems 
 {
-	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MinsVillageAndVillagers.MODID);
+	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, VillageAndVillagers.MODID);
 	
 	public static final RegistryObject<Item> HARVESTER_SPAWN_EGG = registerSpawnEgg("harvester_spawn_egg", () -> VillagerEntities.HARVESTER.get(), 0, 0);
 	

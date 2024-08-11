@@ -1,4 +1,4 @@
-package com.min01.minsvillageandvillagers.entity.villager;
+package com.min01.villageandvillagers.entity.villager;
 
 import javax.annotation.Nullable;
 
@@ -90,20 +90,20 @@ public abstract class AbstractCombatVillager extends AbstractVillager
 	public InteractionResult mobInteract(Player p_35856_, InteractionHand p_35857_) 
 	{
 		ItemStack itemstack = p_35856_.getItemInHand(p_35857_);
-		if (!itemstack.is(Items.VILLAGER_SPAWN_EGG) && this.isAlive() && !this.isTrading() && !this.isBaby() && !this.isCombatMode())
+		if(!itemstack.is(Items.VILLAGER_SPAWN_EGG) && this.isAlive() && !this.isTrading() && !this.isBaby() && !this.isCombatMode())
 		{
-			if (p_35857_ == InteractionHand.MAIN_HAND) 
+			if(p_35857_ == InteractionHand.MAIN_HAND) 
 			{
 				p_35856_.awardStat(Stats.TALKED_TO_VILLAGER);
 			}
 
-			if (this.getOffers().isEmpty()) 
+			if(this.getOffers().isEmpty()) 
 			{
 				return InteractionResult.sidedSuccess(this.level.isClientSide);
 			} 
 			else 
 			{
-				if (!this.level.isClientSide) 
+				if(!this.level.isClientSide) 
 				{
 					this.setTradingPlayer(p_35856_);
 					this.openTradingScreen(p_35856_, this.getDisplayName(), 1);
@@ -121,7 +121,7 @@ public abstract class AbstractCombatVillager extends AbstractVillager
 	@Override
 	protected void rewardTradeXp(MerchantOffer p_35859_)
 	{
-		if (p_35859_.shouldRewardExp())
+		if(p_35859_.shouldRewardExp())
 		{
 			int i = 3 + this.random.nextInt(4);
 			this.level.addFreshEntity(new ExperienceOrb(this.level, this.getX(), this.getY() + 0.5D, this.getZ(), i));
@@ -133,14 +133,14 @@ public abstract class AbstractCombatVillager extends AbstractVillager
 	{
 		VillagerTrades.ItemListing[] avillagertrades$itemlisting = this.getVillagerTrades();
 		VillagerTrades.ItemListing[] avillagertrades$itemlisting1 = this.getVillagerTrades();
-		if (avillagertrades$itemlisting != null && avillagertrades$itemlisting1 != null) 
+		if(avillagertrades$itemlisting != null && avillagertrades$itemlisting1 != null) 
 		{
 			MerchantOffers merchantoffers = this.getOffers();
 			this.addOffersFromItemListings(merchantoffers, avillagertrades$itemlisting, 5);
 			int i = this.random.nextInt(avillagertrades$itemlisting1.length);
 			VillagerTrades.ItemListing villagertrades$itemlisting = avillagertrades$itemlisting1[i];
 			MerchantOffer merchantoffer = villagertrades$itemlisting.getOffer(this, this.random);
-			if (merchantoffer != null)
+			if(merchantoffer != null)
 			{
 				merchantoffers.add(merchantoffer);
 			}
@@ -169,7 +169,7 @@ public abstract class AbstractCombatVillager extends AbstractVillager
 	@Override
 	protected SoundEvent getAmbientSound() 
 	{
-		if (this.isSleeping()) 
+		if(this.isSleeping()) 
 		{
 			return null;
 		} 

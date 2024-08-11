@@ -1,7 +1,7 @@
-package com.min01.minsvillageandvillagers.entity.render;
+package com.min01.villageandvillagers.entity.render;
 
-import com.min01.minsvillageandvillagers.entity.model.ModelHarvester;
-import com.min01.minsvillageandvillagers.entity.villager.EntityHarvester;
+import com.min01.villageandvillagers.entity.model.ModelHarvester;
+import com.min01.villageandvillagers.entity.villager.EntityHarvester;
 
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 

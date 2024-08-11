@@ -1,7 +1,7 @@
 {
 	"required": true,
 	"minVersion": "0.8",
-	"package": "com.min01.minsvillageandvillagers.mixin",
+	"package": "com.min01.villageandvillagers.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
 	],
@@ -11,5 +11,5 @@
 	"injectors": {
 		"defaultRequire": 1
 	},
-	"refmap": "minsvillageandvillagers.mixin-refmap.json"
+	"refmap": "villageandvillagers.mixin-refmap.json"
 }

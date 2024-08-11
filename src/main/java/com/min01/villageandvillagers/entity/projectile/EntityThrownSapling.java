@@ -1,4 +1,4 @@
-package com.min01.minsvillageandvillagers.entity.projectile;
+package com.min01.villageandvillagers.entity.projectile;
 
 import java.util.List;
 

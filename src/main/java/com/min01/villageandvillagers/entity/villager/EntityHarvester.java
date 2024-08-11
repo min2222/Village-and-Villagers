@@ -1,7 +1,7 @@
-package com.min01.minsvillageandvillagers.entity.villager;
+package com.min01.villageandvillagers.entity.villager;
 
-import com.min01.minsvillageandvillagers.entity.VillagerEntities;
-import com.min01.minsvillageandvillagers.entity.projectile.EntityThrownSapling;
+import com.min01.villageandvillagers.entity.VillagerEntities;
+import com.min01.villageandvillagers.entity.projectile.EntityThrownSapling;
 
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;

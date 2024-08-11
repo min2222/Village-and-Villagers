@@ -1,6 +1,19 @@
 1.19.2 Changelog
 43.3
 ====
+ - 43.3.8 Fix TagsProvider not honoring replace attribute (#9865)
+ - 43.3.7 Make common DisplayTest registration tasks easier (#9838)
+          Backport of #9822 to 1.19.2
+ - 43.3.6 Optimise ForgeConfigSpec and make Range public (#9827)
+          Backport of #9810 to 1.19.2
+ - 43.3.5 Update to FG6 and Gradle 8, backport 1.20 MDK (#9754)
+ - 43.3.4 Improve mod description formatting in mods screen (#9771)
+          Co-authored-by: Su5eD <su5ed@outlook.com>
+ - 43.3.3 Backport CrashReportAnalyser to 1.19.2 (#9758)
+ - 43.3.2 Optimise path filter in mod loading (#9712)
+          Co-authored-by: embeddedt <42941056+embeddedt@users.noreply.github.com>
+ - 43.3.1 Improve mod loading error message for errors inside mod constructors (#9709)
+          Co-authored-by: Jab125 <67534807+jab125@users.noreply.github.com>
  - 43.3.0 1.19.2 RB 3
 
 43.2

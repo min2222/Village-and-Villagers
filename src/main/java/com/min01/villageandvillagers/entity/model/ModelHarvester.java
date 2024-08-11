@@ -1,7 +1,7 @@
-package com.min01.minsvillageandvillagers.entity.model;
+package com.min01.villageandvillagers.entity.model;
 
-import com.min01.minsvillageandvillagers.MinsVillageAndVillagers;
-import com.min01.minsvillageandvillagers.entity.villager.EntityHarvester;
+import com.min01.villageandvillagers.VillageAndVillagers;
+import com.min01.villageandvillagers.entity.villager.EntityHarvester;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
@@ -20,7 +20,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class ModelHarvester extends AbstractCombatVillagerModel<EntityHarvester>
 {
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(MinsVillageAndVillagers.MODID, "harvester"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(VillageAndVillagers.MODID, "harvester"), "main");
 	private final ModelPart root;
 	
 	private final ModelPart head;

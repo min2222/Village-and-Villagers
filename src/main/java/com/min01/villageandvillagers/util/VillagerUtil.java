@@ -1,4 +1,4 @@
-package com.min01.minsvillageandvillagers.util;
+package com.min01.villageandvillagers.util;
 
 import java.util.function.Consumer;
 
@@ -35,13 +35,13 @@ public class VillagerUtil
 		{
 			BlockPos blockpos1 = blockpos.below();
 			BlockState blockstate = level.getBlockState(blockpos1);
-			if (blockstate.isFaceSturdy(level, blockpos1, Direction.UP))
+			if(blockstate.isFaceSturdy(level, blockpos1, Direction.UP))
 			{
-				if (!level.isEmptyBlock(blockpos)) 
+				if(!level.isEmptyBlock(blockpos)) 
 				{
 					BlockState blockstate1 = level.getBlockState(blockpos);
 					VoxelShape voxelshape = blockstate1.getCollisionShape(level, blockpos);
-					if (!voxelshape.isEmpty())
+					if(!voxelshape.isEmpty())
 					{
 						d0 = voxelshape.max(Direction.Axis.Y);
 					}
@@ -55,7 +55,7 @@ public class VillagerUtil
 		}
 		while(blockpos.getY() >= Mth.floor(p_32675_) - 1);
 
-		if (flag)
+		if(flag)
 		{
 			consumer.accept(new BlockPos(p_32673_, (double)blockpos.getY() + d0, p_32674_));
 		}
