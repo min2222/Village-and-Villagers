@@ -1,7 +1,8 @@
 package com.min01.villageandvillagers.event;
 
-import com.min01.villageandvillagers.VillageAndVillagers;
+import com.min01.villageandvillagers.VillageandVillagers;
 import com.min01.villageandvillagers.entity.VillagerEntities;
+import com.min01.villageandvillagers.entity.villager.EntityDrOctollager;
 import com.min01.villageandvillagers.entity.villager.EntityHarvester;
 
 import net.minecraft.world.entity.Mob;
@@ -13,13 +14,14 @@ import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent.Operation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = VillageAndVillagers.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = VillageandVillagers.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EventHandler 
 {
     @SubscribeEvent
     public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) 
     {
     	event.put(VillagerEntities.HARVESTER.get(), EntityHarvester.createAttributes().build());
+    	event.put(VillagerEntities.DR_OCTOLLAGER.get(), EntityDrOctollager.createAttributes().build());
     }
     
     @SubscribeEvent

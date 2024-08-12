@@ -1,17 +1,38 @@
 package com.min01.villageandvillagers.util;
 
+import java.lang.reflect.Method;
+import java.util.UUID;
 import java.util.function.Consumer;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.entity.LevelEntityGetter;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
 public class VillagerUtil
 {
+	@SuppressWarnings("unchecked")
+	public static <T extends Entity> T getEntityByUUID(Level level, UUID uuid)
+	{
+		Method m = ObfuscationReflectionHelper.findMethod(Level.class, "m_142646_");
+		try 
+		{
+			LevelEntityGetter<Entity> entities = (LevelEntityGetter<Entity>) m.invoke(level);
+			return (T) entities.get(uuid);
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public static void createLine(Level level, Vec3 targetPos, Vec3 pos, int maxDistance, Consumer<BlockPos> consumer)
 	{
 		double d0 = Math.min(targetPos.y, pos.y);

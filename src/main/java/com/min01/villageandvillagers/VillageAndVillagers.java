@@ -7,12 +7,12 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-@Mod(VillageAndVillagers.MODID)
-public class VillageAndVillagers 
+@Mod(VillageandVillagers.MODID)
+public class VillageandVillagers 
 {
 	public static final String MODID = "villageandvillagers";
 	
-	public VillageAndVillagers()
+	public VillageandVillagers()
 	{
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		

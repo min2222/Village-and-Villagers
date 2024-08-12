@@ -33,7 +33,7 @@ public class EntityHarvester extends AbstractCombatVillager
     			.add(Attributes.MAX_HEALTH, 40)
     			.add(Attributes.MOVEMENT_SPEED, 0.5D)
         		.add(Attributes.ATTACK_DAMAGE, 4)
-        		.add(Attributes.FOLLOW_RANGE, 70)
+        		.add(Attributes.FOLLOW_RANGE, 30)
         		.add(Attributes.ARMOR, 3)
         		.add(Attributes.ARMOR_TOUGHNESS, 3);
     }
