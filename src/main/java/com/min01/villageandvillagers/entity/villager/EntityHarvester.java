@@ -1,8 +1,6 @@
 package com.min01.villageandvillagers.entity.villager;
 
-import com.min01.villageandvillagers.entity.VillagerEntities;
-import com.min01.villageandvillagers.entity.projectile.EntityThrownSapling;
-
+import net.minecraft.commands.arguments.EntityAnchorArgument.Anchor;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -45,6 +43,17 @@ public class EntityHarvester extends AbstractCombatVillager
 	}
 	
 	@Override
+	public void tick() 
+	{
+		super.tick();
+		if(this.getTarget() != null)
+		{
+			this.lookAt(Anchor.EYES, this.getTarget().getEyePosition());
+			this.getNavigation().moveTo(this.getTarget(), this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
+		}
+	}
+	
+	@Override
 	public void aiStep() 
 	{
 		super.aiStep();
@@ -56,20 +65,6 @@ public class EntityHarvester extends AbstractCombatVillager
 			if(this.getLastHurtByMob() != null)
 			{
 				this.setTarget(this.getLastHurtByMob());
-			}
-		}
-		
-		if(this.isCombatMode())
-		{
-			if(this.getTarget() != null)
-			{
-				if(this.tickCount % 100 == 0)
-				{
-					EntityThrownSapling sapling = new EntityThrownSapling(VillagerEntities.THROWN_SAPLING.get(), this, this.level);
-					sapling.setPos(this.position().add(0, this.getEyeHeight(), 0));
-					sapling.shootFromRotation(this, this.getXRot(), this.getYRot(), 0.0F, 1.5F, 1.0F);
-					this.level.addFreshEntity(sapling);
-				}
 			}
 		}
 	}

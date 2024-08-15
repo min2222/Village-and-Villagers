@@ -11,7 +11,7 @@ public class KinematicChain
 {
 	private Entity entity;
 	private Entity target;
-	private ChainSegment[] segments = new ChainSegment[101];
+	private ChainSegment[] segments = new ChainSegment[81];
 	
 	public KinematicChain(Entity entity) 
 	{
@@ -54,23 +54,22 @@ public class KinematicChain
 	
 	public void tick()
 	{
-		this.segments[0].setPos(this.entity.position());
+		this.segments[0].setPos(this.entity.position().add(0, 0.2F, 0));
 		
 		for(ChainSegment segment : this.segments)
 		{
 			ChainSegment parent = segment.getParent();
 			Vec3 pos = segment.getPos();
-			
 			if(parent != null)
 			{
 				segment.setRot(this.lookAt(pos, parent.getPos()));
 				if(segment != this.segments[0])
 				{
-					segment.setPos(this.getLookPos(this.lookAt(parent.getPos(), pos), parent.getPos(), 0, 0, 0.1D));
+					segment.setPos(this.getLookPos(this.lookAt(parent.getPos(), pos), parent.getPos(), 0, 0, 0.15D));
 				}
 				
 				parent.setRot(this.lookAt(parent.getPos(), pos));
-				parent.setPos(this.getLookPos(this.lookAt(pos, parent.getPos()), pos, 0, 0, 0.1D));
+				parent.setPos(this.getLookPos(this.lookAt(pos, parent.getPos()), pos, 0, 0, 0.15D));
 			}
 			
 			if(segment.getName() == "tip")
@@ -85,9 +84,9 @@ public class KinematicChain
 		ChainSegment tip = this.segments[this.segments.length - 1];
 		if(this.target != null)
 		{
-			Vec3 pos = this.target.position().add(0, 0.5, 0);
+			Vec3 pos = this.target.getEyePosition().subtract(0, 0.5, 0);
 			tip.setRot(this.lookAt(tip.getPos(), pos));
-			tip.setPos(this.getLookPos(this.lookAt(pos, tip.getPos()), pos, 0, 0, 0.1D));
+			tip.setPos(this.getLookPos(this.lookAt(pos, tip.getPos()), pos, 0, 0, 0.15D));
 		}
 	}
 	

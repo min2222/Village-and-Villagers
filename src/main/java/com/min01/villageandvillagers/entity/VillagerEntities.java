@@ -21,7 +21,7 @@ public class VillagerEntities
 	public static final RegistryObject<EntityType<EntityHarvester>> HARVESTER = registerEntity("harvester", createBuilder(EntityHarvester::new, MobCategory.MISC).sized(0.6F, 1.95F));
 	public static final RegistryObject<EntityType<EntityDrOctollager>> DR_OCTOLLAGER = registerEntity("dr_octollager", createBuilder(EntityDrOctollager::new, MobCategory.MISC).sized(0.6F, 1.95F));
 
-	public static final RegistryObject<EntityType<EntityOctollagerClaw>> OCTOLLAGER_CLAW = registerEntity("octollager_claw", createBuilder(EntityOctollagerClaw::new, MobCategory.MISC).sized(0.5F, 0.5F));
+	public static final RegistryObject<EntityType<EntityOctollagerClaw>> OCTOLLAGER_CLAW = registerEntity("octollager_claw", createBuilder(EntityOctollagerClaw::new, MobCategory.MISC).sized(0.25F, 0.25F));
 	
 	public static final RegistryObject<EntityType<EntityThrownSapling>> THROWN_SAPLING = registerEntity("thrown_sappling", EntityType.Builder.<EntityThrownSapling>of(EntityThrownSapling::new, MobCategory.MISC).sized(0.25F, 0.25F));
 	

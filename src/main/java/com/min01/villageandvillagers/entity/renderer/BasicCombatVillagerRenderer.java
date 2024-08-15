@@ -1,4 +1,4 @@
-package com.min01.villageandvillagers.entity.render;
+package com.min01.villageandvillagers.entity.renderer;
 
 import com.min01.villageandvillagers.entity.model.AbstractCombatVillagerModel;
 import com.min01.villageandvillagers.entity.villager.AbstractCombatVillager;

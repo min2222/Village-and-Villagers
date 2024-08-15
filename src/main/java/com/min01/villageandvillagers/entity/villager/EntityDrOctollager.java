@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.min01.villageandvillagers.entity.VillagerEntities;
+import com.min01.villageandvillagers.util.VillagerUtil;
 
+import net.minecraft.commands.arguments.EntityAnchorArgument.Anchor;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
@@ -20,6 +22,8 @@ import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.phys.Vec3;
 
 public class EntityDrOctollager extends AbstractCombatVillager
 {
@@ -47,6 +51,7 @@ public class EntityDrOctollager extends AbstractCombatVillager
     	super.registerGoals();
     	this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, IronGolem.class, false));
     	this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Player.class, false));
+    	this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, false));
     }
 
 	@Override
@@ -56,13 +61,46 @@ public class EntityDrOctollager extends AbstractCombatVillager
 	}
 	
 	@Override
+	public void tick() 
+	{
+		super.tick();
+		if(this.getTarget() != null)
+		{
+			this.lookAt(Anchor.EYES, this.getTarget().getEyePosition());
+			if(this.distanceTo(this.getTarget()) > 15.0F)
+			{
+				this.getNavigation().moveTo(this.getTarget(), this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
+			}
+		}
+	}
+	
+	public Vec3 getClawPos(int i)
+	{
+		Vec2 rot = new Vec2(this.getXRot(), this.yBodyRot);
+		switch(i)
+		{
+			case 0:
+				return VillagerUtil.getLookPos(rot, this.getEyePosition(), 0.5F, 0.5F, 0.5F);
+			case 1:
+				return VillagerUtil.getLookPos(rot, this.getEyePosition(), -0.5F, 0.5F, 0.5F);
+			case 2:
+				return VillagerUtil.getLookPos(rot, this.getEyePosition(), 0.5F, -0.5F, 0.5F);
+			case 3:
+				return VillagerUtil.getLookPos(rot, this.getEyePosition(), -0.5F, -0.5F, 0.5F);
+			default:
+				return Vec3.ZERO;
+		}
+	}
+	
+	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_35282_, DifficultyInstance p_35283_, MobSpawnType p_35284_, SpawnGroupData p_35285_, CompoundTag p_35286_)
 	{
 		for(int i = 0; i < 4; i++)
 		{
 			EntityOctollagerClaw claw = new EntityOctollagerClaw(VillagerEntities.OCTOLLAGER_CLAW.get(), this.level);
-			claw.setPos(this.getEyePosition().subtract(this.level.random.nextDouble() * 1.5, 0.5, this.level.random.nextDouble() * 1.5));
+			claw.setPos(this.getClawPos(i));
 			claw.setOwner(this);
+			claw.setIndex(i);
 			this.level.addFreshEntity(claw);
 		}
 		return super.finalizeSpawn(p_35282_, p_35283_, p_35284_, p_35285_, p_35286_);

@@ -31,7 +31,7 @@ public class ModelOctollagerTentacle extends EntityModel<EntityOctollagerClaw>
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 23.0F, 0.0F, 1.5708F, 0.0F, 0.0F));
+		PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -1.0F, -1.0F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 23.0F, 0.0F));
 
 		root.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 3).addBox(-1.0F, -0.5F, -1.0F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.5F, 0.0F, 0.0F, -0.7854F, 0.0F));
 
@@ -41,7 +41,8 @@ public class ModelOctollagerTentacle extends EntityModel<EntityOctollagerClaw>
 	@Override
 	public void setupAnim(EntityOctollagerClaw entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) 
 	{
-
+		this.root.xRot = (float) Math.toRadians(headPitch + 90.0F);
+		this.root.yRot = (float) Math.toRadians(netHeadYaw + 90.0F);
 	}
 
 	@Override

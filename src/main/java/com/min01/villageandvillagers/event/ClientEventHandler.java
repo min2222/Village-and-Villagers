@@ -6,9 +6,9 @@ import com.min01.villageandvillagers.entity.model.ModelDrOctollager;
 import com.min01.villageandvillagers.entity.model.ModelHarvester;
 import com.min01.villageandvillagers.entity.model.ModelOctollagerClaw;
 import com.min01.villageandvillagers.entity.model.ModelOctollagerTentacle;
-import com.min01.villageandvillagers.entity.render.BasicCombatVillagerRenderer;
-import com.min01.villageandvillagers.entity.render.DrOctollagerRenderer;
-import com.min01.villageandvillagers.entity.render.OctollagerClawRenderer;
+import com.min01.villageandvillagers.entity.renderer.BasicCombatVillagerRenderer;
+import com.min01.villageandvillagers.entity.renderer.DrOctollagerRenderer;
+import com.min01.villageandvillagers.entity.renderer.OctollagerClawRenderer;
 
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;

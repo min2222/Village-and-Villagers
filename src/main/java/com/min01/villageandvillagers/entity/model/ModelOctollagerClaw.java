@@ -31,21 +31,21 @@ public class ModelOctollagerClaw extends EntityModel<EntityOctollagerClaw>
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
+		PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 22.0F, -1.0F, -1.5708F, 0.0F, 0.0F));
 
-		root.addOrReplaceChild("core", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -0.5F, -1.0F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -3.5F, 0.0F));
+		root.addOrReplaceChild("core", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -0.5F, -1.0F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -1.5F, 0.0F));
 
-		root.addOrReplaceChild("claw1", CubeListBuilder.create().texOffs(6, 7).addBox(-1.0F, -1.5F, -0.5F, 2.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -1.7615F, -1.9829F, -0.3491F, 0.0F, 0.0F));
+		root.addOrReplaceChild("claw1", CubeListBuilder.create().texOffs(6, 7).addBox(-1.0F, -1.5F, -0.5F, 2.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.2385F, -1.9829F, -0.3491F, 0.0F, 0.0F));
 
-		PartDefinition claw2 = root.addOrReplaceChild("claw2", CubeListBuilder.create(), PartPose.offset(1.9829F, -1.7615F, 0.0F));
+		PartDefinition claw2 = root.addOrReplaceChild("claw2", CubeListBuilder.create(), PartPose.offset(1.9829F, 0.2385F, 0.0F));
 
 		claw2.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 7).addBox(2.0F, -2.0F, -1.0F, 2.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.2988F, 0.6409F, -3.0F, 0.0F, -1.5708F, -0.3491F));
 
-		PartDefinition claw3 = root.addOrReplaceChild("claw3", CubeListBuilder.create(), PartPose.offset(-1.9829F, -1.7615F, 0.0F));
+		PartDefinition claw3 = root.addOrReplaceChild("claw3", CubeListBuilder.create(), PartPose.offset(-1.9829F, 0.2385F, 0.0F));
 
 		claw3.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(6, 3).addBox(-4.0F, -2.0F, -1.0F, 2.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.2988F, 0.6409F, -3.0F, 0.0F, 1.5708F, 0.3491F));
 
-		root.addOrReplaceChild("claw4", CubeListBuilder.create().texOffs(0, 3).addBox(-1.0F, -1.5F, -0.5F, 2.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -1.7615F, 1.9829F, 0.3491F, 0.0F, 0.0F));
+		root.addOrReplaceChild("claw4", CubeListBuilder.create().texOffs(0, 3).addBox(-1.0F, -1.5F, -0.5F, 2.0F, 3.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.2385F, 1.9829F, 0.3491F, 0.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 16, 16);
 	}
@@ -53,7 +53,8 @@ public class ModelOctollagerClaw extends EntityModel<EntityOctollagerClaw>
 	@Override
 	public void setupAnim(EntityOctollagerClaw entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
 	{
-		
+		this.root.xRot = (float) Math.toRadians(headPitch);
+		this.root.yRot = (float) Math.toRadians(netHeadYaw);
 	}
 
 	@Override

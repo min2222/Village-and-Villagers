@@ -46,7 +46,7 @@ public class ModelHarvester extends AbstractCombatVillagerModel<EntityHarvester>
 
 		head.addOrReplaceChild("nose", CubeListBuilder.create().texOffs(24, 0).addBox(-1.0F, -1.0F, -6.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.0F, 0.0F));
 
-		head.addOrReplaceChild("wheat", CubeListBuilder.create().texOffs(53, 50).addBox(-0.4F, 0.1F, 0.6F, 2.0F, 0.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-6.5F, 0.3F, -7.0F, 0.5178F, 0.8425F, 0.2101F));
+		head.addOrReplaceChild("wheat", CubeListBuilder.create().texOffs(25, 40).addBox(-0.4F, 0.1F, 0.6F, 2.0F, 0.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-6.5F, 0.3F, -7.0F, 0.5178F, 0.8425F, 0.2101F));
 
 		head.addOrReplaceChild("hat", CubeListBuilder.create().texOffs(31, 48).addBox(-8.0F, -8.0F, -6.0F, 16.0F, 16.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -1.5708F, 0.0F, 0.0F));
 
@@ -56,11 +56,11 @@ public class ModelHarvester extends AbstractCombatVillagerModel<EntityHarvester>
 
 		body.addOrReplaceChild("bodywear", CubeListBuilder.create().texOffs(0, 38).addBox(-4.0F, 0.0F, -3.0F, 8.0F, 20.0F, 6.0F, new CubeDeformation(0.2F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition combat_arm = root.addOrReplaceChild("combat_arm", CubeListBuilder.create(), PartPose.offset(0.0F, -22.0F, 0.0F));
+		PartDefinition combat_arm = root.addOrReplaceChild("combat_arm", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		combat_arm.addOrReplaceChild("left_c_arm", CubeListBuilder.create().texOffs(44, 22).mirror().addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(5.0F, 0.0F, 0.0F));
+		combat_arm.addOrReplaceChild("left_c_arm", CubeListBuilder.create().texOffs(44, 22).mirror().addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(5.0F, -22.0F, 0.0F));
 
-		combat_arm.addOrReplaceChild("right_c_arm", CubeListBuilder.create().texOffs(44, 22).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-5.0F, 0.0F, 0.0F));
+		combat_arm.addOrReplaceChild("right_c_arm", CubeListBuilder.create().texOffs(44, 22).addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(-5.0F, -22.0F, 0.0F));
 
 		PartDefinition arms = root.addOrReplaceChild("arms", CubeListBuilder.create().texOffs(40, 38).addBox(-4.0F, 2.0F, -2.0F, 8.0F, 4.0F, 4.0F, new CubeDeformation(0.0F))
 		.texOffs(44, 22).addBox(-8.0F, -2.0F, -2.0F, 4.0F, 8.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -21.05F, -1.05F, -0.7505F, 0.0F, 0.0F));

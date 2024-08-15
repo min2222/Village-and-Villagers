@@ -2,7 +2,6 @@ package com.min01.villageandvillagers.entity.villager;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.commands.arguments.EntityAnchorArgument.Anchor;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -17,7 +16,7 @@ import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.InteractGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -33,33 +32,33 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public abstract class AbstractCombatVillager extends AbstractVillager
 {
-	private static final EntityDataAccessor<Boolean> IS_COMBAT = SynchedEntityData.defineId(AbstractCombatVillager.class, EntityDataSerializers.BOOLEAN);
-	   
+	public static final EntityDataAccessor<Integer> ANIMATION_STATE = SynchedEntityData.defineId(AbstractCombatVillager.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Integer> ANIMATION_TICK = SynchedEntityData.defineId(AbstractCombatVillager.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Boolean> CAN_MOVE = SynchedEntityData.defineId(AbstractCombatVillager.class, EntityDataSerializers.BOOLEAN);
+	public static final EntityDataAccessor<Boolean> IS_USING_SKILL = SynchedEntityData.defineId(AbstractCombatVillager.class, EntityDataSerializers.BOOLEAN);
+	public static final EntityDataAccessor<Boolean> IS_COMBAT = SynchedEntityData.defineId(AbstractCombatVillager.class, EntityDataSerializers.BOOLEAN);
+	
 	public AbstractCombatVillager(EntityType<? extends AbstractVillager> p_35267_, Level p_35268_) 
 	{
 		super(p_35267_, p_35268_);
 		((GroundPathNavigation)this.getNavigation()).setCanOpenDoors(true);
 		this.getNavigation().setCanFloat(true);
+		this.noCulling = true;
 	}
 	
 	@Override
 	protected void defineSynchedData() 
 	{
 		super.defineSynchedData();
+		this.entityData.define(ANIMATION_STATE, 0);
+		this.entityData.define(ANIMATION_TICK, 0);
+		this.entityData.define(CAN_MOVE, true);
+		this.entityData.define(IS_USING_SKILL, false);
 		this.entityData.define(IS_COMBAT, false);
-	}
-	
-	public void setCombatMode(boolean value)
-	{
-		this.entityData.set(IS_COMBAT, value);
-	}
-	
-	public boolean isCombatMode()
-	{
-		return this.entityData.get(IS_COMBAT);
 	}
 	
 	@Override
@@ -71,6 +70,30 @@ public abstract class AbstractCombatVillager extends AbstractVillager
 		this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.35D));
 		this.goalSelector.addGoal(9, new InteractGoal(this, Player.class, 3.0F, 1.0F));
 		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
+	}
+	
+    @Override
+	public void move(MoverType p_19973_, Vec3 p_19974_) 
+	{
+		if(this.canMove())
+		{
+			super.move(p_19973_, p_19974_);
+		}
+		else
+		{
+			double yvec = this.onGround || this.isNoGravity() ? 0 : this.getDeltaMovement().y;
+			super.move(p_19973_, new Vec3(0, yvec, 0));
+		}
+	}
+	
+	@Override
+	public void tick()
+	{
+		super.tick();
+		if(this.getAnimationTick() > 0)
+		{
+			this.setAnimationTick(this.getAnimationTick() - 1);
+		}
 	}
 	
 	@Nullable
@@ -147,22 +170,6 @@ public abstract class AbstractCombatVillager extends AbstractVillager
 		}
 	}
 	
-	@Override
-	public void tick()
-	{
-		super.tick();
-		if(this.getTarget() != null && this.moveToTarget())
-		{
-			this.lookAt(Anchor.EYES, this.getTarget().getEyePosition());
-			this.getNavigation().moveTo(this.getTarget(), this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
-		}
-	}
-	
-	public boolean moveToTarget()
-	{
-		return true;
-	}
-	
 	public abstract VillagerTrades.ItemListing[] getVillagerTrades();
 	
 	@Nullable
@@ -190,4 +197,59 @@ public abstract class AbstractCombatVillager extends AbstractVillager
 	{
 		return SoundEvents.VILLAGER_DEATH;
 	}
+	
+	public void stopAllAnimationStates()
+	{
+		
+	}
+	
+	public void setIsUsingSkill(boolean value) 
+	{
+		this.entityData.set(IS_USING_SKILL, value);
+	}
+	
+	public boolean isUsingSkill() 
+	{
+		return this.getAnimationTick() > 0 || this.entityData.get(IS_USING_SKILL);
+	}
+    
+    public void setCanMove(boolean value)
+    {
+    	this.entityData.set(CAN_MOVE, value);
+    }
+    
+    public boolean canMove()
+    {
+    	return this.entityData.get(CAN_MOVE);
+    }
+    
+	public void setCombatMode(boolean value)
+	{
+		this.entityData.set(IS_COMBAT, value);
+	}
+	
+	public boolean isCombatMode()
+	{
+		return this.entityData.get(IS_COMBAT);
+	}
+    
+    public void setAnimationTick(int value)
+    {
+        this.entityData.set(ANIMATION_TICK, value);
+    }
+    
+    public int getAnimationTick()
+    {
+        return this.entityData.get(ANIMATION_TICK);
+    }
+    
+    public void setAnimationState(int value)
+    {
+        this.entityData.set(ANIMATION_STATE, value);
+    }
+    
+    public int getAnimationState()
+    {
+        return this.entityData.get(ANIMATION_STATE);
+    }
 }
