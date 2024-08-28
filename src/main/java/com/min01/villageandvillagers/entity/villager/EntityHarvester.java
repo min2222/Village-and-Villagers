@@ -1,6 +1,5 @@
 package com.min01.villageandvillagers.entity.villager;
 
-import net.minecraft.commands.arguments.EntityAnchorArgument.Anchor;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -48,8 +47,11 @@ public class EntityHarvester extends AbstractCombatVillager
 		super.tick();
 		if(this.getTarget() != null)
 		{
-			this.lookAt(Anchor.EYES, this.getTarget().getEyePosition());
-			this.getNavigation().moveTo(this.getTarget(), this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
+			this.getLookControl().setLookAt(this.getTarget(), 30.0F, 30.0F);
+			if(this.canMove())
+			{
+				this.getNavigation().moveTo(this.getTarget(), this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
+			}
 		}
 	}
 	

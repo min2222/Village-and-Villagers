@@ -6,7 +6,6 @@ import java.util.List;
 import com.min01.villageandvillagers.entity.VillagerEntities;
 import com.min01.villageandvillagers.util.VillagerUtil;
 
-import net.minecraft.commands.arguments.EntityAnchorArgument.Anchor;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
@@ -66,8 +65,8 @@ public class EntityDrOctollager extends AbstractCombatVillager
 		super.tick();
 		if(this.getTarget() != null)
 		{
-			this.lookAt(Anchor.EYES, this.getTarget().getEyePosition());
-			if(this.distanceTo(this.getTarget()) > 15.0F)
+			this.getLookControl().setLookAt(this.getTarget(), 30.0F, 30.0F);
+			if(this.distanceTo(this.getTarget()) > 15.0F && this.canMove())
 			{
 				this.getNavigation().moveTo(this.getTarget(), this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
 			}

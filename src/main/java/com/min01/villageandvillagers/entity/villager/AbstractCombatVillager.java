@@ -16,7 +16,6 @@ import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.InteractGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -32,7 +31,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 
 public abstract class AbstractCombatVillager extends AbstractVillager
 {
@@ -70,20 +68,6 @@ public abstract class AbstractCombatVillager extends AbstractVillager
 		this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.35D));
 		this.goalSelector.addGoal(9, new InteractGoal(this, Player.class, 3.0F, 1.0F));
 		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
-	}
-	
-    @Override
-	public void move(MoverType p_19973_, Vec3 p_19974_) 
-	{
-		if(this.canMove())
-		{
-			super.move(p_19973_, p_19974_);
-		}
-		else
-		{
-			double yvec = this.onGround || this.isNoGravity() ? 0 : this.getDeltaMovement().y;
-			super.move(p_19973_, new Vec3(0, yvec, 0));
-		}
 	}
 	
 	@Override
