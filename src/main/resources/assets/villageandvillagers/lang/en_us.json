@@ -1,7 +1,4 @@
 {
 	"item.villageandvillagers.harvester_spawn_egg": "Harvester Spawn Egg",
-	"item.villageandvillagers.dr_octollager_spawn_egg": "Dr. Octollager Spawn Egg",
-	"entity.villageandvillagers.harvester": "Harvester",
-	"entity.villageandvillagers.dr_octollager": "Dr. Octollager",
-	"entity.villageandvillagers.octollager_claw": "Octollager Claw"
+	"entity.villageandvillagers.harvester": "Harvester"
 }
