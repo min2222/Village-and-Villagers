@@ -64,3 +64,15 @@ this mod aimed to expand lots of unique villagers and illagers!
     versionRange="[1.19.2,1.20)"
     ordering="NONE"
     side="BOTH"
+[[dependencies.centipede]]
+modId="tickrateapi"
+mandatory=true
+versionRange="[1.0.0,)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.centipede]]
+modId="aes"
+mandatory=true
+versionRange="[1.0.0,)"
+ordering="NONE"
+side="BOTH"
