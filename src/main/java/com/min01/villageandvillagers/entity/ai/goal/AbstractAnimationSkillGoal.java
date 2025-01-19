@@ -28,7 +28,7 @@ public abstract class AbstractAnimationSkillGoal<T extends Mob & IAnimatable> ex
     		}
     		else 
     		{
-    			return this.getMob().tickCount >= this.nextSkillTickCount && this.additionalStartCondition();
+    			return this.getMob().tickCount >= this.nextSkillTickCount && this.getMob().isCombatMode() && this.additionalStartCondition();
     		}
     	}
     	else 

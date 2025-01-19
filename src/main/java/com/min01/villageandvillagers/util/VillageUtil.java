@@ -59,6 +59,14 @@ public class VillageUtil
 		return Mth.sqrt(f * f + f1 * f1 + f2 * f2);
 	}
 	
+	public static float distanceTo(Entity entity, Vec3 pos)
+	{
+		float f = (float)(entity.getX() - pos.x);
+		float f1 = (float)(entity.getY() - pos.y);
+		float f2 = (float)(entity.getZ() - pos.z);
+		return Mth.sqrt(f * f + f1 * f1 + f2 * f2);
+	}
+	
 	public static Vec3 getLookPos(Vec2 rotation, Vec3 position, double left, double up, double forwards) 
 	{
 		Vec2 vec2 = rotation;

@@ -250,6 +250,7 @@ public abstract class AbstractCombatVillager extends AbstractVillager implements
 		this.entityData.set(IS_COMBAT_MODE, value);
 	}
 	
+	@Override
 	public boolean isCombatMode()
 	{
 		return this.entityData.get(IS_COMBAT_MODE);
