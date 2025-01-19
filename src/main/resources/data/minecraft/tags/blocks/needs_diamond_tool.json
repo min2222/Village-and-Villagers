@@ -1,0 +1,16 @@
+{
+	"replace": false,
+	"values": [
+		"villageandvillagers:asura_stone",
+		"villageandvillagers:asura_stone_bricks",
+		"villageandvillagers:asura_stone_pillar",
+		"villageandvillagers:chiseled_asura_stone",
+		"villageandvillagers:smooth_asura_stone",
+		"villageandvillagers:asura_stone_slab",
+		"villageandvillagers:asura_stone_brick_slab",
+		"villageandvillagers:smooth_asura_stone_slab",
+		"villageandvillagers:asura_stone_stairs",
+		"villageandvillagers:asura_stone_brick_stairs",
+		"villageandvillagers:smooth_asura_stone_stairs"
+	]
+}

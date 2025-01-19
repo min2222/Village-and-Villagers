@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/stairs",
+	"textures": {
+		"bottom": "villageandvillagers:block/asura_stone",
+		"side": "villageandvillagers:block/asura_stone",
+		"top": "villageandvillagers:block/asura_stone"
+	}
+}

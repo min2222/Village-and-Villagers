@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
-import com.min01.villageandvillagers.util.VillagerUtil;
+import com.min01.villageandvillagers.util.VillageUtil;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -50,9 +50,9 @@ public abstract class AbstractOwnableEntity<T extends Entity> extends Entity
 		}
 	}
 	
-	public void setOwner(T p_37263_)
+	public void setOwner(T owner)
 	{
-		this.entityData.set(OWNER_UUID, Optional.of(p_37263_.getUUID()));
+		this.entityData.set(OWNER_UUID, Optional.of(owner.getUUID()));
 	}
 	
 	@Nullable
@@ -60,7 +60,7 @@ public abstract class AbstractOwnableEntity<T extends Entity> extends Entity
 	{
 		if(this.entityData.get(OWNER_UUID).isPresent()) 
 		{
-			return VillagerUtil.getEntityByUUID(this.level, this.entityData.get(OWNER_UUID).get());
+			return VillageUtil.getEntityByUUID(this.level, this.entityData.get(OWNER_UUID).get());
 		}
 		return null;
 	}

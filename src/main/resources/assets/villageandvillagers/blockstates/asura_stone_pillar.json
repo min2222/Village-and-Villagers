@@ -1,0 +1,16 @@
+{
+	"variants": {
+		"axis=x": {
+			"model": "villageandvillagers:block/asura_stone_pillar",
+			"x": 90,
+			"y": 90
+		},
+		"axis=y": {
+			"model": "villageandvillagers:block/asura_stone_pillar"
+		},
+		"axis=z": {
+			"model": "villageandvillagers:block/asura_stone_pillar",
+			"x": 90
+		}
+	}
+}

@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:block/cube_column",
+	"textures": {
+		"end": "villageandvillagers:block/asura_stone_pillar_top",
+		"side": "villageandvillagers:block/asura_stone_pillar_side"
+	}
+}

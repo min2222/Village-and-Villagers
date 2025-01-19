@@ -1,4 +1,15 @@
 {
+	"entity.villageandvillagers.harvester": "Harvester",
 	"item.villageandvillagers.harvester_spawn_egg": "Harvester Spawn Egg",
-	"entity.villageandvillagers.harvester": "Harvester"
+	"block.villageandvillagers.asura_stone": "Asura Stone",
+	"block.villageandvillagers.asura_stone_bricks": "Asura Stone Bricks",
+	"block.villageandvillagers.asura_stone_pillar": "Asura Stone Pillar",
+	"block.villageandvillagers.chiseled_asura_stone": "Chiseled Asura Stone",
+	"block.villageandvillagers.smooth_asura_stone": "Smooth Asura Stone",
+	"block.villageandvillagers.asura_stone_slab": "Asura Stone Slab",
+	"block.villageandvillagers.asura_stone_brick_slab": "Asura Stone Brick Slab",
+	"block.villageandvillagers.smooth_asura_stone_slab": "Smooth Asura Stone Slab",
+	"block.villageandvillagers.asura_stone_stairs": "Asura Stone Stairs",
+	"block.villageandvillagers.asura_stone_brick_stairs": "Asura Stone Brick Stairs",
+	"block.villageandvillagers.smooth_asura_stone_stairs": "Smooth Asura Stone Stairs"
 }

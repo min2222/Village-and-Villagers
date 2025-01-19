@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/slab_top",
+	"textures": {
+		"bottom": "villageandvillagers:block/asura_stone_bricks",
+		"side": "villageandvillagers:block/asura_stone_bricks",
+		"top": "villageandvillagers:block/asura_stone_bricks"
+	}
+}

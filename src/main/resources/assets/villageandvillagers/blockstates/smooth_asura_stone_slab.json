@@ -1,0 +1,13 @@
+{
+	"variants": {
+		"type=bottom": {
+			"model": "villageandvillagers:block/smooth_asura_stone_slab"
+		},
+		"type=double": {
+			"model": "villageandvillagers:block/smooth_asura_stone"
+		},
+		"type=top": {
+			"model": "villageandvillagers:block/smooth_asura_stone_slab_top"
+		}
+	}
+}

@@ -17,7 +17,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
-public class VillagerUtil
+public class VillageUtil
 {
 	public static Vec3 getGroundPos(BlockGetter pLevel, double pX, double startY, double pZ)
     {
