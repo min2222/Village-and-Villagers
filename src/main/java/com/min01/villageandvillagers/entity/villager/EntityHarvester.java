@@ -1,6 +1,7 @@
 package com.min01.villageandvillagers.entity.villager;
 
 import com.min01.villageandvillagers.entity.ai.goal.HarvesterStabGoal;
+import com.min01.villageandvillagers.entity.ai.goal.HarvesterSummonBarricadeGoal;
 
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.world.entity.AnimationState;
@@ -19,6 +20,7 @@ public class EntityHarvester extends AbstractCombatVillager
 {
 	public final AnimationState stabAnimationState = new AnimationState();
 	public final AnimationState twoHandStabAnimationState = new AnimationState();
+	public final AnimationState stompAnimationState = new AnimationState();
 	
 	public EntityHarvester(EntityType<? extends AbstractVillager> p_35267_, Level p_35268_)
 	{
@@ -42,6 +44,7 @@ public class EntityHarvester extends AbstractCombatVillager
     {
     	super.registerGoals();
     	this.goalSelector.addGoal(4, new HarvesterStabGoal(this));
+    	this.goalSelector.addGoal(4, new HarvesterSummonBarricadeGoal(this));
     }
     
 	@Override
@@ -68,6 +71,12 @@ public class EntityHarvester extends AbstractCombatVillager
         			this.twoHandStabAnimationState.start(this.tickCount);
         			break;
         		}
+        		case 3: 
+        		{
+        			this.stopAllAnimationStates();
+        			this.stompAnimationState.start(this.tickCount);
+        			break;
+        		}
             }
         }
 	}
@@ -77,6 +86,7 @@ public class EntityHarvester extends AbstractCombatVillager
 	{
 		this.stabAnimationState.stop();
 		this.twoHandStabAnimationState.stop();
+		this.stompAnimationState.stop();
 	}
 	
 	@Override
@@ -88,6 +98,7 @@ public class EntityHarvester extends AbstractCombatVillager
 			this.getLookControl().setLookAt(this.getTarget(), 30.0F, 30.0F);
 			if(this.canMove())
 			{
+				//TODO hide in barricade
 				this.getNavigation().moveTo(this.getTarget(), this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
 			}
 		}

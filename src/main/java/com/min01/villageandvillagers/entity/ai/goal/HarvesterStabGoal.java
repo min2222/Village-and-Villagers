@@ -42,13 +42,10 @@ public class HarvesterStabGoal extends BasicAnimationSkillGoal<EntityHarvester>
 		if(this.mob.posArray[0] != null)
 		{
 			List<LivingEntity> list = this.mob.level.getEntitiesOfClass(LivingEntity.class, this.mob.getBoundingBox().inflate(1.5F));
-			list.removeIf(t -> t == this.mob || t.isAlliedTo(this.mob));
+			list.removeIf(t -> t == this.mob || t.isAlliedTo(this.mob) || VillageUtil.distanceTo(t, this.mob.posArray[0]) > 2.5F);
 			list.forEach(t -> 
 			{
-				if(VillageUtil.distanceTo(t, this.mob.posArray[0]) <= 1.5F)
-				{
-					t.hurt(DamageSource.mobAttack(this.mob), (float) this.mob.getAttributeBaseValue(Attributes.ATTACK_DAMAGE));
-				}
+				t.hurt(DamageSource.mobAttack(this.mob), (float) this.mob.getAttributeBaseValue(Attributes.ATTACK_DAMAGE));
 			});
 		}
 	}

@@ -33,7 +33,8 @@ public class ModelHarvester extends HierarchicalModel<EntityHarvester>
 	private final ModelPart right_leg;
 	private final ModelPart left_leg;
 
-	public ModelHarvester(ModelPart root) {
+	public ModelHarvester(ModelPart root)
+	{
 		this.root = root.getChild("root");
 		this.body = this.root.getChild("body");
 		this.upperbody = this.body.getChild("upperbody");
@@ -100,6 +101,7 @@ public class ModelHarvester extends HierarchicalModel<EntityHarvester>
 		VillageClientUtil.animateHead(this.head, netHeadYaw, headPitch);
 		this.animate(entity.stabAnimationState, HarvesterAnimation.HARVESTER_STAB, ageInTicks);
 		this.animate(entity.twoHandStabAnimationState, HarvesterAnimation.HARVESTER_TWO_HAND_STAB, ageInTicks);
+		this.animate(entity.stompAnimationState, HarvesterAnimation.HARVESTER_STOMP, ageInTicks);
 		this.arms_crossed.visible = !entity.isCombatMode();
 		this.arms_out.visible = entity.isCombatMode();
 
