@@ -2,7 +2,7 @@ package com.min01.villageandvillagers.util;
 
 import java.lang.reflect.Method;
 import java.util.UUID;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -102,25 +102,24 @@ public class VillageUtil
 		return null;
 	}
 	
-	public static void createLine(Level level, Vec3 targetPos, Vec3 pos, int maxDistance, Consumer<BlockPos> consumer)
+	public static void createLine(Level level, Vec3 targetPos, Vec3 pos, int maxDistance, BiConsumer<BlockPos, Integer> consumer)
 	{
-		double d0 = Math.min(targetPos.y, pos.y);
-		double d1 = Math.max(targetPos.y, pos.y) + 1.0D;
+		double y = Math.min(targetPos.y, pos.y);
+		double yAbove = Math.max(targetPos.y, pos.y) + 1.0D;
 		float f = (float)Mth.atan2(targetPos.z - pos.z, targetPos.x - pos.x);
-		for(int l = 0; l < maxDistance; ++l)
+		for(int i = 0; i < maxDistance; ++i)
 		{
-			double d2 = 1.25D * (double)(l + 1);
-			int j = 1 * l;
-			createLine(level, pos.x + (double)Mth.cos(f) * d2, pos.z + (double)Mth.sin(f) * d2, d0, d1, j, consumer);
+			double d2 = 1.25D * (double)(i + 1);
+			int delay = 1 * i;
+			createLine(level, pos.x + (double)Mth.cos(f) * d2, pos.z + (double)Mth.sin(f) * d2, y, yAbove, delay, consumer);
 		}
 	}
 	
-	public static void createLine(Level level, double p_32673_, double p_32674_, double p_32675_, double p_32676_, int p_32678_, Consumer<BlockPos> consumer) 
+	public static void createLine(Level level, double x, double z, double y, double yAbove, int delay, BiConsumer<BlockPos, Integer> consumer) 
 	{
-		BlockPos blockpos = new BlockPos(p_32673_, p_32676_, p_32674_);
+		BlockPos blockpos = new BlockPos(x, yAbove, z);
 		boolean flag = false;
 		double d0 = 0.0D;
-
 		do 
 		{
 			BlockPos blockpos1 = blockpos.below();
@@ -143,11 +142,11 @@ public class VillageUtil
 
 			blockpos = blockpos.below();
 		}
-		while(blockpos.getY() >= Mth.floor(p_32675_) - 1);
+		while(blockpos.getY() >= Mth.floor(y) - 1);
 
 		if(flag)
 		{
-			consumer.accept(new BlockPos(p_32673_, (double)blockpos.getY() + d0, p_32674_));
+			consumer.accept(new BlockPos(x, (double)blockpos.getY() + d0, z), delay);
 		}
     }
 }
