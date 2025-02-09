@@ -5,7 +5,6 @@ import java.util.function.Supplier;
 
 import com.min01.villageandvillagers.entity.IPosArray;
 import com.min01.villageandvillagers.misc.VillageEntityDataSerializers;
-import com.min01.villageandvillagers.util.VillageClientUtil;
 import com.min01.villageandvillagers.util.VillageUtil;
 
 import net.minecraft.network.FriendlyByteBuf;
@@ -56,11 +55,14 @@ public class UpdatePosArrayPacket
 				}
 				else
 				{
-					Entity entity = VillageUtil.getEntityByUUID(VillageClientUtil.MC.level, message.entityUUID);
-					if(entity instanceof IPosArray mob) 
+					VillageUtil.getClientLevel(level -> 
 					{
-						mob.getPosArray()[message.array] = message.pos;
-					}
+						Entity entity = VillageUtil.getEntityByUUID(level, message.entityUUID);
+						if(entity instanceof IPosArray mob) 
+						{
+							mob.getPosArray()[message.array] = message.pos;
+						}
+					});
 				}
 			});
 			ctx.get().setPacketHandled(true);

@@ -1,12 +1,14 @@
 package com.min01.villageandvillagers.mixin;
 
+import java.util.List;
+
 import org.spongepowered.asm.mixin.Mixin;
 
 import com.min01.villageandvillagers.entity.IClipPos;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -14,7 +16,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -22,14 +23,19 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public interface MixinBlockGetter extends BlockGetter
 {
     @Override
-    default BlockHitResult clip(ClipContext p_45548_)
+    default BlockHitResult clip(ClipContext ctx)
     {
-    	BlockHitResult hitResult = this.clipOriginal(p_45548_);
-		Vec3 to = hitResult.getLocation();
-		EntityHitResult entityHit = ProjectileUtil.getEntityHitResult(Level.class.cast(this), null, p_45548_.getFrom(), to, new AABB(p_45548_.getFrom(), to), t -> t instanceof IClipPos);
-		if(entityHit != null && entityHit.getEntity() instanceof IClipPos entity)
+    	BlockHitResult hitResult = this.clipOriginal(ctx);
+	    Vec3 from = ctx.getFrom();
+	    Vec3 to = hitResult.getLocation();
+	    AABB aabb = new AABB(from, to);
+	    List<Entity> entities = Level.class.cast(this).getEntitiesOfClass(Entity.class, aabb, t -> t instanceof IClipPos);
+		for(Entity entity : entities)
 		{
-			hitResult = new BlockHitResult(entity.getClipPos(), hitResult.getDirection(), hitResult.getBlockPos(), hitResult.isInside());
+			if(entity instanceof IClipPos clip)
+			{
+				return new BlockHitResult(clip.getClipPos(), hitResult.getDirection(), hitResult.getBlockPos(), hitResult.isInside());
+			}
 		}
     	return hitResult;
     }
