@@ -5,7 +5,6 @@ import java.util.List;
 import com.min01.villageandvillagers.entity.villager.EntityHarvester;
 import com.min01.villageandvillagers.util.VillageUtil;
 
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
@@ -45,7 +44,7 @@ public class HarvesterStabGoal extends BasicAnimationSkillGoal<EntityHarvester>
 			list.removeIf(t -> t == this.mob || t.isAlliedTo(this.mob) || VillageUtil.distanceTo(t, this.mob.posArray[0]) > 2.5F);
 			list.forEach(t -> 
 			{
-				t.hurt(DamageSource.mobAttack(this.mob), (float) this.mob.getAttributeBaseValue(Attributes.ATTACK_DAMAGE));
+				t.hurt(this.mob.damageSources().mobAttack(this.mob), (float) this.mob.getAttributeBaseValue(Attributes.ATTACK_DAMAGE));
 			});
 		}
 	}

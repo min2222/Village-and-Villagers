@@ -9,6 +9,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
@@ -132,11 +133,11 @@ public class EntityHaybaleBarricade extends AbstractOwnableEntity<EntityHarveste
 	{
 		if(this.getDurability() > 0)
 		{
-			int damage = p_19946_.isFire() ? 2 : 1;
+			int damage = p_19946_.is(DamageTypeTags.IS_FIRE) ? 2 : 1;
 			this.playSound(SoundEvents.GRASS_BREAK);
 			this.setDurability(this.getDurability() - damage);
 		}
-		return p_19946_.isBypassInvul();
+		return p_19946_.is(DamageTypeTags.BYPASSES_INVULNERABILITY);
 	}
 	
 	@Override

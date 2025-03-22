@@ -1,10 +1,11 @@
 package com.min01.villageandvillagers.util;
 
+import org.joml.Matrix4f;
+import org.joml.Quaternionf;
+import org.joml.Vector4f;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector4f;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
@@ -44,7 +45,7 @@ public class VillageClientUtil
         {
         	poseStack.translate(entity.getX(), entity.getY(), entity.getZ());
         }
-        poseStack.mulPose(new Quaternion((float)rotation.x, (float)-rotation.y + 180.0F, (float)rotation.z, true));
+        poseStack.mulPose(new Quaternionf().rotateXYZ((float)Math.toRadians(rotation.x), (float)Math.toRadians(-rotation.y + 180.0F), (float)Math.toRadians(rotation.z)));
         poseStack.scale(-1.0F, -1.0F, 1.0F);
         ModelPart nextPart = null;
         for(int i = 0; i < modelPartName.length; i++)
@@ -64,7 +65,7 @@ public class VillageClientUtil
         PoseStack.Pose last = poseStack.last();
         Matrix4f matrix4f = last.pose();
         Vector4f vector4f = new Vector4f(0, 0, 0, 1);
-        vector4f.transform(matrix4f);
+        vector4f.mul(matrix4f);
         return new Vec3(vector4f.x(), vector4f.y(), vector4f.z());
     }
     

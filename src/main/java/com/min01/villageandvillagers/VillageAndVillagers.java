@@ -3,6 +3,7 @@ package com.min01.villageandvillagers;
 import com.min01.villageandvillagers.block.VillageBlocks;
 import com.min01.villageandvillagers.entity.VillageEntities;
 import com.min01.villageandvillagers.item.VillageItems;
+import com.min01.villageandvillagers.misc.VillageCreativeTabs;
 import com.min01.villageandvillagers.misc.VillageEntityDataSerializers;
 import com.min01.villageandvillagers.network.VillageNetwork;
 
@@ -23,6 +24,7 @@ public class VillageandVillagers
 		VillageItems.ITEMS.register(bus);
 		VillageBlocks.BLOCKS.register(bus);
 		VillageEntityDataSerializers.SERIALIZERS.register(bus);
+		VillageCreativeTabs.CREATIVE_MODE_TAB.register(bus);
 		
 		VillageNetwork.registerMessages();
 	}

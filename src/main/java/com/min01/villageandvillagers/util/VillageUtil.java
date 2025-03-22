@@ -23,6 +23,7 @@ import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
 public class VillageUtil
 {
+	@SuppressWarnings("deprecation")
 	public static Vec3 getGroundPos(BlockGetter pLevel, double pX, double startY, double pZ)
     {
         BlockPos.MutableBlockPos blockpos$mutable = new BlockPos.MutableBlockPos(pX, startY, pZ);
@@ -30,7 +31,7 @@ public class VillageUtil
         {
         	blockpos$mutable.move(Direction.DOWN);
         } 
-        while((pLevel.getBlockState(blockpos$mutable).isAir() || pLevel.getBlockState(blockpos$mutable).getMaterial().isLiquid() || !pLevel.getBlockState(blockpos$mutable).isCollisionShapeFullBlock(pLevel, blockpos$mutable)) && blockpos$mutable.getY() > pLevel.getMinBuildHeight());
+        while((pLevel.getBlockState(blockpos$mutable).isAir() || pLevel.getBlockState(blockpos$mutable).liquid() || !pLevel.getBlockState(blockpos$mutable).isCollisionShapeFullBlock(pLevel, blockpos$mutable)) && blockpos$mutable.getY() > pLevel.getMinBuildHeight());
 
         BlockPos blockpos = blockpos$mutable;
 
@@ -129,7 +130,7 @@ public class VillageUtil
 	
 	public static void createLine(Level level, double x, double z, double y, double yAbove, int delay, BiConsumer<BlockPos, Integer> consumer) 
 	{
-		BlockPos blockpos = new BlockPos(x, yAbove, z);
+		BlockPos blockpos = BlockPos.containing(x, yAbove, z);
 		boolean flag = false;
 		double d0 = 0.0D;
 		do 
@@ -158,7 +159,7 @@ public class VillageUtil
 
 		if(flag)
 		{
-			consumer.accept(new BlockPos(x, (double)blockpos.getY() + d0, z), delay);
+			consumer.accept(BlockPos.containing(x, (double)blockpos.getY() + d0, z), delay);
 		}
     }
 }

@@ -24,7 +24,7 @@ public class HarvesterSummonBarricadeGoal extends BasicAnimationSkillGoal<Entity
 	@Override
 	public boolean additionalStartCondition() 
 	{
-		return this.mob.distanceTo(this.mob.getTarget()) >= 6.0F && this.mob.isOnGround();
+		return this.mob.distanceTo(this.mob.getTarget()) >= 6.0F && this.mob.onGround();
 	}
 
 	@Override

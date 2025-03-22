@@ -58,7 +58,7 @@ public interface MixinBlockGetter extends BlockGetter
     	}, (p_151372_) ->
     	{
     		Vec3 vec3 = p_151372_.getFrom().subtract(p_151372_.getTo());
-    		return BlockHitResult.miss(p_151372_.getTo(), Direction.getNearest(vec3.x, vec3.y, vec3.z), new BlockPos(p_151372_.getTo()));
+    		return BlockHitResult.miss(p_151372_.getTo(), Direction.getNearest(vec3.x, vec3.y, vec3.z), BlockPos.containing(p_151372_.getTo()));
     	});
     }
 }
