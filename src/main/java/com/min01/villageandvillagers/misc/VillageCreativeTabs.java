@@ -31,5 +31,6 @@ public class VillageCreativeTabs
     			output.accept(VillageItems.ASURA_STONE_BRICK_STAIRS.get());
     			output.accept(VillageItems.SMOOTH_ASURA_STONE_STAIRS.get());
     			output.accept(VillageItems.HARVESTER_SPAWN_EGG.get());
+    			output.accept(VillageItems.TIME_KEEPER_SPAWN_EGG.get());
     		}).build());
 }

@@ -20,7 +20,8 @@ public class VillageItems
 {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, VillageandVillagers.MODID);
 	
-	public static final RegistryObject<Item> HARVESTER_SPAWN_EGG = registerSpawnEgg("harvester_spawn_egg", () -> VillageEntities.HARVESTER.get(), 11040094, 2579613);
+	public static final RegistryObject<Item> HARVESTER_SPAWN_EGG = registerSpawnEgg("harvester_spawn_egg", () -> VillageEntities.HARVESTER.get(), 1787273, 15002863);
+	public static final RegistryObject<Item> TIME_KEEPER_SPAWN_EGG = registerSpawnEgg("time_keeper_spawn_egg", () -> VillageEntities.TIME_KEEPER.get(), 8932675, 14725725);
 	
 	public static final RegistryObject<Item> ASURA_STONE = registerBlockItem("asura_stone", () -> VillageBlocks.ASURA_STONE.get(), new Item.Properties());
 	public static final RegistryObject<Item> ASURA_STONE_BRICKS = registerBlockItem("asura_stone_bricks", () -> VillageBlocks.ASURA_STONE_BRICKS.get(), new Item.Properties());

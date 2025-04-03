@@ -1,8 +1,10 @@
 {
 	"itemGroup.villageandvillagers.villageandvillagers": "Village and Villagers",
 	"entity.villageandvillagers.harvester": "Harvester",
+	"entity.villageandvillagers.time_keeper": "Time Keeper",
 	"entity.villageandvillagers.haybale_barricade": "Haybale Barricade",
 	"item.villageandvillagers.harvester_spawn_egg": "Harvester Spawn Egg",
+	"item.villageandvillagers.time_keeper_spawn_egg": "Time Keeper Spawn Egg",
 	"block.villageandvillagers.asura_stone": "Asura Stone",
 	"block.villageandvillagers.asura_stone_bricks": "Asura Stone Bricks",
 	"block.villageandvillagers.asura_stone_pillar": "Asura Stone Pillar",
