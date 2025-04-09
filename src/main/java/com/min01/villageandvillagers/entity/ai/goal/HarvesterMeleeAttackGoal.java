@@ -8,9 +8,9 @@ import com.min01.villageandvillagers.util.VillageUtil;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
-public class HarvesterStabGoal extends BasicAnimationSkillGoal<EntityHarvester>
+public class HarvesterMeleeAttackGoal extends BasicAnimationSkillGoal<EntityHarvester>
 {
-	public HarvesterStabGoal(EntityHarvester mob) 
+	public HarvesterMeleeAttackGoal(EntityHarvester mob) 
 	{
 		super(mob);
 	}

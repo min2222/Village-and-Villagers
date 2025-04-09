@@ -6,6 +6,7 @@ uniform sampler2D DepthSampler;
 uniform mat4 ProjectionMatrix;
 uniform mat4 ViewMatrix;
 
+uniform float BHSize;
 uniform vec2 OutSize;
 
 in vec2 texCoord;
@@ -28,7 +29,7 @@ float linearizeDepth(float depth) {
 }
 
 vec3 applyLensing(vec3 ro, vec3 rd, vec2 uv) {
-    float lensingSphereRadius = 7.0;
+    float lensingSphereRadius = BHSize;
     vec3 blackHoleCenter = vec3(0.0); // Assuming black hole at world origin
 
     vec3 oc = ro - blackHoleCenter;
@@ -37,9 +38,10 @@ vec3 applyLensing(vec3 ro, vec3 rd, vec2 uv) {
     float c = dot(oc, oc) - lensingSphereRadius * lensingSphereRadius;
     float discriminant = b * b - 4.0 * a * c;
 
+    float depth = linearizeDepth(texture(DepthSampler, texCoord).r);
     if (discriminant > 0.0) {
         float t = (-b - sqrt(discriminant)) / (2.0 * a);
-        if (t > 0.0) {
+        if (t > 0.0 && t < depth) {
             vec3 intersectionPoint = ro + t * rd;
             vec3 lensToIntersection = intersectionPoint - blackHoleCenter;
             vec3 lensToIntersectionNormalized = normalize(lensToIntersection);

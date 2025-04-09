@@ -1,9 +1,12 @@
 package com.min01.villageandvillagers.util;
 
+import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector4f;
 
+import com.min01.villageandvillagers.VillageandVillagers;
+import com.min01.villageandvillagers.entity.ITrail;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
@@ -17,13 +20,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class VillageClientUtil
 {
-    public static final ResourceLocation ICE_TEXTURE = new ResourceLocation("textures/block/ice.png");
 	public static final Minecraft MC = Minecraft.getInstance();
 	
 	//https://github.com/EEEAB/EEEABsMobs/blob/master/src/main/java/com/eeeab/animate/client/util/ModelPartUtils.java#L57
@@ -71,7 +70,7 @@ public class VillageClientUtil
     
     public static void drawBox(AABB boundingBox, PoseStack stack, MultiBufferSource bufferIn, Vec3 rgb, int alpha) 
     {
-    	drawBox(boundingBox, stack, bufferIn, rgb, LightTexture.FULL_BLOCK, alpha, RenderType.entityCutoutNoCull(ICE_TEXTURE));
+    	drawBox(boundingBox, stack, bufferIn, rgb, LightTexture.FULL_BLOCK, alpha, RenderType.entityCutoutNoCull(new ResourceLocation("textures/block/ice.png")));
     }
     
     public static void drawBox(AABB boundingBox, PoseStack stack, MultiBufferSource bufferIn, Vec3 rgb, int light, int alpha, RenderType renderType) 
@@ -134,6 +133,35 @@ public class VillageClientUtil
         vertexbuffer.vertex(matrix4f, (float) boundingBox.minX, (float) boundingBox.minY, (float) boundingBox.minZ).color((float)rgb.x, (float)rgb.y, (float)rgb.z, alpha).uv(maxU, minV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(0.0F, -1.0F, 0.0F).endVertex();
         vertexbuffer.vertex(matrix4f, (float) boundingBox.maxX, (float) boundingBox.minY, (float) boundingBox.minZ).color((float)rgb.x, (float)rgb.y, (float)rgb.z, alpha).uv(maxU, maxV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(0.0F, -1.0F, 0.0F).endVertex();
         vertexbuffer.vertex(matrix4f, (float) boundingBox.maxX, (float) boundingBox.minY, (float) boundingBox.maxZ).color((float)rgb.x, (float)rgb.y, (float)rgb.z, alpha).uv(minU, maxV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(0.0F, -1.0F, 0.0F).endVertex();
+    }
+    
+    public static void renderTrail(ITrail entityIn, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, float trailR, float trailG, float trailB, float trailA, int sampleSize, float trailHeight) 
+    {
+        int samples = 0;
+        float trailZRot = 0;
+        Vec3 topAngleVec = new Vec3(0, trailHeight, 0).zRot(trailZRot);
+        Vec3 bottomAngleVec = new Vec3(0, -trailHeight, 0).zRot(trailZRot);
+        Vec3 drawFrom = entityIn.getTrailPosition(0, partialTicks);
+        VertexConsumer vertexconsumer = bufferIn.getBuffer(RenderType.entityCutoutNoCull(new ResourceLocation(VillageandVillagers.MODID, "textures/effect/trail.png")));
+        while(samples < sampleSize)
+        {
+            Vec3 sample = entityIn.getTrailPosition(samples, partialTicks);
+            float u1 = samples / (float) sampleSize;
+            float u2 = u1 + 1 / (float) sampleSize;
+
+            Vec3 draw1 = drawFrom;
+            Vec3 draw2 = sample;
+
+            PoseStack.Pose posestack$pose = poseStack.last();
+            Matrix4f matrix4f = posestack$pose.pose();
+            Matrix3f matrix3f = posestack$pose.normal();
+            vertexconsumer.vertex(matrix4f, (float) draw1.x + (float) bottomAngleVec.x, (float) draw1.y + (float) bottomAngleVec.y, (float) draw1.z + (float) bottomAngleVec.z).color(trailR, trailG, trailB, trailA).uv(u1, 1.0F).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(LightTexture.FULL_BLOCK).normal(matrix3f, 0.0F, 1.0F, 0.0F).endVertex();
+            vertexconsumer.vertex(matrix4f, (float) draw2.x + (float) bottomAngleVec.x, (float) draw2.y + (float) bottomAngleVec.y, (float) draw2.z + (float) bottomAngleVec.z).color(trailR, trailG, trailB, trailA).uv(u2, 1.0F).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(LightTexture.FULL_BLOCK).normal(matrix3f, 0.0F, 1.0F, 0.0F).endVertex();
+            vertexconsumer.vertex(matrix4f, (float) draw2.x + (float) topAngleVec.x, (float) draw2.y + (float) topAngleVec.y, (float) draw2.z + (float) topAngleVec.z).color(trailR, trailG, trailB, trailA).uv(u2, 0).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(LightTexture.FULL_BLOCK).normal(matrix3f, 0.0F, 1.0F, 0.0F).endVertex();
+            vertexconsumer.vertex(matrix4f, (float) draw1.x + (float) topAngleVec.x, (float) draw1.y + (float) topAngleVec.y, (float) draw1.z + (float) topAngleVec.z).color(trailR, trailG, trailB, trailA).uv(u1, 0).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(LightTexture.FULL_BLOCK).normal(matrix3f, 0.0F, 1.0F, 0.0F).endVertex();
+            samples++;
+            drawFrom = sample;
+        }
     }
 	
 	public static void animateHead(ModelPart head, float netHeadYaw, float headPitch)

@@ -15,6 +15,7 @@ public class VillageShaders implements ResourceManagerReloadListener
 	protected static final List<ExtendedPostChain> SHADERS = new ArrayList<>();
 
 	protected static ExtendedPostChain DISTORTION;
+	protected static ExtendedPostChain SHOCKWAVE;
 
 	@Override
 	public void onResourceManagerReload(ResourceManager manager)
@@ -33,6 +34,7 @@ public class VillageShaders implements ResourceManagerReloadListener
 	public static void init(ResourceManager manager) throws IOException
 	{
 		DISTORTION = add(new ExtendedPostChain(VillageandVillagers.MODID, "distortion"));
+		SHOCKWAVE = add(new ExtendedPostChain(VillageandVillagers.MODID, "shockwave"));
 	}
 
 	public void clear()
@@ -50,5 +52,10 @@ public class VillageShaders implements ResourceManagerReloadListener
 	public static ExtendedPostChain getDistortion()
 	{
 		return DISTORTION;
+	}
+	
+	public static ExtendedPostChain getShockwave()
+	{
+		return SHOCKWAVE;
 	}
 }

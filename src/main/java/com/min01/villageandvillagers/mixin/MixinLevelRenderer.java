@@ -1,7 +1,5 @@
 package com.min01.villageandvillagers.mixin;
 
-import java.util.List;
-
 import javax.annotation.Nullable;
 
 import org.joml.Matrix4f;
@@ -12,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import com.min01.villageandvillagers.shader.ShaderEffectHandler;
 import com.min01.villageandvillagers.shader.ExtendedPostChain;
 import com.min01.villageandvillagers.shader.VillageShaders;
 import com.min01.villageandvillagers.util.VillageClientUtil;
@@ -25,8 +24,6 @@ import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.LightTexture;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.phys.Vec3;
 
 @Mixin(LevelRenderer.class)
@@ -41,23 +38,43 @@ public abstract class MixinLevelRenderer
 	@Inject(at = @At(value = "TAIL"), method = "renderLevel")
 	private void renderLevel(PoseStack mtx, float frameTime, long nanoTime, boolean renderOutline, Camera camera, GameRenderer gameRenderer, LightTexture light, Matrix4f projMat, CallbackInfo ci)
 	{
-		List<Arrow> list = VillageClientUtil.MC.player.level.getEntitiesOfClass(Arrow.class, VillageClientUtil.MC.player.getBoundingBox().inflate(50));
-		list.forEach(t -> 
+		ShaderEffectHandler.EFFECTS.forEach(t ->
 		{
-			if(t.isAlive())
+			if(t.enabled)
 			{
-				double x = Mth.lerp((double)frameTime, t.xOld, t.getX());
-				double y = Mth.lerp((double)frameTime, t.yOld, t.getY());
-				double z = Mth.lerp((double)frameTime, t.zOld, t.getZ());
 				Vec3 camPos = camera.getPosition();
-				Vec3 entityPos = new Vec3(x, y, z);
-				Vec3 pos = entityPos.subtract(camPos);
+				Vec3 pos = t.pos.subtract(camPos);
 				mtx.pushPose();
 				mtx.translate(pos.x, pos.y, pos.z);
-				this.applyDistortion(mtx, frameTime);
+				if(t.effectName.equals("distortion"))
+				{
+					this.applyDistortion(mtx, frameTime);
+				}
+				if(t.effectName.equals("shockwave"))
+				{
+					this.applyShockwave(mtx, frameTime);
+				}
 				mtx.popPose();
 			}
 		});
+		ShaderEffectHandler.EFFECTS.removeIf(t -> !t.enabled);
+	}
+	
+	@Unique
+	private void applyShockwave(PoseStack mtx, float frameTime)
+	{
+		Minecraft mc = VillageClientUtil.MC;
+
+		ExtendedPostChain shaderChain = VillageShaders.getShockwave();
+		EffectInstance shader = shaderChain.getMainShader();
+
+		if(shader != null)
+		{
+			shader.safeGetUniform("InverseTransformMatrix").set(this.getInverseTransformMatrix(INVERSE_MAT, mtx.last().pose()));
+			shader.safeGetUniform("iTime").set((((float) (mc.level.getGameTime() % 2400000)) + frameTime) / 20.0F);
+			shaderChain.process(frameTime);
+			mc.getMainRenderTarget().bindWrite(false);
+		}
 	}
 	
 	@Unique

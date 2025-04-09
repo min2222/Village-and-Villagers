@@ -78,7 +78,7 @@ public abstract class AbstractCombatVillager extends AbstractVillager implements
 			@Override
 			public boolean canUse()
 			{
-				return super.canUse() && AbstractCombatVillager.this.getTarget() == null;
+				return super.canUse() && !AbstractCombatVillager.this.isUsingSkill();
 			}
 		});
 		this.goalSelector.addGoal(9, new InteractGoal(this, Player.class, 3.0F, 1.0F));
@@ -87,7 +87,7 @@ public abstract class AbstractCombatVillager extends AbstractVillager implements
 			@Override
 			public boolean canUse()
 			{
-				return super.canUse() && AbstractCombatVillager.this.getTarget() == null;
+				return super.canUse() && !AbstractCombatVillager.this.isUsingSkill();
 			}
 		});
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));

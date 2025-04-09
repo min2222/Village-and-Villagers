@@ -1,5 +1,8 @@
 package com.min01.villageandvillagers.entity.villager;
 
+import com.min01.villageandvillagers.entity.ai.goal.TimeKeeperFallingGearGoal;
+import com.min01.villageandvillagers.entity.ai.goal.TimeKeeperShootGearGoal;
+
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -30,5 +33,23 @@ public class EntityTimeKeeper extends AbstractCombatVillager
 	public ItemListing[] getVillagerTrades() 
 	{
 		return null;
+	}
+	
+	@Override
+	protected void registerGoals() 
+	{
+		super.registerGoals();
+		this.goalSelector.addGoal(4, new TimeKeeperShootGearGoal(this));
+		this.goalSelector.addGoal(4, new TimeKeeperFallingGearGoal(this));
+	}
+	
+	@Override
+	public void tick() 
+	{
+		super.tick();
+		if(this.getTarget() != null)
+		{
+			this.getLookControl().setLookAt(this.getTarget(), 30.0F, 30.0F);
+		}
 	}
 }

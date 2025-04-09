@@ -5,6 +5,8 @@ import java.util.UUID;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+import org.joml.Math;
+
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -23,6 +25,35 @@ import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
 public class VillageUtil
 {
+	public static Vec3 getSpreadPosition(Level level, Vec3 startPos, double range)
+	{
+        double x = startPos.x + (level.random.nextDouble() - level.random.nextDouble()) * range + 0.5D;
+        double y = startPos.y + (level.random.nextDouble() - level.random.nextDouble()) * range + 0.5D;
+        double z = startPos.z + (level.random.nextDouble() - level.random.nextDouble()) * range + 0.5D;
+        return new Vec3(x, y, z);
+	}
+	
+	public static Vec3 getSpreadPosition(Entity entity, double range)
+	{
+        double x = entity.getX() + (entity.level.random.nextDouble() - entity.level.random.nextDouble()) * range + 0.5D;
+        double y = entity.getY() + (entity.level.random.nextDouble() - entity.level.random.nextDouble()) * range + 0.5D;
+        double z = entity.getZ() + (entity.level.random.nextDouble() - entity.level.random.nextDouble()) * range + 0.5D;
+        return new Vec3(x, y, z);
+	}
+	
+	//Chat GPT ahh;
+	public static Vec3 getCirclePosition(Entity entity, double range)
+	{
+	    double angle = entity.level.random.nextDouble() * Math.PI * 2;
+	    double radius = Math.sqrt(entity.level.random.nextDouble()) * range;
+	    
+	    double x = entity.getX() + Math.cos(angle) * radius;
+	    double y = entity.getY();
+	    double z = entity.getZ() + Math.sin(angle) * radius;
+	    
+	    return new Vec3(x, y, z);
+	}
+	
 	@SuppressWarnings("deprecation")
 	public static Vec3 getGroundPos(BlockGetter pLevel, double pX, double startY, double pZ)
     {

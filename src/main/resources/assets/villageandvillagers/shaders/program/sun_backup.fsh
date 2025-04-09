@@ -69,8 +69,9 @@ void main() {
     // Apply heat distortion
     vec2 distortedUV = texCoord + infernalDistortion(texCoord, origin + dir * t, GatePosition);
     vec3 col = texture(DiffuseSampler, distortedUV).xyz;
+    float depth = linearizeDepth(texture(DepthSampler, texCoord).r);
     
-    if(dist < GateRadius * 1.5) {
+    if(dist < GateRadius * 1.5 && dist < depth) {
         // Hellgate core effects
         vec3 core = hellCoreEffect(origin + dir * t, GatePosition);
         

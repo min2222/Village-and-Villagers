@@ -1,6 +1,6 @@
 package com.min01.villageandvillagers.entity.villager;
 
-import com.min01.villageandvillagers.entity.ai.goal.HarvesterStabGoal;
+import com.min01.villageandvillagers.entity.ai.goal.HarvesterMeleeAttackGoal;
 import com.min01.villageandvillagers.entity.ai.goal.HarvesterSummonBarricadeGoal;
 
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -43,7 +43,7 @@ public class EntityHarvester extends AbstractCombatVillager
     protected void registerGoals()
     {
     	super.registerGoals();
-    	this.goalSelector.addGoal(4, new HarvesterStabGoal(this));
+    	this.goalSelector.addGoal(4, new HarvesterMeleeAttackGoal(this));
     	this.goalSelector.addGoal(4, new HarvesterSummonBarricadeGoal(this));
     }
     
