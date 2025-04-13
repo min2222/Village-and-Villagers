@@ -66,8 +66,9 @@ void main() {
     float depth = linearizeDepth(texture(DepthSampler, texCoord).r);
     
     float d = RayMarch(ro, rd);
-
-    if(d<MAX_DIST && d < depth) {
+    //this makes unable to render multiple effects
+	// && d < depth
+    if(d<MAX_DIST) {
         vec3 p = ro + rd * d;
         vec2 uv = texCoord;
 		float dist = length(uv);

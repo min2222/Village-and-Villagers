@@ -9,9 +9,9 @@ import com.min01.villageandvillagers.util.VillageUtil;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 
-public class TimeKeeperShootGearGoal extends BasicAnimationSkillGoal<EntityTimeKeeper>
+public class TimeKeeperTrackingGearGoal extends BasicAnimationSkillGoal<EntityTimeKeeper>
 {
-	public TimeKeeperShootGearGoal(EntityTimeKeeper mob) 
+	public TimeKeeperTrackingGearGoal(EntityTimeKeeper mob) 
 	{
 		super(mob);
 	}

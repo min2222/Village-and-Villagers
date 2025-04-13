@@ -41,7 +41,9 @@ vec3 applyLensing(vec3 ro, vec3 rd, vec2 uv) {
     float depth = linearizeDepth(texture(DepthSampler, texCoord).r);
     if (discriminant > 0.0) {
         float t = (-b - sqrt(discriminant)) / (2.0 * a);
-        if (t > 0.0 && t < depth) {
+        //this makes unable to render multiple effects
+        // && t < depth
+        if (t > 0.0) {
             vec3 intersectionPoint = ro + t * rd;
             vec3 lensToIntersection = intersectionPoint - blackHoleCenter;
             vec3 lensToIntersectionNormalized = normalize(lensToIntersection);

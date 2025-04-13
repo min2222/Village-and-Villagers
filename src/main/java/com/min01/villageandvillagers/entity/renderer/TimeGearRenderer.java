@@ -82,7 +82,7 @@ public class TimeGearRenderer extends EntityRenderer<EntityTimeGear> implements 
 	@Override
 	public ResourceLocation getStreakTexture(EntityTimeGear entity) 
 	{
-		return new ResourceLocation(VillageandVillagers.MODID, "textures/entity/time_gear_afterimage.png");
+		return this.getTextureLocation(entity);
 	}
 
 }

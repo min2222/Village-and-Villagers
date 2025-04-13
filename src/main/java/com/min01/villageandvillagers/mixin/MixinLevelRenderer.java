@@ -1,5 +1,7 @@
 package com.min01.villageandvillagers.mixin;
 
+import java.util.ArrayList;
+
 import javax.annotation.Nullable;
 
 import org.joml.Matrix4f;
@@ -10,8 +12,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.min01.villageandvillagers.shader.ShaderEffectHandler;
 import com.min01.villageandvillagers.shader.ExtendedPostChain;
+import com.min01.villageandvillagers.shader.ShaderEffectHandler;
 import com.min01.villageandvillagers.shader.VillageShaders;
 import com.min01.villageandvillagers.util.VillageClientUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -38,7 +40,7 @@ public abstract class MixinLevelRenderer
 	@Inject(at = @At(value = "TAIL"), method = "renderLevel")
 	private void renderLevel(PoseStack mtx, float frameTime, long nanoTime, boolean renderOutline, Camera camera, GameRenderer gameRenderer, LightTexture light, Matrix4f projMat, CallbackInfo ci)
 	{
-		ShaderEffectHandler.EFFECTS.forEach(t ->
+		new ArrayList<>(ShaderEffectHandler.EFFECTS).forEach(t -> 
 		{
 			if(t.enabled)
 			{
@@ -57,14 +59,13 @@ public abstract class MixinLevelRenderer
 				mtx.popPose();
 			}
 		});
-		ShaderEffectHandler.EFFECTS.removeIf(t -> !t.enabled);
 	}
 	
 	@Unique
 	private void applyShockwave(PoseStack mtx, float frameTime)
 	{
 		Minecraft mc = VillageClientUtil.MC;
-
+		
 		ExtendedPostChain shaderChain = VillageShaders.getShockwave();
 		EffectInstance shader = shaderChain.getMainShader();
 

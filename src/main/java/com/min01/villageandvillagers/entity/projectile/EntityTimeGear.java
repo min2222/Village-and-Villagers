@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.min01.villageandvillagers.entity.EntityVillageCameraShake;
+import com.min01.villageandvillagers.shader.ShaderEffectHandler;
 import com.min01.villageandvillagers.streak.IStreak;
 import com.min01.villageandvillagers.util.VillageUtil;
 
@@ -12,6 +13,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
@@ -58,7 +60,7 @@ public class EntityTimeGear extends ThrowableProjectile implements IStreak
 			Mob owner = (Mob) this.getOwner();
 			if(this.getGearType() == GearType.TRACKING)
 			{
-				if(owner.getTarget() != null && this.tickCount >= 40)
+				if(owner.getTarget() != null && this.tickCount >= 40 && this.tickCount <= 120)
 				{
 					this.setDeltaMovement(VillageUtil.fromToVector(this.position(), owner.getTarget().getEyePosition(), 0.5F));
 				}
@@ -105,6 +107,12 @@ public class EntityTimeGear extends ThrowableProjectile implements IStreak
 		}
 		if(this.getGearType() == GearType.TRACKING)
 		{
+			this.discard();
+		}
+		if(this.getGearType() == GearType.EXPLOSIVE)
+		{
+			ShaderEffectHandler.addEffect("shockwave", this.position(), 10);
+			this.playSound(SoundEvents.GENERIC_EXPLODE);
 			this.discard();
 		}
 	}
@@ -182,7 +190,8 @@ public class EntityTimeGear extends ThrowableProjectile implements IStreak
 	public static enum GearType
 	{
 		TRACKING(false),
-		FALLING(true);
+		FALLING(true),
+		EXPLOSIVE(false);
 		
 		private boolean isLarge;
 		

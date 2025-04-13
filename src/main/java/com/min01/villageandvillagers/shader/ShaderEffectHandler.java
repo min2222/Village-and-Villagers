@@ -26,10 +26,11 @@ public class ShaderEffectHandler
 	{
         if(event.phase == TickEvent.Phase.END)
         {
-    		ShaderEffectHandler.EFFECTS.forEach(t ->
+        	new ArrayList<>(EFFECTS).forEach(t -> 
     		{
     			t.tick();
     		});
+    		EFFECTS.removeIf(t -> !t.enabled);
         }
 	}
 	
