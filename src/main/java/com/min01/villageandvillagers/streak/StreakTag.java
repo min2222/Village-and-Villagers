@@ -69,7 +69,7 @@ public class StreakTag implements Tag
                     matrixStackIn.translate(x, y, z);
                     matrixStackIn.scale(-1.0F, -1.0F, 1.0F);
                     matrixStackIn.translate(0.0F, -1.5F, 0.0F);
-                    model.setupAnim(tracker.getParent(), 0, 0, 0, yRot, xRot);
+                    model.setupAnim(tracker.getParent(), 0, 0, partialTicks + info.tickCount, yRot, xRot);
                     model.renderToBuffer(matrixStackIn, consumer, packedLightIn, OverlayTexture.NO_OVERLAY, (float) color.x, (float) color.y, (float) color.z, ((maxTrailNumber + 1) - (i + partialTicks)) / (float)(maxTrailNumber) * 0.5F);
                     matrixStackIn.popPose();
                 }

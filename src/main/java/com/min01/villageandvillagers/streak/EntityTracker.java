@@ -134,7 +134,7 @@ public class EntityTracker extends Entity
 
             if(this.maxTrack > 0)
             {
-                EntityInfo info = new EntityInfo(this.parent.getX(), this.parent.getY(), this.parent.getZ(), this.parent.getBbWidth(), this.parent.getBbHeight(), this.parent.getYRot(), this.parent.getXRot(), this.parent.isInvisible());
+                EntityInfo info = new EntityInfo(this.parent.getX(), this.parent.getY(), this.parent.getZ(), this.parent.getBbWidth(), this.parent.getBbHeight(), this.parent.getYRot(), this.parent.getXRot(), this.parent.isInvisible(), this.parent.tickCount);
                 this.trackedInfo.add(0, info);
                 this.tags.forEach(tag -> tag.addInfo(this, info));
 
@@ -190,8 +190,9 @@ public class EntityTracker extends Entity
         public final float yaw;
         public final float pitch;
         public final boolean invisible;
+        public final int tickCount;
 
-        public EntityInfo(double posX, double posY, double posZ, float width, float height, float yaw, float pitch, boolean invisible) 
+        public EntityInfo(double posX, double posY, double posZ, float width, float height, float yaw, float pitch, boolean invisible, int tickCount) 
         {
             this.posX = posX;
             this.posY = posY;
@@ -201,6 +202,7 @@ public class EntityTracker extends Entity
             this.yaw = yaw;
             this.pitch = pitch;
             this.invisible = invisible;
+            this.tickCount = tickCount;
         }
     }
 }
