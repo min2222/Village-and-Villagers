@@ -158,7 +158,7 @@ public class EntityHaybaleBarricade extends AbstractOwnableEntity<EntityHarveste
 	}
 	
 	@Override
-	public Vec3 getClipPos() 
+	public Vec3 getClipPos(Vec3 from, Vec3 to) 
 	{
 		return this.getEyePosition();
 	}
