@@ -9,10 +9,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.npc.AbstractVillager;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.world.entity.npc.VillagerTrades;
-import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
@@ -22,7 +20,7 @@ public class EntityHarvester extends AbstractCombatVillager
 	public final AnimationState twoHandStabAnimationState = new AnimationState();
 	public final AnimationState stompAnimationState = new AnimationState();
 	
-	public EntityHarvester(EntityType<? extends AbstractVillager> p_35267_, Level p_35268_)
+	public EntityHarvester(EntityType<? extends Villager> p_35267_, Level p_35268_)
 	{
 		super(p_35267_, p_35268_);
 		this.posArray = new Vec3[1];
@@ -103,10 +101,16 @@ public class EntityHarvester extends AbstractCombatVillager
 			}
 		}
 	}
-
+	
 	@Override
-	public ItemListing[] getVillagerTrades()
+	public VillagerProfession getProfession()
 	{
-		return VillagerTrades.TRADES.get(VillagerProfession.FARMER).get(1);
+		return VillagerProfession.FARMER;
+	}
+	
+	@Override
+	public boolean isSpecial() 
+	{
+		return true;
 	}
 }

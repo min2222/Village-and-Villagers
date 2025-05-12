@@ -1,19 +1,37 @@
 package com.min01.villageandvillagers.util;
 
 import java.lang.reflect.Method;
+import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import org.joml.Math;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
+import com.min01.tickrateapi.util.TickrateUtil;
+import com.min01.villageandvillagers.item.VillageItems;
+import com.min01.villageandvillagers.misc.VillageProfessions;
+
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import net.minecraft.Util;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerTrades;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.entity.LevelEntityGetter;
 import net.minecraft.world.phys.Vec2;
@@ -22,9 +40,66 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.util.LogicalSidedProvider;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotResult;
 
 public class VillageUtil
 {
+	public static final Map<VillagerProfession, Int2ObjectMap<VillagerTrades.ItemListing[]>> TRADES = Util.make(Maps.newHashMap(), (p_35633_) -> 
+	{
+		p_35633_.put(VillagerProfession.FARMER, toIntMap(ImmutableMap.of(1, new VillagerTrades.ItemListing[]
+				{
+					new VillagerTrades.EmeraldForItems(Items.WHEAT, 20, 16, 2), 
+					new VillagerTrades.EmeraldForItems(Items.POTATO, 26, 16, 2), 
+					new VillagerTrades.EmeraldForItems(Items.CARROT, 22, 16, 2), 
+					new VillagerTrades.EmeraldForItems(Items.BEETROOT, 15, 16, 2), 
+					new VillagerTrades.ItemsForEmeralds(Items.BREAD, 1, 6, 16, 1)
+				}, 2, new VillagerTrades.ItemListing[]
+				{
+					new VillagerTrades.EmeraldForItems(Blocks.PUMPKIN, 6, 12, 10),
+					new VillagerTrades.ItemsForEmeralds(Items.PUMPKIN_PIE, 1, 4, 5), 
+					new VillagerTrades.ItemsForEmeralds(Items.APPLE, 1, 4, 16, 5)
+				}, 3, new VillagerTrades.ItemListing[]
+				{
+					new VillagerTrades.ItemsForEmeralds(Items.COOKIE, 3, 18, 10),
+					new VillagerTrades.EmeraldForItems(Blocks.MELON, 4, 12, 20)
+				}, 4, new VillagerTrades.ItemListing[]
+				{
+					new VillagerTrades.ItemsForEmeralds(Blocks.CAKE, 1, 1, 12, 15)
+				}, 5, new VillagerTrades.ItemListing[]
+				{
+					new VillagerTrades.ItemsForEmeralds(Items.GOLDEN_CARROT, 3, 3, 30),
+					new VillagerTrades.ItemsForEmeralds(Items.GLISTERING_MELON_SLICE, 4, 3, 30)
+				})));
+		p_35633_.put(VillageProfessions.TIME_KEEPER.get(), toIntMap(ImmutableMap.of(1, new VillagerTrades.ItemListing[]
+				{
+					new VillagerTrades.ItemsForEmeralds(VillageItems.GEAR.get(), 8, 3, 100)
+				})));
+	});
+	
+	public static Int2ObjectMap<VillagerTrades.ItemListing[]> toIntMap(ImmutableMap<Integer, VillagerTrades.ItemListing[]> p_35631_)
+	{
+		return new Int2ObjectOpenHashMap<>(p_35631_);
+	}
+	
+	public static void setTickrateWithTime(Entity entity, int tickrate, int time)
+	{
+		TickrateUtil.setTickrate(entity, tickrate);
+		entity.getPersistentData().putInt("ForceTickCount", time);
+	}
+	
+	public static void getCurio(LivingEntity living, Item item, Consumer<ItemStack> consumer)
+	{
+		CuriosApi.getCuriosInventory(living).ifPresent(t -> 
+		{
+			Optional<SlotResult> slot = t.findFirstCurio(item);
+			if(!slot.isEmpty())
+			{
+				consumer.accept(slot.get().stack());
+			}
+		});
+	}
+		   
 	public static Vec3 getSpreadPosition(Level level, Vec3 startPos, double range)
 	{
         double x = startPos.x + (level.random.nextDouble() - level.random.nextDouble()) * range + 0.5D;
@@ -128,6 +203,22 @@ public class VillageUtil
 		double d1 = vec31.y * forwards + vec32.y * up + vec33.y * left;
 		double d2 = vec31.z * forwards + vec32.z * up + vec33.z * left;
 		return new Vec3(vec3.x + d0, vec3.y + d1, vec3.z + d2);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Iterable<Entity> getAllEntities(Level level)
+	{
+		Method m = ObfuscationReflectionHelper.findMethod(Level.class, "m_142646_");
+		try 
+		{
+			LevelEntityGetter<Entity> entities = (LevelEntityGetter<Entity>) m.invoke(level);
+			return entities.getAll();
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	@SuppressWarnings("unchecked")

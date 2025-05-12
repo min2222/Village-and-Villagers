@@ -5,6 +5,7 @@ import com.min01.villageandvillagers.entity.VillageEntities;
 import com.min01.villageandvillagers.item.VillageItems;
 import com.min01.villageandvillagers.misc.VillageCreativeTabs;
 import com.min01.villageandvillagers.misc.VillageEntityDataSerializers;
+import com.min01.villageandvillagers.misc.VillageProfessions;
 import com.min01.villageandvillagers.network.VillageNetwork;
 
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -25,6 +26,7 @@ public class VillageandVillagers
 		VillageBlocks.BLOCKS.register(bus);
 		VillageEntityDataSerializers.SERIALIZERS.register(bus);
 		VillageCreativeTabs.CREATIVE_MODE_TAB.register(bus);
+		VillageProfessions.VILLAGER_PROFESSION.register(bus);
 		
 		VillageNetwork.registerMessages();
 	}

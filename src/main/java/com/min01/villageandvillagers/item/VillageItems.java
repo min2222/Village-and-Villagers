@@ -10,6 +10,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
@@ -34,6 +35,13 @@ public class VillageItems
 	public static final RegistryObject<Item> ASURA_STONE_STAIRS = registerBlockItem("asura_stone_stairs", () -> VillageBlocks.ASURA_STONE_STAIRS.get(), new Item.Properties());
 	public static final RegistryObject<Item> ASURA_STONE_BRICK_STAIRS = registerBlockItem("asura_stone_brick_stairs", () -> VillageBlocks.ASURA_STONE_BRICK_STAIRS.get(), new Item.Properties());
 	public static final RegistryObject<Item> SMOOTH_ASURA_STONE_STAIRS = registerBlockItem("smooth_asura_stone_stairs", () -> VillageBlocks.SMOOTH_ASURA_STONE_STAIRS.get(), new Item.Properties());
+	
+	public static final RegistryObject<Item> TIME_JELLY = ITEMS.register("time_jelly", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+	public static final RegistryObject<Item> TIME_CRYSTAL = ITEMS.register("time_crystal", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
+	public static final RegistryObject<Item> GEAR = ITEMS.register("gear", () -> new Item(new Item.Properties()));
+	
+	public static final RegistryObject<Item> MONOCLE = ITEMS.register("monocle", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+	public static final RegistryObject<Item> POCKET_WATCH = ITEMS.register("pocket_watch", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)));
 
 	public static RegistryObject<Item> registerSpawnEgg(String name, Supplier<EntityType<? extends Mob>> type, int color1, int color2)
 	{
