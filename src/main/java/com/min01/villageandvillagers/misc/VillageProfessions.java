@@ -17,6 +17,9 @@ public class VillageProfessions
 	public static final DeferredRegister<VillagerProfession> VILLAGER_PROFESSION = DeferredRegister.create(ForgeRegistries.VILLAGER_PROFESSIONS, VillageandVillagers.MODID);
 	
 	public static final RegistryObject<VillagerProfession> TIME_KEEPER = registerSpecialProfession("time_keeper", null);
+	public static final RegistryObject<VillagerProfession> ROBIN_HOOD = registerSpecialProfession("robin_hood", null);
+	public static final RegistryObject<VillagerProfession> DAYDREAMER = registerSpecialProfession("daydreamer", null);
+	public static final RegistryObject<VillagerProfession> MARTIAL_ARTIST = registerSpecialProfession("martial_artist", null);
 	
 	public static RegistryObject<VillagerProfession> registerSpecialProfession(String p_219654_, @Nullable SoundEvent p_219657_)
 	{

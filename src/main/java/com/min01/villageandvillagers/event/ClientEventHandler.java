@@ -2,14 +2,20 @@ package com.min01.villageandvillagers.event;
 
 import com.min01.villageandvillagers.VillageandVillagers;
 import com.min01.villageandvillagers.entity.VillageEntities;
+import com.min01.villageandvillagers.entity.model.ModelDaydreamer;
 import com.min01.villageandvillagers.entity.model.ModelHarvester;
 import com.min01.villageandvillagers.entity.model.ModelHaybaleBarricade;
 import com.min01.villageandvillagers.entity.model.ModelLargeTimeGear;
+import com.min01.villageandvillagers.entity.model.ModelMartialArtist;
+import com.min01.villageandvillagers.entity.model.ModelRobinHood;
 import com.min01.villageandvillagers.entity.model.ModelTimeGear;
 import com.min01.villageandvillagers.entity.model.ModelTimeKeeper;
+import com.min01.villageandvillagers.entity.renderer.DaydreamerRenderer;
 import com.min01.villageandvillagers.entity.renderer.HarvesterRenderer;
 import com.min01.villageandvillagers.entity.renderer.HaybaleBarricadeRenderer;
+import com.min01.villageandvillagers.entity.renderer.MartialArtistRenderer;
 import com.min01.villageandvillagers.entity.renderer.NoneRenderer;
+import com.min01.villageandvillagers.entity.renderer.RobinHoodRenderer;
 import com.min01.villageandvillagers.entity.renderer.TimeGearRenderer;
 import com.min01.villageandvillagers.entity.renderer.TimeKeeperRenderer;
 import com.min01.villageandvillagers.shader.VillageShaders;
@@ -33,6 +39,9 @@ public class ClientEventHandler
 		event.registerEntityRenderer(VillageEntities.TIME_GEAR.get(), TimeGearRenderer::new);
     	event.registerEntityRenderer(VillageEntities.VILLAGE_CAMERA_SHAKE.get(), NoneRenderer::new);
     	event.registerEntityRenderer(VillageEntities.ENTITY_TRACKER.get(), EntityTrackerRenderer::new);
+		event.registerEntityRenderer(VillageEntities.ROBIN_HOOD.get(), RobinHoodRenderer::new);
+		event.registerEntityRenderer(VillageEntities.DAYDREAMER.get(), DaydreamerRenderer::new);
+		event.registerEntityRenderer(VillageEntities.MARTIAL_ARTIST.get(), MartialArtistRenderer::new);
 	}
 	
     @SubscribeEvent
@@ -43,6 +52,9 @@ public class ClientEventHandler
     	event.registerLayerDefinition(ModelTimeKeeper.LAYER_LOCATION, ModelTimeKeeper::createBodyLayer);
     	event.registerLayerDefinition(ModelTimeGear.LAYER_LOCATION, ModelTimeGear::createBodyLayer);
     	event.registerLayerDefinition(ModelLargeTimeGear.LAYER_LOCATION, ModelLargeTimeGear::createBodyLayer);
+    	event.registerLayerDefinition(ModelRobinHood.LAYER_LOCATION, ModelRobinHood::createBodyLayer);
+    	event.registerLayerDefinition(ModelDaydreamer.LAYER_LOCATION, ModelDaydreamer::createBodyLayer);
+    	event.registerLayerDefinition(ModelMartialArtist.LAYER_LOCATION, ModelMartialArtist::createBodyLayer);
     }
     
 	@SubscribeEvent

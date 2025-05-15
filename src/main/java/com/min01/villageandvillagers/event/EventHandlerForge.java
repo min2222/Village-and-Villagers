@@ -57,7 +57,7 @@ public class EventHandlerForge
 						Entity entity = event.getSource().getEntity();
 						if(entity != null)
 						{
-							VillageUtil.setTickrateWithTime(entity, 0, 30);
+							VillageUtil.setTickrateWithTime(entity, 0, 60);
 							player.getCooldowns().addCooldown(t.getItem(), 20 * 60);
 						}
 						else
@@ -65,7 +65,7 @@ public class EventHandlerForge
 							List<LivingEntity> list = living.level.getEntitiesOfClass(LivingEntity.class, living.getBoundingBox().inflate(5.0F), target -> target != living && !living.isAlliedTo(target));
 							list.forEach(target -> 
 							{
-								VillageUtil.setTickrateWithTime(target, 0, 60);
+								VillageUtil.setTickrateWithTime(target, 0, 100);
 							});
 							player.getCooldowns().addCooldown(t.getItem(), 20 * 90);
 						}

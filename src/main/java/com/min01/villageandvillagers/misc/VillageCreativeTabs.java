@@ -32,6 +32,9 @@ public class VillageCreativeTabs
     			output.accept(VillageItems.SMOOTH_ASURA_STONE_STAIRS.get());
     			output.accept(VillageItems.HARVESTER_SPAWN_EGG.get());
     			output.accept(VillageItems.TIME_KEEPER_SPAWN_EGG.get());
+    			output.accept(VillageItems.ROBIN_HOOD_SPAWN_EGG.get());
+    			output.accept(VillageItems.DAYDREAMER_SPAWN_EGG.get());
+    			output.accept(VillageItems.MARTIAL_ARTIST_SPAWN_EGG.get());
     			output.accept(VillageItems.TIME_JELLY.get());
     			output.accept(VillageItems.TIME_CRYSTAL.get());
     			output.accept(VillageItems.GEAR.get());

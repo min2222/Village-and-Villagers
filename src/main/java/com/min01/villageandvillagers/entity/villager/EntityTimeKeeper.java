@@ -1,5 +1,8 @@
 package com.min01.villageandvillagers.entity.villager;
 
+import com.min01.villageandvillagers.entity.ai.goal.TimeKeeperExplosiveGearGoal;
+import com.min01.villageandvillagers.entity.ai.goal.TimeKeeperFallingGearGoal;
+import com.min01.villageandvillagers.entity.ai.goal.TimeKeeperTrackingGearGoal;
 import com.min01.villageandvillagers.misc.VillageProfessions;
 
 import net.minecraft.world.entity.EntityType;
@@ -32,9 +35,9 @@ public class EntityTimeKeeper extends AbstractCombatVillager
 	protected void registerGoals() 
 	{
 		super.registerGoals();
-		/*this.goalSelector.addGoal(4, new TimeKeeperTrackingGearGoal(this));
+		this.goalSelector.addGoal(4, new TimeKeeperTrackingGearGoal(this));
 		this.goalSelector.addGoal(4, new TimeKeeperFallingGearGoal(this));
-		this.goalSelector.addGoal(4, new TimeKeeperExplosiveGearGoal(this));*/
+		this.goalSelector.addGoal(4, new TimeKeeperExplosiveGearGoal(this));
 	}
 	
 	@Override

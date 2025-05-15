@@ -1,10 +1,8 @@
 package com.min01.villageandvillagers.entity.villager;
 
-import com.min01.villageandvillagers.entity.ai.goal.HarvesterMeleeAttackGoal;
-import com.min01.villageandvillagers.entity.ai.goal.HarvesterSummonBarricadeGoal;
+import com.min01.villageandvillagers.misc.VillageProfessions;
 
 import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -12,26 +10,20 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 
-public class EntityHarvester extends AbstractCombatVillager
+public class EntityDaydreamer extends AbstractCombatVillager
 {
-	public final AnimationState stabAnimationState = new AnimationState();
-	public final AnimationState twoHandStabAnimationState = new AnimationState();
-	public final AnimationState stompAnimationState = new AnimationState();
-	
-	public EntityHarvester(EntityType<? extends Villager> p_35267_, Level p_35268_)
+	public EntityDaydreamer(EntityType<? extends Villager> p_35267_, Level p_35268_)
 	{
 		super(p_35267_, p_35268_);
-		this.posArray = new Vec3[1];
 	}
 	
     public static AttributeSupplier.Builder createAttributes()
     {
         return Mob.createMobAttributes()
-    			.add(Attributes.MAX_HEALTH, 40.0F)
-    			.add(Attributes.MOVEMENT_SPEED, 0.5F)
-        		.add(Attributes.ATTACK_DAMAGE, 5.0F)
+    			.add(Attributes.MAX_HEALTH, 30.0F)
+    			.add(Attributes.MOVEMENT_SPEED, 0.75F)
+        		.add(Attributes.ATTACK_DAMAGE, 2.0F)
         		.add(Attributes.FOLLOW_RANGE, 48.0F);
     }
     
@@ -39,8 +31,6 @@ public class EntityHarvester extends AbstractCombatVillager
     protected void registerGoals()
     {
     	super.registerGoals();
-    	this.goalSelector.addGoal(4, new HarvesterMeleeAttackGoal(this));
-    	this.goalSelector.addGoal(4, new HarvesterSummonBarricadeGoal(this));
     }
     
 	@Override
@@ -55,24 +45,6 @@ public class EntityHarvester extends AbstractCombatVillager
         			this.stopAllAnimationStates();
         			break;
         		}
-        		case 1: 
-        		{
-        			this.stopAllAnimationStates();
-        			this.stabAnimationState.start(this.tickCount);
-        			break;
-        		}
-        		case 2: 
-        		{
-        			this.stopAllAnimationStates();
-        			this.twoHandStabAnimationState.start(this.tickCount);
-        			break;
-        		}
-        		case 3: 
-        		{
-        			this.stopAllAnimationStates();
-        			this.stompAnimationState.start(this.tickCount);
-        			break;
-        		}
             }
         }
 	}
@@ -80,9 +52,7 @@ public class EntityHarvester extends AbstractCombatVillager
 	@Override
 	public void stopAllAnimationStates() 
 	{
-		this.stabAnimationState.stop();
-		this.twoHandStabAnimationState.stop();
-		this.stompAnimationState.stop();
+		
 	}
 	
 	@Override
@@ -94,7 +64,6 @@ public class EntityHarvester extends AbstractCombatVillager
 			this.getLookControl().setLookAt(this.getTarget(), 30.0F, 30.0F);
 			if(this.canMove())
 			{
-				//TODO hide in barricade
 				this.getNavigation().moveTo(this.getTarget(), this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
 			}
 		}
@@ -103,7 +72,7 @@ public class EntityHarvester extends AbstractCombatVillager
 	@Override
 	public VillagerProfession getProfession()
 	{
-		return VillagerProfession.FARMER;
+		return VillageProfessions.DAYDREAMER.get();
 	}
 	
 	@Override

@@ -2,7 +2,10 @@ package com.min01.villageandvillagers.event;
 
 import com.min01.villageandvillagers.VillageandVillagers;
 import com.min01.villageandvillagers.entity.VillageEntities;
+import com.min01.villageandvillagers.entity.villager.EntityDaydreamer;
 import com.min01.villageandvillagers.entity.villager.EntityHarvester;
+import com.min01.villageandvillagers.entity.villager.EntityMartialArtist;
+import com.min01.villageandvillagers.entity.villager.EntityRobinHood;
 import com.min01.villageandvillagers.entity.villager.EntityTimeKeeper;
 
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -26,6 +29,9 @@ public class EventHandler
     {
     	event.put(VillageEntities.HARVESTER.get(), EntityHarvester.createAttributes().build());
     	event.put(VillageEntities.TIME_KEEPER.get(), EntityTimeKeeper.createAttributes().build());
+    	event.put(VillageEntities.ROBIN_HOOD.get(), EntityRobinHood.createAttributes().build());
+    	event.put(VillageEntities.DAYDREAMER.get(), EntityDaydreamer.createAttributes().build());
+    	event.put(VillageEntities.MARTIAL_ARTIST.get(), EntityMartialArtist.createAttributes().build());
     }
     
     @SubscribeEvent

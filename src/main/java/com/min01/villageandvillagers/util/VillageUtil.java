@@ -221,15 +221,12 @@ public class VillageUtil
 						d0 = voxelshape.max(Direction.Axis.Y);
 					}
 				}
-
 				flag = true;
 				break;
 			}
-
 			blockpos = blockpos.below();
 		}
 		while(blockpos.getY() >= Mth.floor(y) - 1);
-
 		if(flag)
 		{
 			consumer.accept(BlockPos.containing(x, (double)blockpos.getY() + d0, z), delay);

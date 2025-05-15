@@ -58,15 +58,24 @@ public class VillageTrades
 				}, 3, new VillagerTrades.ItemListing[]
 				{
 					new VillagerTrades.ItemsForEmeralds(VillageItems.MONOCLE.get(), 10, 1, 1, 5)
-				}
-				, 4, new VillagerTrades.ItemListing[]
+				}, 4, new VillagerTrades.ItemListing[]
 				{
 					new VillagerTrades.ItemsForEmeralds(VillageItems.POCKET_WATCH.get(), 40, 1, 1, 10)
-				}
-				, 5, new VillagerTrades.ItemListing[]
+				}, 5, new VillagerTrades.ItemListing[]
 				{
 					new VillagerTrades.ItemsForEmeralds(VillageItems.TIME_JELLY.get(), 15, 1, 20, 2),
 					new VillagerTrades.ItemsForEmeralds(VillageItems.TIME_CRYSTAL.get(), 40, 1, 10, 10)
+				})));
+		p_35633_.put(VillageProfessions.ROBIN_HOOD.get(), toIntMap(ImmutableMap.of(1, new VillagerTrades.ItemListing[]
+				{
+				}, 2, new VillagerTrades.ItemListing[]
+				{
+				}, 3, new VillagerTrades.ItemListing[]
+				{
+				}, 4, new VillagerTrades.ItemListing[]
+				{
+				}, 5, new VillagerTrades.ItemListing[]
+				{
 				})));
 	});
 	
