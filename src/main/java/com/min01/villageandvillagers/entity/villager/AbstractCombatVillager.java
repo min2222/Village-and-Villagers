@@ -5,7 +5,7 @@ import javax.annotation.Nullable;
 import com.google.common.collect.ImmutableSet;
 import com.min01.villageandvillagers.entity.IAnimatable;
 import com.min01.villageandvillagers.entity.IPosArray;
-import com.min01.villageandvillagers.util.VillageUtil;
+import com.min01.villageandvillagers.misc.VillageTrades;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Dynamic;
 
@@ -148,7 +148,7 @@ public abstract class AbstractCombatVillager extends Villager implements IAnimat
 	protected void updateTrades()
 	{
 		VillagerData villagerdata = this.getVillagerData();
-		Int2ObjectMap<VillagerTrades.ItemListing[]> int2objectmap = VillageUtil.TRADES.get(villagerdata.getProfession());
+		Int2ObjectMap<VillagerTrades.ItemListing[]> int2objectmap = VillageTrades.TRADES.get(villagerdata.getProfession());
 		if(int2objectmap != null && !int2objectmap.isEmpty()) 
 		{
 			VillagerTrades.ItemListing[] avillagertrades$itemlisting = int2objectmap.get(villagerdata.getLevel());

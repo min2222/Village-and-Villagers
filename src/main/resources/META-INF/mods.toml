@@ -71,7 +71,7 @@ description='''this mod aimed to expand lots of unique villagers and illagers!''
 [[dependencies.villageandvillagers]]
 	modId="tickrateapi"
 	mandatory=true
-	versionRange="[2.0.0,)"
+	versionRange="[4.0.0,)"
 	ordering="NONE"
 	side="BOTH"
 [[dependencies.villageandvillagers]]
