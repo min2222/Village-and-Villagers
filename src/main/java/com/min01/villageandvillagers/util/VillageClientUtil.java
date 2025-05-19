@@ -17,6 +17,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -42,7 +43,11 @@ public class VillageClientUtil
         PoseStack poseStack = new PoseStack();
         if(translateToEntity)
         {
-        	poseStack.translate(entity.getX(), entity.getY(), entity.getZ());
+            float partialTick = MC.getFrameTime();
+            double x = Mth.lerp((double)partialTick, entity.xOld, entity.getX());
+            double y = Mth.lerp((double)partialTick, entity.yOld, entity.getY());
+            double z = Mth.lerp((double)partialTick, entity.zOld, entity.getZ());
+        	poseStack.translate(x, y, z);
         }
         poseStack.mulPose(new Quaternionf().rotateXYZ((float)Math.toRadians(rotation.x), (float)Math.toRadians(-rotation.y + 180.0F), (float)Math.toRadians(rotation.z)));
         poseStack.scale(-1.0F, -1.0F, 1.0F);
