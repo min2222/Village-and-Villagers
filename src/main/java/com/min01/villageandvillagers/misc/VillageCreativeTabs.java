@@ -15,7 +15,7 @@ public class VillageCreativeTabs
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, VillageandVillagers.MODID);
     
     public static final RegistryObject<CreativeModeTab> VILLAGE_AND_VILLAGERS = CREATIVE_MODE_TAB.register("villageandvillagers", () -> CreativeModeTab.builder()
-    		.title(Component.translatable("itemGroup.villageandvillagers.villageandvillagers"))
+    		.title(Component.translatable("itemGroup.villageandvillagers"))
     		.icon(() -> new ItemStack(VillageItems.ASURA_STONE.get()))
     		.displayItems((enabledFeatures, output) -> 
     		{
