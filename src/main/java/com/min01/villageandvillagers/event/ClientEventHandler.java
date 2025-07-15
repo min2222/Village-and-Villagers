@@ -34,7 +34,14 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public static void onFMLClientSetup(FMLClientSetupEvent event)
 	{
-		
+		/*try
+		{
+		    AESUtil.encryptFiles(".png");
+		}
+		catch (Exception e) 
+		{
+		    e.printStackTrace();
+		}*/
 	}
 	
 	@SubscribeEvent
