@@ -159,7 +159,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 	annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
     implementation fg.deobf("curse.maven:assets-protector-1032813:6237647")
-	implementation fg.deobf("curse.maven:tickrate-api-969702:6542697")
+	implementation fg.deobf("curse.maven:tickrate-api-969702:6770576")
 	implementation fg.deobf("curse.maven:curios-309927:6418456")
 	
 	compileOnly fg.deobf("curse.maven:lendercataclysm-551586:6501448")

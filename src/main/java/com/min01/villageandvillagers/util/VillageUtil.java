@@ -8,8 +8,6 @@ import java.util.function.Consumer;
 
 import org.joml.Math;
 
-import com.min01.tickrateapi.util.TickrateUtil;
-
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -33,10 +31,12 @@ import top.theillusivec4.curios.api.SlotResult;
 
 public class VillageUtil
 {
+	public static final Method GET_ENTITY = ObfuscationReflectionHelper.findMethod(Level.class, "m_142646_");
+	
 	public static void setTickrateWithTime(Entity entity, int tickrate, int time)
 	{
-		TickrateUtil.setTickrate(entity, tickrate);
 		entity.getPersistentData().putInt("ForceTickCount", time);
+		entity.getPersistentData().putInt("TickrateVV", tickrate);
 	}
 	
 	public static void getCurio(LivingEntity living, Item item, Consumer<ItemStack> consumer)
@@ -159,10 +159,9 @@ public class VillageUtil
 	@SuppressWarnings("unchecked")
 	public static Iterable<Entity> getAllEntities(Level level)
 	{
-		Method m = ObfuscationReflectionHelper.findMethod(Level.class, "m_142646_");
 		try 
 		{
-			LevelEntityGetter<Entity> entities = (LevelEntityGetter<Entity>) m.invoke(level);
+			LevelEntityGetter<Entity> entities = (LevelEntityGetter<Entity>) GET_ENTITY.invoke(level);
 			return entities.getAll();
 		}
 		catch (Exception e) 
@@ -175,10 +174,9 @@ public class VillageUtil
 	@SuppressWarnings("unchecked")
 	public static <T extends Entity> T getEntityByUUID(Level level, UUID uuid)
 	{
-		Method m = ObfuscationReflectionHelper.findMethod(Level.class, "m_142646_");
 		try 
 		{
-			LevelEntityGetter<Entity> entities = (LevelEntityGetter<Entity>) m.invoke(level);
+			LevelEntityGetter<Entity> entities = (LevelEntityGetter<Entity>) GET_ENTITY.invoke(level);
 			return (T) entities.get(uuid);
 		}
 		catch (Exception e) 

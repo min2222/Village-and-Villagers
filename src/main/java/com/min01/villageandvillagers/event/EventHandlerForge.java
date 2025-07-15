@@ -2,7 +2,6 @@ package com.min01.villageandvillagers.event;
 
 import java.util.List;
 
-import com.google.common.collect.Lists;
 import com.min01.tickrateapi.util.TickrateUtil;
 import com.min01.villageandvillagers.VillageandVillagers;
 import com.min01.villageandvillagers.item.VillageItems;
@@ -30,16 +29,20 @@ public class EventHandlerForge
 	public static void onLevelTick(LevelTickEvent event)
 	{
 		Iterable<Entity> all = VillageUtil.getAllEntities(event.level);
-		Lists.newArrayList(all).stream().filter(t -> t.getPersistentData().contains("ForceTickCount")).forEach(t -> 
+		for(Entity entity : all)
 		{
-			int time = t.getPersistentData().getInt("ForceTickCount");
-			t.getPersistentData().putInt("ForceTickCount", time - 1);
+			if(!(entity instanceof LivingEntity) || !entity.getPersistentData().contains("ForceTickCount"))
+			{
+				continue;
+			}
+			int time = entity.getPersistentData().getInt("ForceTickCount");
+			entity.getPersistentData().putInt("ForceTickCount", time - 1);
+			TickrateUtil.setTickrate(entity, entity.getPersistentData().getInt("TickrateVV"));
 			if(time <= 0)
 			{
-				TickrateUtil.resetTickrate(t);
-				t.getPersistentData().remove("ForceTickCount");
+				entity.getPersistentData().remove("ForceTickCount");
 			}
-		});
+		}
 	}
 	
 	@SubscribeEvent
