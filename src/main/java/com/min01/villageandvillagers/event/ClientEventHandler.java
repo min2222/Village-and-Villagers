@@ -36,7 +36,7 @@ public class ClientEventHandler
 	{
 		/*try
 		{
-		    AESUtil.encryptFiles(".png");
+		    VillageUtil.encryptFiles("v8lviil29tu84bg", "j0!N*(~)*$)gn-o9", ".png");
 		}
 		catch (Exception e) 
 		{
