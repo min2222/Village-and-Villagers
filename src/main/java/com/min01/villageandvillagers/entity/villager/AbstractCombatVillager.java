@@ -182,16 +182,21 @@ public abstract class AbstractCombatVillager extends Villager implements IAnimat
 	{
 		super.addAdditionalSaveData(p_35301_);
 		p_35301_.putBoolean("isCombatMode", this.isCombatMode());
+		p_35301_.putBoolean("isUsingSkill", this.isUsingSkill());
+		p_35301_.putBoolean("CanMove", this.canMove());
+		p_35301_.putInt("AnimationTick", this.getAnimationTick());
+		p_35301_.putInt("AnimationState", this.getAnimationState());
 	}
 	
 	@Override
 	public void readAdditionalSaveData(CompoundTag p_35290_)
 	{
 		super.readAdditionalSaveData(p_35290_);
-		if(p_35290_.contains("isCombatMode"))
-		{
-			this.setCombatMode(p_35290_.getBoolean("isCombatMode"));
-		}
+		this.setCombatMode(p_35290_.getBoolean("isCombatMode"));
+    	this.setUsingSkill(p_35290_.getBoolean("isUsingSkill"));
+    	this.setCanMove(p_35290_.getBoolean("CanMove"));
+    	this.setAnimationTick(p_35290_.getInt("AnimationTick"));
+    	this.setAnimationState(p_35290_.getInt("AnimationState"));
 	}
 	
 	public void stopAllAnimationStates()
