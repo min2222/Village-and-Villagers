@@ -2,9 +2,8 @@ package com.min01.villageandvillagers.entity.villager;
 
 import com.min01.villageandvillagers.entity.ai.goal.HarvesterMeleeAttackGoal;
 import com.min01.villageandvillagers.entity.ai.goal.HarvesterSummonBarricadeGoal;
+import com.min01.villageandvillagers.misc.SmoothAnimationState;
 
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -16,9 +15,9 @@ import net.minecraft.world.phys.Vec3;
 
 public class EntityHarvester extends AbstractCombatVillager
 {
-	public final AnimationState stabAnimationState = new AnimationState();
-	public final AnimationState twoHandStabAnimationState = new AnimationState();
-	public final AnimationState stompAnimationState = new AnimationState();
+	public final SmoothAnimationState stabAnimationState = new SmoothAnimationState();
+	public final SmoothAnimationState twoHandStabAnimationState = new SmoothAnimationState();
+	public final SmoothAnimationState stompAnimationState = new SmoothAnimationState();
 	
 	public EntityHarvester(EntityType<? extends Villager> p_35267_, Level p_35268_)
 	{
@@ -42,56 +41,23 @@ public class EntityHarvester extends AbstractCombatVillager
     	this.goalSelector.addGoal(4, new HarvesterMeleeAttackGoal(this));
     	this.goalSelector.addGoal(4, new HarvesterSummonBarricadeGoal(this));
     }
-    
-	@Override
-	public void onSyncedDataUpdated(EntityDataAccessor<?> p_219422_) 
-	{
-        if(ANIMATION_STATE.equals(p_219422_) && this.level.isClientSide) 
-        {
-            switch(this.getAnimationState()) 
-            {
-        		case 0: 
-        		{
-        			this.stopAllAnimationStates();
-        			break;
-        		}
-        		case 1: 
-        		{
-        			this.stopAllAnimationStates();
-        			this.stabAnimationState.start(this.tickCount);
-        			break;
-        		}
-        		case 2: 
-        		{
-        			this.stopAllAnimationStates();
-        			this.twoHandStabAnimationState.start(this.tickCount);
-        			break;
-        		}
-        		case 3: 
-        		{
-        			this.stopAllAnimationStates();
-        			this.stompAnimationState.start(this.tickCount);
-        			break;
-        		}
-            }
-        }
-	}
-	
-	@Override
-	public void stopAllAnimationStates() 
-	{
-		this.stabAnimationState.stop();
-		this.twoHandStabAnimationState.stop();
-		this.stompAnimationState.stop();
-	}
 	
 	@Override
 	public void tick() 
 	{
 		super.tick();
+		if(this.level.isClientSide)
+		{
+			this.stabAnimationState.updateWhen(this.getAnimationState() == 1, this.tickCount);
+			this.twoHandStabAnimationState.updateWhen(getAnimationState() == 2, this.tickCount);
+			this.stompAnimationState.updateWhen(this.getAnimationState() == 3, this.tickCount);
+		}
 		if(this.getTarget() != null)
 		{
-			this.getLookControl().setLookAt(this.getTarget(), 30.0F, 30.0F);
+			if(this.canLook())
+			{
+				this.getLookControl().setLookAt(this.getTarget(), 30.0F, 30.0F);
+			}
 			if(this.canMove())
 			{
 				//TODO hide in barricade

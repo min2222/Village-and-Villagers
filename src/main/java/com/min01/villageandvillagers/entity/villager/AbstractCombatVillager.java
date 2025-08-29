@@ -47,6 +47,7 @@ public abstract class AbstractCombatVillager extends Villager implements IAnimat
 {
 	public static final EntityDataAccessor<Integer> ANIMATION_STATE = SynchedEntityData.defineId(AbstractCombatVillager.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> ANIMATION_TICK = SynchedEntityData.defineId(AbstractCombatVillager.class, EntityDataSerializers.INT);
+	public static final EntityDataAccessor<Boolean> CAN_LOOK = SynchedEntityData.defineId(AbstractCombatVillager.class, EntityDataSerializers.BOOLEAN);
 	public static final EntityDataAccessor<Boolean> CAN_MOVE = SynchedEntityData.defineId(AbstractCombatVillager.class, EntityDataSerializers.BOOLEAN);
 	public static final EntityDataAccessor<Boolean> IS_USING_SKILL = SynchedEntityData.defineId(AbstractCombatVillager.class, EntityDataSerializers.BOOLEAN);
 	public static final EntityDataAccessor<Boolean> IS_COMBAT_MODE = SynchedEntityData.defineId(AbstractCombatVillager.class, EntityDataSerializers.BOOLEAN);
@@ -66,6 +67,7 @@ public abstract class AbstractCombatVillager extends Villager implements IAnimat
 		super.defineSynchedData();
 		this.entityData.define(ANIMATION_STATE, 0);
 		this.entityData.define(ANIMATION_TICK, 0);
+		this.entityData.define(CAN_LOOK, true);
 		this.entityData.define(CAN_MOVE, true);
 		this.entityData.define(IS_USING_SKILL, false);
 		this.entityData.define(IS_COMBAT_MODE, false);
@@ -183,6 +185,7 @@ public abstract class AbstractCombatVillager extends Villager implements IAnimat
 		super.addAdditionalSaveData(p_35301_);
 		p_35301_.putBoolean("isCombatMode", this.isCombatMode());
 		p_35301_.putBoolean("isUsingSkill", this.isUsingSkill());
+		p_35301_.putBoolean("CanLook", this.canLook());
 		p_35301_.putBoolean("CanMove", this.canMove());
 		p_35301_.putInt("AnimationTick", this.getAnimationTick());
 		p_35301_.putInt("AnimationState", this.getAnimationState());
@@ -194,14 +197,10 @@ public abstract class AbstractCombatVillager extends Villager implements IAnimat
 		super.readAdditionalSaveData(p_35290_);
 		this.setCombatMode(p_35290_.getBoolean("isCombatMode"));
     	this.setUsingSkill(p_35290_.getBoolean("isUsingSkill"));
+    	this.setCanLook(p_35290_.getBoolean("CanLook"));
     	this.setCanMove(p_35290_.getBoolean("CanMove"));
     	this.setAnimationTick(p_35290_.getInt("AnimationTick"));
     	this.setAnimationState(p_35290_.getInt("AnimationState"));
-	}
-	
-	public void stopAllAnimationStates()
-	{
-		
 	}
 	
 	public void setCombatMode(boolean value) 
@@ -226,6 +225,16 @@ public abstract class AbstractCombatVillager extends Villager implements IAnimat
 	{
 		return this.getAnimationTick() > 0 || this.entityData.get(IS_USING_SKILL);
 	}
+	
+    public void setCanLook(boolean value)
+    {
+    	this.entityData.set(CAN_LOOK, value);
+    }
+    
+    public boolean canLook()
+    {
+    	return this.entityData.get(CAN_LOOK);
+    }
     
 	@Override
     public void setCanMove(boolean value)

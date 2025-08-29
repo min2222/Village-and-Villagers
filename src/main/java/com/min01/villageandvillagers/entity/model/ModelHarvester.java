@@ -99,9 +99,10 @@ public class ModelHarvester extends HierarchicalModel<EntityHarvester>
 	{
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 		VillageClientUtil.animateHead(this.head, netHeadYaw, headPitch);
-		this.animate(entity.stabAnimationState, HarvesterAnimation.HARVESTER_STAB, ageInTicks);
-		this.animate(entity.twoHandStabAnimationState, HarvesterAnimation.HARVESTER_TWO_HAND_STAB, ageInTicks);
-		this.animate(entity.stompAnimationState, HarvesterAnimation.HARVESTER_STOMP, ageInTicks);
+		entity.stabAnimationState.animate(this, HarvesterAnimation.HARVESTER_STAB, ageInTicks);
+		entity.twoHandStabAnimationState.animate(this, HarvesterAnimation.HARVESTER_TWO_HAND_STAB, ageInTicks);
+		entity.stompAnimationState.animate(this, HarvesterAnimation.HARVESTER_STOMP, ageInTicks);
+		
 		this.arms_crossed.visible = !entity.isCombatMode();
 		this.arms_out.visible = entity.isCombatMode();
 
