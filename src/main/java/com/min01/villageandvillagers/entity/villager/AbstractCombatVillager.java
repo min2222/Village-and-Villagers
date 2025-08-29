@@ -257,11 +257,12 @@ public abstract class AbstractCombatVillager extends Villager implements IAnimat
     
     public int getAnimationState()
     {
-    	if(!this.isUsingSkill())
-    	{
-    		return 0;
-    	}
         return this.entityData.get(ANIMATION_STATE);
+    }
+    
+    public boolean isUsingSkill(int state)
+    {
+    	return this.getAnimationState() == state && this.isUsingSkill();
     }
     
     @Override

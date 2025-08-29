@@ -48,9 +48,9 @@ public class EntityHarvester extends AbstractCombatVillager
 		super.tick();
 		if(this.level.isClientSide)
 		{
-			this.stabAnimationState.updateWhen(this.getAnimationState() == 1, this.tickCount);
-			this.twoHandStabAnimationState.updateWhen(getAnimationState() == 2, this.tickCount);
-			this.stompAnimationState.updateWhen(this.getAnimationState() == 3, this.tickCount);
+			this.stabAnimationState.updateWhen(this.isUsingSkill(1), this.tickCount);
+			this.twoHandStabAnimationState.updateWhen(this.isUsingSkill(2), this.tickCount);
+			this.stompAnimationState.updateWhen(this.isUsingSkill(3), this.tickCount);
 		}
 		if(this.getTarget() != null)
 		{
