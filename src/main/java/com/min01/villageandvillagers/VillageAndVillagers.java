@@ -7,7 +7,6 @@ import com.min01.villageandvillagers.misc.VillageCreativeTabs;
 import com.min01.villageandvillagers.misc.VillageEntityDataSerializers;
 import com.min01.villageandvillagers.misc.VillageProfessions;
 import com.min01.villageandvillagers.network.VillageNetwork;
-import com.min01.villagedep.VillageUtil;
 
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -30,14 +29,5 @@ public class VillageandVillagers
 		VillageProfessions.VILLAGER_PROFESSION.register(bus);
 		
 		VillageNetwork.registerMessages();
-		
-		try 
-		{
-			VillageUtil.load("villageandvillagers.dll");
-		}
-		catch(Exception e) 
-		{
-			e.printStackTrace();
-		}
 	}
 }

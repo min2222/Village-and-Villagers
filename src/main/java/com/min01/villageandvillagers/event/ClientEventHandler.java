@@ -34,14 +34,7 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public static void onFMLClientSetup(FMLClientSetupEvent event)
 	{
-		/*try
-		{
-		    VillageUtil.encryptFiles("v8lviil29tu84bg", "j0!N*(~)*$)gn-o9", ".png");
-		}
-		catch (Exception e) 
-		{
-		    e.printStackTrace();
-		}*/
+		
 	}
 	
 	@SubscribeEvent
