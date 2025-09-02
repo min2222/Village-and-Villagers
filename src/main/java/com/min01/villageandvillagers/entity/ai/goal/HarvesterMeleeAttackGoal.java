@@ -30,9 +30,9 @@ public class HarvesterMeleeAttackGoal extends BasicAnimationSkillGoal<EntityHarv
 	}
 	
 	@Override
-	public boolean additionalStartCondition() 
+	public boolean canUse() 
 	{
-		return this.mob.distanceTo(this.mob.getTarget()) <= 4.0F;
+		return super.canUse() && this.mob.distanceTo(this.mob.getTarget()) <= 4.0F;
 	}
 
 	@Override

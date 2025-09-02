@@ -19,9 +19,9 @@ public class TimeKeeperFallingGearGoal extends BasicAnimationSkillGoal<EntityTim
 	}
 	
 	@Override
-	public boolean additionalStartCondition() 
+	public boolean canUse() 
 	{
-		return this.mob.distanceTo(this.mob.getTarget()) >= 8.0F;
+		return super.canUse() && this.mob.distanceTo(this.mob.getTarget()) >= 8.0F;
 	}
 
 	@Override

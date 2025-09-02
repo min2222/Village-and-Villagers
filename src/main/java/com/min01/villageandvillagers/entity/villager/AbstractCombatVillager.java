@@ -3,8 +3,7 @@ package com.min01.villageandvillagers.entity.villager;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableSet;
-import com.min01.villageandvillagers.entity.IAnimatable;
-import com.min01.villageandvillagers.entity.IPosArray;
+import com.min01.villageandvillagers.entity.AbstractAnimatableVillager;
 import com.min01.villageandvillagers.misc.VillageTrades;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Dynamic;
@@ -20,15 +19,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.VillagerGoalPackages;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.InteractGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.LookAtTradingPlayerGoal;
-import net.minecraft.world.entity.ai.goal.TradeWithPlayerGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
@@ -41,46 +33,29 @@ import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.entity.schedule.Schedule;
 import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 
-public abstract class AbstractCombatVillager extends Villager implements IAnimatable, IPosArray
+public abstract class AbstractCombatVillager extends AbstractAnimatableVillager
 {
-	public static final EntityDataAccessor<Integer> ANIMATION_STATE = SynchedEntityData.defineId(AbstractCombatVillager.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Integer> ANIMATION_TICK = SynchedEntityData.defineId(AbstractCombatVillager.class, EntityDataSerializers.INT);
-	public static final EntityDataAccessor<Boolean> CAN_LOOK = SynchedEntityData.defineId(AbstractCombatVillager.class, EntityDataSerializers.BOOLEAN);
-	public static final EntityDataAccessor<Boolean> CAN_MOVE = SynchedEntityData.defineId(AbstractCombatVillager.class, EntityDataSerializers.BOOLEAN);
 	public static final EntityDataAccessor<Boolean> IS_COMBAT_MODE = SynchedEntityData.defineId(AbstractCombatVillager.class, EntityDataSerializers.BOOLEAN);
-	
-	public Vec3[] posArray;
 	
 	public AbstractCombatVillager(EntityType<? extends Villager> p_35267_, Level p_35268_) 
 	{
 		super(p_35267_, p_35268_);
 		this.setVillagerData(this.getVillagerData().setProfession(this.getProfession()));
-		this.noCulling = true;
+	}
+	
+	@Override
+	protected void registerGoals() 
+	{
+		super.registerGoals();
+		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
 	}
 	
 	@Override
 	protected void defineSynchedData() 
 	{
 		super.defineSynchedData();
-		this.entityData.define(ANIMATION_STATE, 0);
-		this.entityData.define(ANIMATION_TICK, 0);
-		this.entityData.define(CAN_LOOK, true);
-		this.entityData.define(CAN_MOVE, true);
 		this.entityData.define(IS_COMBAT_MODE, false);
-	}
-	
-	@Override
-	protected void registerGoals()
-	{
-		this.goalSelector.addGoal(0, new FloatGoal(this));
-		this.goalSelector.addGoal(1, new TradeWithPlayerGoal(this));
-		this.goalSelector.addGoal(1, new LookAtTradingPlayerGoal(this));
-		this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.35D));
-		this.goalSelector.addGoal(9, new InteractGoal(this, Player.class, 3.0F, 1.0F));
-		this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Mob.class, 8.0F));
-		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
 	}
 	
 	@Override
@@ -120,10 +95,6 @@ public abstract class AbstractCombatVillager extends Villager implements IAnimat
 	public void tick()
 	{
 		super.tick();
-		if(this.getAnimationTick() > 0)
-		{
-			this.setAnimationTick(this.getAnimationTick() - 1);
-		}
 		
 		if(!this.level.isClientSide)
 		{
@@ -136,13 +107,7 @@ public abstract class AbstractCombatVillager extends Villager implements IAnimat
 				this.getBrain().stopAll((ServerLevel) this.level, this);
 			}
 		}
-	}
-	
-	@Override
-	public Vec3[] getPosArray() 
-	{
-		return this.posArray;
-	}
+    }
 	
 	@Override
 	protected void updateTrades()
@@ -182,10 +147,6 @@ public abstract class AbstractCombatVillager extends Villager implements IAnimat
 	{
 		super.addAdditionalSaveData(p_35301_);
 		p_35301_.putBoolean("isCombatMode", this.isCombatMode());
-		p_35301_.putBoolean("CanLook", this.canLook());
-		p_35301_.putBoolean("CanMove", this.canMove());
-		p_35301_.putInt("AnimationTick", this.getAnimationTick());
-		p_35301_.putInt("AnimationState", this.getAnimationState());
 	}
 	
 	@Override
@@ -193,10 +154,6 @@ public abstract class AbstractCombatVillager extends Villager implements IAnimat
 	{
 		super.readAdditionalSaveData(p_35290_);
 		this.setCombatMode(p_35290_.getBoolean("isCombatMode"));
-    	this.setCanLook(p_35290_.getBoolean("CanLook"));
-    	this.setCanMove(p_35290_.getBoolean("CanMove"));
-    	this.setAnimationTick(p_35290_.getInt("AnimationTick"));
-    	this.setAnimationState(p_35290_.getInt("AnimationState"));
 	}
 	
 	public void setCombatMode(boolean value) 
@@ -209,61 +166,6 @@ public abstract class AbstractCombatVillager extends Villager implements IAnimat
 	{
 		return this.entityData.get(IS_COMBAT_MODE);
 	}
-	
-	@Override
-	public boolean isUsingSkill() 
-	{
-		return this.getAnimationTick() > 0;
-	}
-	
-    public void setCanLook(boolean value)
-    {
-    	this.entityData.set(CAN_LOOK, value);
-    }
-    
-    public boolean canLook()
-    {
-    	return this.entityData.get(CAN_LOOK);
-    }
-    
-	@Override
-    public void setCanMove(boolean value)
-    {
-    	this.entityData.set(CAN_MOVE, value);
-    }
-    
-    @Override
-    public boolean canMove()
-    {
-    	return this.entityData.get(CAN_MOVE);
-    }
-    
-    @Override
-    public void setAnimationTick(int value)
-    {
-        this.entityData.set(ANIMATION_TICK, value);
-    }
-    
-    @Override
-    public int getAnimationTick()
-    {
-        return this.entityData.get(ANIMATION_TICK);
-    }
-    
-    public void setAnimationState(int value)
-    {
-        this.entityData.set(ANIMATION_STATE, value);
-    }
-    
-    public int getAnimationState()
-    {
-        return this.entityData.get(ANIMATION_STATE);
-    }
-    
-    public boolean isUsingSkill(int state)
-    {
-    	return this.getAnimationState() == state && this.isUsingSkill();
-    }
     
     @Override
     protected Component getTypeName()
