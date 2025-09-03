@@ -22,8 +22,10 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.VillagerGoalPackages;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerData;
 import net.minecraft.world.entity.npc.VillagerProfession;
@@ -48,6 +50,7 @@ public abstract class AbstractCombatVillager extends AbstractAnimatableVillager
 	protected void registerGoals() 
 	{
 		super.registerGoals();
+		this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Monster.class, false));
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
 	}
 	
@@ -88,7 +91,7 @@ public abstract class AbstractCombatVillager extends AbstractAnimatableVillager
 		p_35425_.setCoreActivities(ImmutableSet.of(Activity.CORE));
 		p_35425_.setDefaultActivity(Activity.IDLE);
 		p_35425_.setActiveActivityIfPossible(Activity.IDLE);
-		p_35425_.updateActivityFromSchedule(this.level().getDayTime(), this.level().getGameTime());
+		p_35425_.updateActivityFromSchedule(this.level.getDayTime(), this.level.getGameTime());
 	}
 	
 	@Override

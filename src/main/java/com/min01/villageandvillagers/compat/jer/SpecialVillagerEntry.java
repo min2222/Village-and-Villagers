@@ -1,7 +1,6 @@
 package com.min01.villageandvillagers.compat.jer;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.google.common.base.Supplier;
 import com.min01.villageandvillagers.VillageandVillagers;
@@ -10,7 +9,6 @@ import com.min01.villageandvillagers.entity.villager.AbstractCombatVillager;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import jeresources.compatibility.CompatBase;
 import jeresources.entry.AbstractVillagerEntry;
-import jeresources.util.VillagersHelper;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
@@ -58,13 +56,13 @@ public class SpecialVillagerEntry extends AbstractVillagerEntry<AbstractCombatVi
     @Override
     public List<ItemStack> getPois() 
     {
-        return VillagersHelper.getPoiBlocks(this.profession.heldJobSite()).stream().map(blockstate -> new ItemStack(blockstate.getBlock())).collect(Collectors.toList());
+        return List.of();
     }
 
     @Override
     public boolean hasPois() 
     {
-        return !VillagersHelper.getPoiBlocks(this.profession.heldJobSite()).isEmpty();
+        return false;
     }
 
     @Override

@@ -8,12 +8,17 @@ import java.util.function.Consumer;
 
 import org.joml.Math;
 
+import com.min01.villageandvillagers.config.VillageConfig;
+import com.min01.villageandvillagers.entity.villager.AbstractCombatVillager;
+
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -24,6 +29,7 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.util.LogicalSidedProvider;
+import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -32,6 +38,18 @@ import top.theillusivec4.curios.api.SlotResult;
 public class VillageUtil
 {
 	public static final Method GET_ENTITY = ObfuscationReflectionHelper.findMethod(Level.class, "m_142646_");
+	
+	public static <T extends AbstractCombatVillager> void convertVillagerToSpecial(EntityType<T> entityType, Villager original, MobSpawnEvent.FinalizeSpawn event)
+	{
+		if(Math.random() <= VillageConfig.specialVillagerChance.get() / 100.0F)
+		{
+			T entity = entityType.create(original.level);
+			entity.setPos(Vec3.atBottomCenterOf(original.blockPosition()));
+			original.level.addFreshEntity(entity);
+			event.setSpawnCancelled(true);
+			event.setCanceled(true);
+		}
+	}
 	
 	public static void setTickrateWithTime(Entity entity, int tickrate, int time)
 	{

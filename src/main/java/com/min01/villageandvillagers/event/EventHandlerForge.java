@@ -4,12 +4,21 @@ import java.util.List;
 
 import com.min01.tickrateapi.util.TickrateUtil;
 import com.min01.villageandvillagers.VillageandVillagers;
+import com.min01.villageandvillagers.config.VillageConfig;
+import com.min01.villageandvillagers.entity.VillageEntities;
+import com.min01.villageandvillagers.entity.villager.AbstractCombatVillager;
 import com.min01.villageandvillagers.item.VillageItems;
 import com.min01.villageandvillagers.util.VillageUtil;
 
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.StructureTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.animal.IronGolem;
+import net.minecraft.world.entity.npc.AbstractVillager;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -18,18 +27,68 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.event.TickEvent.LevelTickEvent;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import tallestegg.guardvillagers.entities.Guard;
 
 @Mod.EventBusSubscriber(modid = VillageandVillagers.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EventHandlerForge 
 {	
 	@SubscribeEvent
-	public static void onEntityJoinLevel(EntityJoinLevelEvent event)
+	public static void onFinalizeSpawn(MobSpawnEvent.FinalizeSpawn event)
 	{
-		
+		if(event.getEntity() instanceof Villager villager && event.getSpawnType() == MobSpawnType.STRUCTURE)
+		{
+			if(villager.level instanceof ServerLevel serverLevel)
+			{
+				if(serverLevel.structureManager().getStructureWithPieceAt(villager.blockPosition(), StructureTags.VILLAGE).isValid())
+				{
+					VillageUtil.convertVillagerToSpecial(VillageEntities.HARVESTER.get(), villager, event);
+				}
+			}
+		}
+	}
+	
+	
+	@SubscribeEvent
+	public static void onLivingDamage(LivingDamageEvent event)
+	{
+		if(VillageConfig.disableDamageVillagers.get())
+		{
+			LivingEntity entity = event.getEntity();
+			Entity source = event.getSource().getDirectEntity();
+			if(source != null)
+			{
+				if(source instanceof IronGolem || source instanceof AbstractCombatVillager || source instanceof Guard)
+				{
+					if(entity instanceof IronGolem || entity instanceof AbstractCombatVillager || entity instanceof Guard || entity instanceof AbstractVillager)
+					{
+						event.setCanceled(true);
+					}
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onLivingChangeTarget(LivingChangeTargetEvent event)
+	{
+		if(VillageConfig.disableDamageVillagers.get())
+		{
+			LivingEntity entity = event.getEntity();
+			if(entity instanceof IronGolem || entity instanceof AbstractCombatVillager || entity instanceof Guard)
+			{
+				LivingEntity target = event.getNewTarget();
+				if(target instanceof IronGolem || target instanceof AbstractCombatVillager || target instanceof Guard || target instanceof AbstractVillager)
+				{
+					event.setCanceled(true);
+				}
+			}
+		}
 	}
 	
 	@SubscribeEvent

@@ -162,6 +162,7 @@ dependencies {
 	
 	compileOnly fg.deobf("curse.maven:lendercataclysm-551586:6906993")
 	compileOnly fg.deobf("curse.maven:lionfish-api-1001614:5922047")
+	compileOnly fg.deobf("curse.maven:guard-villagers-360203:6793945")
 	
 	runtimeOnly fg.deobf("curse.maven:mob-battle-mod-268746:5950124")
 	runtimeOnly fg.deobf("curse.maven:mob-battle-extra-853296:4810120")
