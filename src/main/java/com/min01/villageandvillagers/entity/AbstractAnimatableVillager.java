@@ -59,7 +59,7 @@ public abstract class AbstractAnimatableVillager extends Villager implements IAn
 				return super.canUse() && AbstractAnimatableVillager.this.canLookAround();
 			}
 		});
-		this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 1.0F)
+		this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 0.5F)
 		{
 			@Override
 			public boolean canUse()

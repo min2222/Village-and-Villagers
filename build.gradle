@@ -167,6 +167,7 @@ dependencies {
 	runtimeOnly fg.deobf("curse.maven:mob-battle-extra-853296:4810120")
 	runtimeOnly fg.deobf("curse.maven:jei-238222:6075247")
 	runtimeOnly fg.deobf("curse.maven:just-enough-resources-jer-240630:5057220")
+    runtimeOnly fg.deobf("curse.maven:jade-324717:6855440")
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

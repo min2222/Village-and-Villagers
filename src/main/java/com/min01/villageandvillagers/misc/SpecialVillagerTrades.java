@@ -20,11 +20,11 @@ import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 
-public class VillageTrades
+public class SpecialVillagerTrades
 {
 	public static final Map<VillagerProfession, Int2ObjectMap<VillagerTrades.ItemListing[]>> TRADES = Util.make(Maps.newHashMap(), (p_35633_) -> 
 	{
-		p_35633_.put(VillagerProfession.FARMER, toIntMap(ImmutableMap.of(1, new VillagerTrades.ItemListing[]
+		p_35633_.put(SpecialVillagerProfessions.HARVESTER.get(), toIntMap(ImmutableMap.of(1, new VillagerTrades.ItemListing[]
 				{
 					new VillagerTrades.EmeraldForItems(Items.WHEAT, 20, 16, 2), 
 					new VillagerTrades.EmeraldForItems(Items.POTATO, 26, 16, 2), 
@@ -48,7 +48,7 @@ public class VillageTrades
 					new VillagerTrades.ItemsForEmeralds(Items.GOLDEN_CARROT, 3, 3, 30),
 					new VillagerTrades.ItemsForEmeralds(Items.GLISTERING_MELON_SLICE, 4, 3, 30)
 				})));
-		p_35633_.put(VillageProfessions.TIME_KEEPER.get(), toIntMap(ImmutableMap.of(1, new VillagerTrades.ItemListing[]
+		p_35633_.put(SpecialVillagerProfessions.TIME_KEEPER.get(), toIntMap(ImmutableMap.of(1, new VillagerTrades.ItemListing[]
 				{
 					new VillagerTrades.ItemsForEmeralds(VillageItems.GEAR.get(), 8, 3, 100, 1),
 				}, 2, new VillagerTrades.ItemListing[]
@@ -66,7 +66,7 @@ public class VillageTrades
 					new VillagerTrades.ItemsForEmeralds(VillageItems.TIME_JELLY.get(), 15, 1, 20, 2),
 					new VillagerTrades.ItemsForEmeralds(VillageItems.TIME_CRYSTAL.get(), 40, 1, 10, 10)
 				})));
-		p_35633_.put(VillageProfessions.ROBIN_HOOD.get(), toIntMap(ImmutableMap.of(1, new VillagerTrades.ItemListing[]
+		p_35633_.put(SpecialVillagerProfessions.ROBIN_HOOD.get(), toIntMap(ImmutableMap.of(1, new VillagerTrades.ItemListing[]
 				{
 				}, 2, new VillagerTrades.ItemListing[]
 				{

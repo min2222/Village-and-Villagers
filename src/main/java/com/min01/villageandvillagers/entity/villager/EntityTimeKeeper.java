@@ -3,7 +3,7 @@ package com.min01.villageandvillagers.entity.villager;
 import com.min01.villageandvillagers.entity.ai.goal.TimeKeeperExplosiveGearGoal;
 import com.min01.villageandvillagers.entity.ai.goal.TimeKeeperFallingGearGoal;
 import com.min01.villageandvillagers.entity.ai.goal.TimeKeeperTrackingGearGoal;
-import com.min01.villageandvillagers.misc.VillageProfessions;
+import com.min01.villageandvillagers.misc.SpecialVillagerProfessions;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -53,12 +53,6 @@ public class EntityTimeKeeper extends AbstractCombatVillager
 	@Override
 	public VillagerProfession getProfession()
 	{
-		return VillageProfessions.TIME_KEEPER.get();
-	}
-	
-	@Override
-	public boolean isSpecial() 
-	{
-		return true;
+		return SpecialVillagerProfessions.TIME_KEEPER.get();
 	}
 }

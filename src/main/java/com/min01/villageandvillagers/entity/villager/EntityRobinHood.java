@@ -1,6 +1,6 @@
 package com.min01.villageandvillagers.entity.villager;
 
-import com.min01.villageandvillagers.misc.VillageProfessions;
+import com.min01.villageandvillagers.misc.SpecialVillagerProfessions;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -52,12 +52,6 @@ public class EntityRobinHood extends AbstractCombatVillager
 	@Override
 	public VillagerProfession getProfession()
 	{
-		return VillageProfessions.ROBIN_HOOD.get();
-	}
-	
-	@Override
-	public boolean isSpecial() 
-	{
-		return true;
+		return SpecialVillagerProfessions.ROBIN_HOOD.get();
 	}
 }

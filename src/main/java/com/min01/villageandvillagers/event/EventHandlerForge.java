@@ -7,9 +7,16 @@ import com.min01.villageandvillagers.VillageandVillagers;
 import com.min01.villageandvillagers.item.VillageItems;
 import com.min01.villageandvillagers.util.VillageUtil;
 
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.event.TickEvent.LevelTickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -18,7 +25,7 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = VillageandVillagers.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EventHandlerForge 
-{
+{	
 	@SubscribeEvent
 	public static void onEntityJoinLevel(EntityJoinLevelEvent event)
 	{
@@ -76,5 +83,32 @@ public class EventHandlerForge
 				}
 			}
 		});
+	}
+	
+	public static class EmeraldForItems implements VillagerTrades.ItemListing 
+	{
+		private final Item item;
+		private final int cost;
+		private final int maxUses;
+		private final int villagerXp;
+		private final int emeraldCount;
+		private final float priceMultiplier;
+
+		public EmeraldForItems(ItemLike p_35657_, int p_35658_, int p_35659_, int p_35660_, int emeraldCount) 
+		{
+			this.item = p_35657_.asItem();
+			this.cost = p_35658_;
+			this.maxUses = p_35659_;
+			this.villagerXp = p_35660_;
+			this.emeraldCount = emeraldCount;
+			this.priceMultiplier = 0.05F;
+		}
+
+		@Override
+		public MerchantOffer getOffer(Entity p_219682_, RandomSource p_219683_)
+		{
+			ItemStack itemstack = new ItemStack(this.item, this.cost);
+			return new MerchantOffer(itemstack, new ItemStack(Items.EMERALD, this.emeraldCount), this.maxUses, this.villagerXp, this.priceMultiplier);
+		}
 	}
 }

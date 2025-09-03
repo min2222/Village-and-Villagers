@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableSet;
 import com.min01.villageandvillagers.entity.AbstractAnimatableVillager;
-import com.min01.villageandvillagers.misc.VillageTrades;
+import com.min01.villageandvillagers.misc.SpecialVillagerTrades;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Dynamic;
 
@@ -113,7 +113,7 @@ public abstract class AbstractCombatVillager extends AbstractAnimatableVillager
 	protected void updateTrades()
 	{
 		VillagerData villagerdata = this.getVillagerData();
-		Int2ObjectMap<VillagerTrades.ItemListing[]> int2objectmap = VillageTrades.TRADES.get(villagerdata.getProfession());
+		Int2ObjectMap<VillagerTrades.ItemListing[]> int2objectmap = SpecialVillagerTrades.TRADES.get(villagerdata.getProfession());
 		if(int2objectmap != null && !int2objectmap.isEmpty()) 
 		{
 			VillagerTrades.ItemListing[] avillagertrades$itemlisting = int2objectmap.get(villagerdata.getLevel());
@@ -187,6 +187,6 @@ public abstract class AbstractCombatVillager extends AbstractAnimatableVillager
 	
 	public boolean isSpecial()
 	{
-		return false;
+		return true;
 	}
 }

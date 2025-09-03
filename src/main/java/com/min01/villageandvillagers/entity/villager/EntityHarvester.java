@@ -3,6 +3,7 @@ package com.min01.villageandvillagers.entity.villager;
 import com.min01.villageandvillagers.entity.ai.goal.HarvesterMeleeAttackGoal;
 import com.min01.villageandvillagers.entity.ai.goal.HarvesterSummonBarricadeGoal;
 import com.min01.villageandvillagers.misc.SmoothAnimationState;
+import com.min01.villageandvillagers.misc.SpecialVillagerProfessions;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -69,12 +70,6 @@ public class EntityHarvester extends AbstractCombatVillager
 	@Override
 	public VillagerProfession getProfession()
 	{
-		return VillagerProfession.FARMER;
-	}
-	
-	@Override
-	public boolean isSpecial() 
-	{
-		return true;
+		return SpecialVillagerProfessions.HARVESTER.get();
 	}
 }

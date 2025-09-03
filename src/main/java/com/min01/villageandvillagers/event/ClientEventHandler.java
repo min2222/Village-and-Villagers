@@ -18,12 +18,10 @@ import com.min01.villageandvillagers.entity.renderer.NoneRenderer;
 import com.min01.villageandvillagers.entity.renderer.RobinHoodRenderer;
 import com.min01.villageandvillagers.entity.renderer.TimeGearRenderer;
 import com.min01.villageandvillagers.entity.renderer.TimeKeeperRenderer;
-import com.min01.villageandvillagers.shader.VillageShaders;
 import com.min01.villageandvillagers.streak.EntityTrackerRenderer;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -63,10 +61,4 @@ public class ClientEventHandler
     	event.registerLayerDefinition(ModelDaydreamer.LAYER_LOCATION, ModelDaydreamer::createBodyLayer);
     	event.registerLayerDefinition(ModelMartialArtist.LAYER_LOCATION, ModelMartialArtist::createBodyLayer);
     }
-    
-	@SubscribeEvent
-	public static void onRegisterClientReloadListeners(RegisterClientReloadListenersEvent event)
-	{
-		event.registerReloadListener(new VillageShaders());
-	}
 }

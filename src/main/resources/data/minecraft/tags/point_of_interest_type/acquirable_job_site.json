@@ -1,0 +1,10 @@
+{
+	"replace": false,
+	"values": [
+		"villageandvillagers:harvester",
+		"villageandvillagers:time_keeper",
+		"villageandvillagers:robin_hood",
+		"villageandvillagers:daydreamer",
+		"villageandvillagers:martial_artist"
+	]
+}

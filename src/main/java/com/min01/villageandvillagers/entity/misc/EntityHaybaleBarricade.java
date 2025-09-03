@@ -3,6 +3,7 @@ package com.min01.villageandvillagers.entity.misc;
 import com.min01.villageandvillagers.entity.AbstractOwnableEntity;
 import com.min01.villageandvillagers.entity.IClipPos;
 import com.min01.villageandvillagers.entity.villager.EntityHarvester;
+import com.min01.villageandvillagers.util.VillageUtil;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -12,6 +13,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -158,9 +160,11 @@ public class EntityHaybaleBarricade extends AbstractOwnableEntity<EntityHarveste
 	}
 	
 	@Override
-	public Vec3 getClipPos(Vec3 from, Vec3 to) 
+	public Vec3 getClipPos(Vec3 from, Vec3 to, Entity entity) 
 	{
-		return this.getEyePosition();
+    	Vec3 motion = VillageUtil.fromToVector(from, to, (float) from.distanceTo(this.getEyePosition()) - 3.5F);
+    	Vec3 pos = from.add(motion);
+		return pos;
 	}
 	
 	public void setDurability(int value)

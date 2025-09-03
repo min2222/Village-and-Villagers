@@ -1,6 +1,6 @@
 package com.min01.villageandvillagers.entity.villager;
 
-import com.min01.villageandvillagers.misc.VillageProfessions;
+import com.min01.villageandvillagers.misc.SpecialVillagerProfessions;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -54,12 +54,6 @@ public class EntityMartialArtist extends AbstractCombatVillager
 	@Override
 	public VillagerProfession getProfession()
 	{
-		return VillageProfessions.MARTIAL_ARTIST.get();
-	}
-	
-	@Override
-	public boolean isSpecial() 
-	{
-		return true;
+		return SpecialVillagerProfessions.MARTIAL_ARTIST.get();
 	}
 }

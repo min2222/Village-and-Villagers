@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.UUID;
 
 import com.min01.villageandvillagers.entity.EntityVillageCameraShake;
-import com.min01.villageandvillagers.shader.ShaderEffectHandler;
 import com.min01.villageandvillagers.streak.IStreak;
 import com.min01.villageandvillagers.util.VillageUtil;
 
@@ -111,7 +110,6 @@ public class EntityTimeGear extends ThrowableProjectile implements IStreak
 		}
 		if(this.getGearType() == GearType.EXPLOSIVE)
 		{
-			ShaderEffectHandler.addEffect("shockwave", this.position(), 10);
 			this.playSound(SoundEvents.GENERIC_EXPLODE);
 			this.discard();
 		}

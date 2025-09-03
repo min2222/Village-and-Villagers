@@ -4,11 +4,10 @@
 	"package": "com.min01.villageandvillagers.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"MixinLevel",
+		"MixinLevelAccessor",
 		"MixinResource"
 	],
 	"client": [
-		"MixinLevelRenderer"
 	],
 	"server": [
 	],

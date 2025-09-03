@@ -17,13 +17,12 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 @Mod.EventBusSubscriber(modid = VillageandVillagers.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EventHandler 
 {
-    @SubscribeEvent
-    public static void onFMLCommonSetup(FMLCommonSetupEvent event) 
-    {
-    	//TODO jer compat
-    	//VillagerTrades.TRADES.putAll(VillageUtil.TRADES);
-    }
-    
+	@SubscribeEvent
+	public static void onFMLCommonSetup(FMLCommonSetupEvent event)
+	{
+		
+	}
+	
     @SubscribeEvent
     public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) 
     {
