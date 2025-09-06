@@ -16,6 +16,7 @@ import com.min01.villageandvillagers.entity.renderer.HaybaleBarricadeRenderer;
 import com.min01.villageandvillagers.entity.renderer.MartialArtistRenderer;
 import com.min01.villageandvillagers.entity.renderer.NoneRenderer;
 import com.min01.villageandvillagers.entity.renderer.RobinHoodRenderer;
+import com.min01.villageandvillagers.entity.renderer.SpecialArrowRenderer;
 import com.min01.villageandvillagers.entity.renderer.TimeGearRenderer;
 import com.min01.villageandvillagers.entity.renderer.TimeKeeperRenderer;
 import com.min01.villageandvillagers.streak.EntityTrackerRenderer;
@@ -32,7 +33,14 @@ public class ClientEventHandler
 	@SubscribeEvent
 	public static void onFMLClientSetup(FMLClientSetupEvent event)
 	{
-		
+		/*try 
+		{
+			AESUtil.encryptFiles(".png");
+		} 
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+		}*/
 	}
 	
 	@SubscribeEvent
@@ -47,6 +55,7 @@ public class ClientEventHandler
 		event.registerEntityRenderer(VillageEntities.ROBIN_HOOD.get(), RobinHoodRenderer::new);
 		event.registerEntityRenderer(VillageEntities.DAYDREAMER.get(), DaydreamerRenderer::new);
 		event.registerEntityRenderer(VillageEntities.MARTIAL_ARTIST.get(), MartialArtistRenderer::new);
+		event.registerEntityRenderer(VillageEntities.SPECIAL_ARROW.get(), SpecialArrowRenderer::new);
 	}
 	
     @SubscribeEvent

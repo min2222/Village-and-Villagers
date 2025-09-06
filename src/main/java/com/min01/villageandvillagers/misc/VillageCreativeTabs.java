@@ -40,5 +40,10 @@ public class VillageCreativeTabs
     			output.accept(VillageItems.GEAR.get());
     			output.accept(VillageItems.MONOCLE.get());
     			output.accept(VillageItems.POCKET_WATCH.get());
+    			output.accept(VillageItems.PITCHFORK.get());
+    			output.accept(VillageItems.BOUNCY_ARROW.get());
+    			output.accept(VillageItems.ENDER_ARROW.get());
+    			output.accept(VillageItems.MULTI_ARROW.get());
+    			output.accept(VillageItems.PIERCING_ARROW.get());
     		}).build());
 }

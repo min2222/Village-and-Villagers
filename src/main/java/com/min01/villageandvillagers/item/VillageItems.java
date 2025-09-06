@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 import com.min01.villageandvillagers.VillageandVillagers;
 import com.min01.villageandvillagers.block.VillageBlocks;
 import com.min01.villageandvillagers.entity.VillageEntities;
+import com.min01.villageandvillagers.entity.projectile.EntitySpecialArrow.SpecialArrowType;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -46,6 +47,13 @@ public class VillageItems
 	public static final RegistryObject<Item> MONOCLE = ITEMS.register("monocle", () -> new SimpleTooltipItem("item.villageandvillagers.monocle.tooltip", new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
 	public static final RegistryObject<Item> POCKET_WATCH = ITEMS.register("pocket_watch", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)));
 
+	public static final RegistryObject<Item> PITCHFORK = ITEMS.register("pitchfork", () -> new PitchforkItem());
+	
+	public static final RegistryObject<Item> BOUNCY_ARROW = ITEMS.register("bouncy_arrow", () -> new SpecialArrowItem(new Item.Properties(), SpecialArrowType.BOUNCY));
+	public static final RegistryObject<Item> ENDER_ARROW = ITEMS.register("ender_arrow", () -> new SpecialArrowItem(new Item.Properties(), SpecialArrowType.ENDER));
+	public static final RegistryObject<Item> MULTI_ARROW = ITEMS.register("multi_arrow", () -> new SpecialArrowItem(new Item.Properties(), SpecialArrowType.MULTI));
+	public static final RegistryObject<Item> PIERCING_ARROW = ITEMS.register("piercing_arrow", () -> new SpecialArrowItem(new Item.Properties(), SpecialArrowType.PIERCING));
+	
 	public static RegistryObject<Item> registerSpawnEgg(String name, Supplier<EntityType<? extends Mob>> type, int color1, int color2)
 	{
 		return ITEMS.register(name, () -> new ForgeSpawnEggItem(type, color1, color2, new Item.Properties()));

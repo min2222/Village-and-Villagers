@@ -42,7 +42,8 @@ public class SpecialVillagerTrades
 					new VillagerTrades.EmeraldForItems(Blocks.MELON, 4, 12, 20)
 				}, 4, new VillagerTrades.ItemListing[]
 				{
-					new VillagerTrades.ItemsForEmeralds(Blocks.CAKE, 1, 1, 12, 15)
+					new VillagerTrades.ItemsForEmeralds(Blocks.CAKE, 1, 1, 12, 15),
+					new VillagerTrades.ItemsForEmeralds(VillageItems.PITCHFORK.get(), 30, 1, 10, 30) 
 				}, 5, new VillagerTrades.ItemListing[]
 				{
 					new VillagerTrades.ItemsForEmeralds(Items.GOLDEN_CARROT, 3, 3, 30),
@@ -68,14 +69,20 @@ public class SpecialVillagerTrades
 				})));
 		p_35633_.put(SpecialVillagerProfessions.ROBIN_HOOD.get(), toIntMap(ImmutableMap.of(1, new VillagerTrades.ItemListing[]
 				{
+					new VillagerTrades.ItemsForEmeralds(Items.ARROW, 1, 5, 200, 1),
+					new EmeraldForItems(Items.ARROW, 5, 200, 1, 1),
 				}, 2, new VillagerTrades.ItemListing[]
 				{
+					new VillagerTrades.ItemsForEmeralds(VillageItems.BOUNCY_ARROW.get(), 5, 3, 100, 5)
 				}, 3, new VillagerTrades.ItemListing[]
 				{
+					new VillagerTrades.ItemsForEmeralds(VillageItems.PIERCING_ARROW.get(), 10, 2, 50, 10)
 				}, 4, new VillagerTrades.ItemListing[]
 				{
+					new VillagerTrades.ItemsForEmeralds(VillageItems.ENDER_ARROW.get(), 15, 1, 30, 20)
 				}, 5, new VillagerTrades.ItemListing[]
 				{
+					new VillagerTrades.ItemsForEmeralds(VillageItems.MULTI_ARROW.get(), 20, 1, 20, 30)
 				})));
 	});
 	

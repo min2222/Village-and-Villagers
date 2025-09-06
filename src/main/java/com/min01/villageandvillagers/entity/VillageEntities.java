@@ -2,6 +2,7 @@ package com.min01.villageandvillagers.entity;
 
 import com.min01.villageandvillagers.VillageandVillagers;
 import com.min01.villageandvillagers.entity.misc.EntityHaybaleBarricade;
+import com.min01.villageandvillagers.entity.projectile.EntitySpecialArrow;
 import com.min01.villageandvillagers.entity.projectile.EntityTimeGear;
 import com.min01.villageandvillagers.entity.villager.EntityDaydreamer;
 import com.min01.villageandvillagers.entity.villager.EntityHarvester;
@@ -32,6 +33,7 @@ public class VillageEntities
 	public static final RegistryObject<EntityType<EntityTimeGear>> TIME_GEAR = registerEntity("time_gear", createBuilder(EntityTimeGear::new, MobCategory.MISC).sized(0.25F, 0.25F));
 	public static final RegistryObject<EntityType<Entity>> VILLAGE_CAMERA_SHAKE = registerEntity("village_camera_shake", createBuilder(EntityVillageCameraShake::new, MobCategory.MISC).sized(0.0F, 0.0F));
 	public static final RegistryObject<EntityType<EntityTracker>> ENTITY_TRACKER = registerEntity("entity_tracker", createBuilder(EntityTracker::new, MobCategory.MISC).noSave().noSummon().fireImmune());
+	public static final RegistryObject<EntityType<EntitySpecialArrow>> SPECIAL_ARROW = registerEntity("special_arrow", EntityType.Builder.<EntitySpecialArrow>of(EntitySpecialArrow::new, MobCategory.MISC).sized(0.5F, 0.5F));
 
 	public static <T extends Entity> EntityType.Builder<T> createBuilder(EntityType.EntityFactory<T> factory, MobCategory category)
 	{

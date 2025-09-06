@@ -48,6 +48,7 @@ public class EventHandlerForge
 				if(serverLevel.structureManager().getStructureWithPieceAt(villager.blockPosition(), StructureTags.VILLAGE).isValid())
 				{
 					VillageUtil.convertVillagerToSpecial(VillageEntities.HARVESTER.get(), villager, event);
+					VillageUtil.convertVillagerToSpecial(VillageEntities.ROBIN_HOOD.get(), villager, event);
 				}
 			}
 		}

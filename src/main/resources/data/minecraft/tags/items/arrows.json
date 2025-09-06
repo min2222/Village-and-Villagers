@@ -1,0 +1,9 @@
+{
+	"replace": false,
+	"values": [
+		"villageandvillagers:bouncy_arrow",
+		"villageandvillagers:ender_arrow",
+		"villageandvillagers:multi_arrow",
+		"villageandvillagers:piercing_arrow"
+	]
+}
