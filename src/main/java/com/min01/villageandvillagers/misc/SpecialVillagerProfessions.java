@@ -2,13 +2,9 @@ package com.min01.villageandvillagers.misc;
 
 import com.google.common.collect.ImmutableSet;
 import com.min01.villageandvillagers.VillageandVillagers;
-import com.min01.villageandvillagers.compat.jer.SpecialVillagerEntry;
-import com.min01.villageandvillagers.entity.villager.AbstractCombatVillager;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;
-import jeresources.registry.VillagerRegistry;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
@@ -30,11 +26,6 @@ public class SpecialVillagerProfessions
     {
         return SpecialVillagerTrades.TRADES.getOrDefault(profession, Int2ObjectMaps.emptyMap());
     }
-	
-	public static <T extends AbstractCombatVillager> void registerVillagerEntry(VillagerRegistry registry, RegistryObject<EntityType<T>> entityType, RegistryObject<VillagerProfession> profession)
-	{
-		registry.addVillagerEntry(new SpecialVillagerEntry(() -> entityType.get(), profession.get(), getTrades(profession.get())));
-	}
 	
 	public static RegistryObject<VillagerProfession> registerSpecialProfession(String name)
 	{
