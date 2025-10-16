@@ -32,6 +32,7 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import tallestegg.guardvillagers.entities.Guard;
 
@@ -64,9 +65,10 @@ public class EventHandlerForge
 			Entity source = event.getSource().getDirectEntity();
 			if(source != null)
 			{
-				if(source instanceof IronGolem || source instanceof AbstractCombatVillager || source instanceof Guard)
+				boolean flag = ModList.get().isLoaded("guardvillagers") ? source instanceof Guard : false;
+				if(source instanceof IronGolem || source instanceof AbstractCombatVillager || flag)
 				{
-					if(entity instanceof IronGolem || entity instanceof AbstractCombatVillager || entity instanceof Guard || entity instanceof AbstractVillager)
+					if(entity instanceof IronGolem || entity instanceof AbstractCombatVillager || flag || entity instanceof AbstractVillager)
 					{
 						event.setCanceled(true);
 					}
