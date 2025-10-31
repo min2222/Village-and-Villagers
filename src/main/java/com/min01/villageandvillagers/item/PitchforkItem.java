@@ -8,6 +8,6 @@ public class PitchforkItem extends HoeItem
 {
 	public PitchforkItem() 
 	{
-		super(Tiers.IRON, 3, -2.4F, new Item.Properties().durability(250));
+		super(Tiers.IRON, 3, -2.4F, new Item.Properties().durability(650));
 	}
 }

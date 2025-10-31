@@ -3,8 +3,7 @@ package com.min01.villageandvillagers.entity.projectile;
 import java.util.List;
 import java.util.UUID;
 
-import com.min01.villageandvillagers.entity.EntityVillageCameraShake;
-import com.min01.villageandvillagers.streak.IStreak;
+import com.min01.villageandvillagers.entity.EntityCameraShake;
 import com.min01.villageandvillagers.util.VillageUtil;
 
 import net.minecraft.core.particles.ParticleTypes;
@@ -28,7 +27,7 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
-public class EntityTimeGear extends ThrowableProjectile implements IStreak
+public class EntityTimeGear extends ThrowableProjectile
 {
 	public static final EntityDataAccessor<Integer> GEAR_TYPE = SynchedEntityData.defineId(EntityTimeGear.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> LIFE_TIME = SynchedEntityData.defineId(EntityTimeGear.class, EntityDataSerializers.INT);
@@ -84,7 +83,7 @@ public class EntityTimeGear extends ThrowableProjectile implements IStreak
 		super.onHitBlock(p_37258_);
 		if(this.getGearType() == GearType.FALLING && !this.onGround())
 		{
-			EntityVillageCameraShake.cameraShake(this.level, this.position(), 20, 0.15F, 0, 10);
+			EntityCameraShake.cameraShake(this.level, this.position(), 20, 0.15F, 0, 10);
 			for(int i = 0; i < 360; i++)
 			{
 				Vec3 lookPos = VillageUtil.getLookPos(new Vec2(0, i), p_37258_.getLocation(), 0, 0.5F, 3.5F);

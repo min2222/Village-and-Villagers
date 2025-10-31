@@ -10,10 +10,12 @@ import com.min01.villageandvillagers.entity.villager.AbstractCombatVillager;
 import com.min01.villageandvillagers.item.VillageItems;
 import com.min01.villageandvillagers.util.VillageUtil;
 
+import net.minecraft.Util;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.StructureTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.IronGolem;
@@ -48,8 +50,9 @@ public class EventHandlerForge
 			{
 				if(serverLevel.structureManager().getStructureWithPieceAt(villager.blockPosition(), StructureTags.VILLAGE).isValid())
 				{
-					VillageUtil.convertVillagerToSpecial(VillageEntities.HARVESTER.get(), villager, event);
-					VillageUtil.convertVillagerToSpecial(VillageEntities.ROBIN_HOOD.get(), villager, event);
+					List<EntityType<? extends AbstractCombatVillager>> list = List.of(VillageEntities.HARVESTER.get(), VillageEntities.ROBIN_HOOD.get());
+					EntityType<? extends AbstractCombatVillager> entityType = Util.getRandom(list, serverLevel.getRandom());
+					VillageUtil.convertVillagerToSpecial(entityType, villager, event);
 				}
 			}
 		}

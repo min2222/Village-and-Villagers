@@ -157,7 +157,7 @@ dependencies {
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 	annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
-	implementation fg.deobf("curse.maven:tickrate-api-969702:6830640")
+	implementation fg.deobf("curse.maven:tickrate-api-969702:7105256")
 	implementation fg.deobf("curse.maven:curios-309927:6418456")
 	
 	compileOnly fg.deobf("curse.maven:lendercataclysm-551586:6906993")

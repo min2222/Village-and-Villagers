@@ -3,8 +3,11 @@ package com.min01.villageandvillagers.entity.misc;
 import com.min01.villageandvillagers.entity.AbstractOwnableEntity;
 import com.min01.villageandvillagers.entity.IClipPos;
 import com.min01.villageandvillagers.entity.villager.EntityHarvester;
+import com.min01.villageandvillagers.misc.SmoothAnimationState;
 import com.min01.villageandvillagers.util.VillageUtil;
 
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -12,10 +15,10 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 
 public class EntityHaybaleBarricade extends AbstractOwnableEntity<EntityHarvester> implements IClipPos
@@ -24,8 +27,8 @@ public class EntityHaybaleBarricade extends AbstractOwnableEntity<EntityHarveste
 	public static final EntityDataAccessor<Integer> ANIMATION_TICK = SynchedEntityData.defineId(EntityHaybaleBarricade.class, EntityDataSerializers.INT);
 	public static final EntityDataAccessor<Integer> DURABILITY = SynchedEntityData.defineId(EntityHaybaleBarricade.class, EntityDataSerializers.INT);
 	
-	public final AnimationState appearAnimationState = new AnimationState();
-	public final AnimationState disappearAnimationState = new AnimationState();
+	public final SmoothAnimationState appearAnimationState = new SmoothAnimationState();
+	public final SmoothAnimationState disappearAnimationState = new SmoothAnimationState();
 	
 	public EntityHaybaleBarricade(EntityType<?> p_19870_, Level p_19871_) 
 	{
@@ -39,40 +42,6 @@ public class EntityHaybaleBarricade extends AbstractOwnableEntity<EntityHarveste
 		this.entityData.define(ANIMATION_STATE, 0);
 		this.entityData.define(ANIMATION_TICK, 0);
 		this.entityData.define(DURABILITY, 100);
-	}
-	
-	@Override
-	public void onSyncedDataUpdated(EntityDataAccessor<?> p_219422_) 
-	{
-        if(ANIMATION_STATE.equals(p_219422_) && this.level.isClientSide) 
-        {
-            switch(this.getAnimationState()) 
-            {
-        		case 0: 
-        		{
-        			this.stopAllAnimationStates();
-        			break;
-        		}
-        		case 1: 
-        		{
-        			this.stopAllAnimationStates();
-        			this.appearAnimationState.start(this.tickCount);
-        			break;
-        		}
-        		case 2: 
-        		{
-        			this.stopAllAnimationStates();
-        			this.disappearAnimationState.start(this.tickCount);
-        			break;
-        		}
-            }
-        }
-	}
-	
-	public void stopAllAnimationStates() 
-	{
-		this.appearAnimationState.stop();
-		this.disappearAnimationState.stop();
 	}
 	
 	@Override
@@ -91,6 +60,12 @@ public class EntityHaybaleBarricade extends AbstractOwnableEntity<EntityHarveste
 	public void tick() 
 	{
 		super.tick();
+		
+		if(this.level.isClientSide)
+		{
+			this.appearAnimationState.updateWhen(this.getAnimationState() == 1, this.tickCount);
+			this.disappearAnimationState.updateWhen(this.getAnimationState() == 2, this.tickCount);
+		}
 		
 		if(this.getDurability() <= 0 || this.tickCount >= 200)
 		{
@@ -138,6 +113,10 @@ public class EntityHaybaleBarricade extends AbstractOwnableEntity<EntityHarveste
 			int damage = p_19946_.is(DamageTypeTags.IS_FIRE) ? 2 : 1;
 			this.playSound(SoundEvents.GRASS_BREAK);
 			this.setDurability(this.getDurability() - damage);
+    		for(int i = 0; i < 20; i++)
+    		{
+        		this.level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.HAY_BLOCK.defaultBlockState()), this.getX() + this.random.nextGaussian() * 0.1F, this.getEyeY(), this.getZ() + this.random.nextGaussian() * 0.1F, this.random.nextGaussian() * 0.1F, this.random.nextGaussian() * 0.1F, this.random.nextGaussian() * 0.1F);
+    		}
 		}
 		return p_19946_.is(DamageTypeTags.BYPASSES_INVULNERABILITY);
 	}
@@ -153,10 +132,7 @@ public class EntityHaybaleBarricade extends AbstractOwnableEntity<EntityHarveste
 	public void readAdditionalSaveData(CompoundTag p_37262_) 
 	{
 		super.readAdditionalSaveData(p_37262_);
-		if(p_37262_.contains("Durability"))
-		{
-			this.setDurability(p_37262_.getInt("Durability"));
-		}
+		this.setDurability(p_37262_.getInt("Durability"));
 	}
 	
 	@Override

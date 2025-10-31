@@ -52,8 +52,8 @@ public class ModelHaybaleBarricade extends HierarchicalModel<EntityHaybaleBarric
 	public void setupAnim(EntityHaybaleBarricade entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
 	{
 		this.root().getAllParts().forEach(ModelPart::resetPose);
-		this.animate(entity.appearAnimationState, HaybaleBarricadeAnimation.BARRICADE_APPEAR, ageInTicks);
-		this.animate(entity.disappearAnimationState, HaybaleBarricadeAnimation.BARRICADE_DISAPPEAR, ageInTicks);
+		entity.appearAnimationState.animate(this, HaybaleBarricadeAnimation.BARRICADE_APPEAR, ageInTicks);
+		entity.disappearAnimationState.animate(this, HaybaleBarricadeAnimation.BARRICADE_DISAPPEAR, ageInTicks);
 	}
 	
 	@Override

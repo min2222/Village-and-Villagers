@@ -2,6 +2,8 @@ package com.min01.villageandvillagers.entity;
 
 import com.min01.villageandvillagers.VillageandVillagers;
 import com.min01.villageandvillagers.entity.misc.EntityHaybaleBarricade;
+import com.min01.villageandvillagers.entity.misc.EntityRushingCow;
+import com.min01.villageandvillagers.entity.misc.EntityScarecrow;
 import com.min01.villageandvillagers.entity.projectile.EntitySpecialArrow;
 import com.min01.villageandvillagers.entity.projectile.EntityTimeGear;
 import com.min01.villageandvillagers.entity.villager.EntityDaydreamer;
@@ -9,7 +11,6 @@ import com.min01.villageandvillagers.entity.villager.EntityHarvester;
 import com.min01.villageandvillagers.entity.villager.EntityMartialArtist;
 import com.min01.villageandvillagers.entity.villager.EntityRobinHood;
 import com.min01.villageandvillagers.entity.villager.EntityTimeKeeper;
-import com.min01.villageandvillagers.streak.EntityTracker;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -28,11 +29,15 @@ public class VillageEntities
 	public static final RegistryObject<EntityType<EntityRobinHood>> ROBIN_HOOD = registerEntity("robin_hood", createBuilder(EntityRobinHood::new, MobCategory.MISC).sized(0.6F, 1.95F));
 	public static final RegistryObject<EntityType<EntityDaydreamer>> DAYDREAMER = registerEntity("daydreamer", createBuilder(EntityDaydreamer::new, MobCategory.MISC).sized(0.6F, 1.95F));
 	public static final RegistryObject<EntityType<EntityMartialArtist>> MARTIAL_ARTIST = registerEntity("martial_artist", createBuilder(EntityMartialArtist::new, MobCategory.MISC).sized(0.6F, 1.95F));
-	
+
+	public static final RegistryObject<EntityType<Entity>> CAMERA_SHAKE = registerEntity("camera_shake", createBuilder(EntityCameraShake::new, MobCategory.MISC).sized(0.0F, 0.0F));
+
+	public static final RegistryObject<EntityType<EntityScarecrow>> SCARECROW = registerEntity("scarecrow", createBuilder(EntityScarecrow::new, MobCategory.MISC).sized(0.5F, 2.125F));
 	public static final RegistryObject<EntityType<EntityHaybaleBarricade>> HAYBALE_BARRICADE = registerEntity("haybale_barricade", createBuilder(EntityHaybaleBarricade::new, MobCategory.MISC).sized(3.0F, 3.0F));
+	public static final RegistryObject<EntityType<EntityRushingCow>> RUSHING_COW = registerEntity("rushing_cow", createBuilder(EntityRushingCow::new, MobCategory.MISC).sized(0.9F, 1.4F));
+	
 	public static final RegistryObject<EntityType<EntityTimeGear>> TIME_GEAR = registerEntity("time_gear", createBuilder(EntityTimeGear::new, MobCategory.MISC).sized(0.25F, 0.25F));
-	public static final RegistryObject<EntityType<Entity>> VILLAGE_CAMERA_SHAKE = registerEntity("village_camera_shake", createBuilder(EntityVillageCameraShake::new, MobCategory.MISC).sized(0.0F, 0.0F));
-	public static final RegistryObject<EntityType<EntityTracker>> ENTITY_TRACKER = registerEntity("entity_tracker", createBuilder(EntityTracker::new, MobCategory.MISC).noSave().noSummon().fireImmune());
+	
 	public static final RegistryObject<EntityType<EntitySpecialArrow>> SPECIAL_ARROW = registerEntity("special_arrow", EntityType.Builder.<EntitySpecialArrow>of(EntitySpecialArrow::new, MobCategory.MISC).sized(0.5F, 0.5F));
 
 	public static <T extends Entity> EntityType.Builder<T> createBuilder(EntityType.EntityFactory<T> factory, MobCategory category)

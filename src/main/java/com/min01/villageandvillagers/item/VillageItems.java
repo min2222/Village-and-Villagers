@@ -27,6 +27,22 @@ public class VillageItems
 	public static final RegistryObject<Item> ROBIN_HOOD_SPAWN_EGG = registerSpawnEgg("robin_hood_spawn_egg", () -> VillageEntities.ROBIN_HOOD.get(), 2047016, 4928814);
 	public static final RegistryObject<Item> DAYDREAMER_SPAWN_EGG = registerSpawnEgg("daydreamer_spawn_egg", () -> VillageEntities.DAYDREAMER.get(), 5153005, 15067369);
 	public static final RegistryObject<Item> MARTIAL_ARTIST_SPAWN_EGG = registerSpawnEgg("martial_artist_spawn_egg", () -> VillageEntities.MARTIAL_ARTIST.get(), 15198162, 2433827);
+
+	public static final RegistryObject<Item> PITCHFORK = ITEMS.register("pitchfork", () -> new PitchforkItem());
+	public static final RegistryObject<Item> SCARECROW = ITEMS.register("scarecrow", () -> new ScarecrowItem());
+	public static final RegistryObject<Item> COWBELL = ITEMS.register("cowbell", () -> new CowbellItem());
+	
+	public static final RegistryObject<Item> TIME_JELLY = ITEMS.register("time_jelly", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+	public static final RegistryObject<Item> TIME_CRYSTAL = ITEMS.register("time_crystal", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
+	public static final RegistryObject<Item> GEAR = ITEMS.register("gear", () -> new Item(new Item.Properties()));
+	
+	public static final RegistryObject<Item> MONOCLE = ITEMS.register("monocle", () -> new SimpleTooltipItem("item.villageandvillagers.monocle.tooltip", new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+	public static final RegistryObject<Item> POCKET_WATCH = ITEMS.register("pocket_watch", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)));
+	
+	public static final RegistryObject<Item> BOUNCY_ARROW = ITEMS.register("bouncy_arrow", () -> new SpecialArrowItem(new Item.Properties(), SpecialArrowType.BOUNCY));
+	public static final RegistryObject<Item> ENDER_ARROW = ITEMS.register("ender_arrow", () -> new SpecialArrowItem(new Item.Properties(), SpecialArrowType.ENDER));
+	public static final RegistryObject<Item> MULTI_ARROW = ITEMS.register("multi_arrow", () -> new SpecialArrowItem(new Item.Properties(), SpecialArrowType.MULTI));
+	public static final RegistryObject<Item> PIERCING_ARROW = ITEMS.register("piercing_arrow", () -> new SpecialArrowItem(new Item.Properties(), SpecialArrowType.PIERCING));
 	
 	public static final RegistryObject<Item> ASURA_STONE = registerBlockItem("asura_stone", () -> VillageBlocks.ASURA_STONE.get(), new Item.Properties());
 	public static final RegistryObject<Item> ASURA_STONE_BRICKS = registerBlockItem("asura_stone_bricks", () -> VillageBlocks.ASURA_STONE_BRICKS.get(), new Item.Properties());
@@ -39,20 +55,6 @@ public class VillageItems
 	public static final RegistryObject<Item> ASURA_STONE_STAIRS = registerBlockItem("asura_stone_stairs", () -> VillageBlocks.ASURA_STONE_STAIRS.get(), new Item.Properties());
 	public static final RegistryObject<Item> ASURA_STONE_BRICK_STAIRS = registerBlockItem("asura_stone_brick_stairs", () -> VillageBlocks.ASURA_STONE_BRICK_STAIRS.get(), new Item.Properties());
 	public static final RegistryObject<Item> SMOOTH_ASURA_STONE_STAIRS = registerBlockItem("smooth_asura_stone_stairs", () -> VillageBlocks.SMOOTH_ASURA_STONE_STAIRS.get(), new Item.Properties());
-	
-	public static final RegistryObject<Item> TIME_JELLY = ITEMS.register("time_jelly", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
-	public static final RegistryObject<Item> TIME_CRYSTAL = ITEMS.register("time_crystal", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
-	public static final RegistryObject<Item> GEAR = ITEMS.register("gear", () -> new Item(new Item.Properties()));
-	
-	public static final RegistryObject<Item> MONOCLE = ITEMS.register("monocle", () -> new SimpleTooltipItem("item.villageandvillagers.monocle.tooltip", new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
-	public static final RegistryObject<Item> POCKET_WATCH = ITEMS.register("pocket_watch", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)));
-
-	public static final RegistryObject<Item> PITCHFORK = ITEMS.register("pitchfork", () -> new PitchforkItem());
-	
-	public static final RegistryObject<Item> BOUNCY_ARROW = ITEMS.register("bouncy_arrow", () -> new SpecialArrowItem(new Item.Properties(), SpecialArrowType.BOUNCY));
-	public static final RegistryObject<Item> ENDER_ARROW = ITEMS.register("ender_arrow", () -> new SpecialArrowItem(new Item.Properties(), SpecialArrowType.ENDER));
-	public static final RegistryObject<Item> MULTI_ARROW = ITEMS.register("multi_arrow", () -> new SpecialArrowItem(new Item.Properties(), SpecialArrowType.MULTI));
-	public static final RegistryObject<Item> PIERCING_ARROW = ITEMS.register("piercing_arrow", () -> new SpecialArrowItem(new Item.Properties(), SpecialArrowType.PIERCING));
 	
 	public static RegistryObject<Item> registerSpawnEgg(String name, Supplier<EntityType<? extends Mob>> type, int color1, int color2)
 	{

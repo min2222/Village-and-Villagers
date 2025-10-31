@@ -4,11 +4,8 @@ import com.min01.villageandvillagers.VillageandVillagers;
 import com.min01.villageandvillagers.entity.model.ModelLargeTimeGear;
 import com.min01.villageandvillagers.entity.model.ModelTimeGear;
 import com.min01.villageandvillagers.entity.projectile.EntityTimeGear;
-import com.min01.villageandvillagers.misc.VillageRenderType;
-import com.min01.villageandvillagers.streak.IStreakRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 
-import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -17,7 +14,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-public class TimeGearRenderer extends EntityRenderer<EntityTimeGear> implements IStreakRenderer<EntityTimeGear>
+public class TimeGearRenderer extends EntityRenderer<EntityTimeGear>
 {
 	public final ModelTimeGear model;
 	public final ModelLargeTimeGear modelLarge;
@@ -53,36 +50,6 @@ public class TimeGearRenderer extends EntityRenderer<EntityTimeGear> implements 
 	public ResourceLocation getTextureLocation(EntityTimeGear p_114482_)
 	{
 		return p_114482_.getGearType().isLarge() ? new ResourceLocation(VillageandVillagers.MODID, "textures/entity/large_time_gear.png") : new ResourceLocation(VillageandVillagers.MODID, "textures/entity/time_gear.png");
-	}
-	
-	@Override
-	public int getMaxStreakCount(EntityTimeGear entity)
-	{
-		return 12;
-	}
-	
-	@Override
-	public RenderType getStreakRenderType(ResourceLocation texture, EntityTimeGear entity)
-	{
-		return VillageRenderType.eyesNoAlpha(texture);
-	}
-	
-	@Override
-	public boolean canRenderStreak(EntityTimeGear entity)
-	{
-		return !entity.getGearType().isLarge();
-	}
-
-	@Override
-	public HierarchicalModel<EntityTimeGear> getStreakModel(EntityTimeGear entity) 
-	{
-		return this.model;
-	}
-
-	@Override
-	public ResourceLocation getStreakTexture(EntityTimeGear entity) 
-	{
-		return this.getTextureLocation(entity);
 	}
 
 }

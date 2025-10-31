@@ -16,21 +16,21 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkHooks;
 
-public class EntityVillageCameraShake extends Entity 
+public class EntityCameraShake extends Entity 
 {
-	private static final EntityDataAccessor<Float> RADIUS = SynchedEntityData.defineId(EntityVillageCameraShake.class, EntityDataSerializers.FLOAT);
-    private static final EntityDataAccessor<Float> MAGNITUDE = SynchedEntityData.defineId(EntityVillageCameraShake.class, EntityDataSerializers.FLOAT);
-    private static final EntityDataAccessor<Integer> DURATION = SynchedEntityData.defineId(EntityVillageCameraShake.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> FADE_DURATION = SynchedEntityData.defineId(EntityVillageCameraShake.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Float> RADIUS = SynchedEntityData.defineId(EntityCameraShake.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> MAGNITUDE = SynchedEntityData.defineId(EntityCameraShake.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Integer> DURATION = SynchedEntityData.defineId(EntityCameraShake.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> FADE_DURATION = SynchedEntityData.defineId(EntityCameraShake.class, EntityDataSerializers.INT);
 
-    public EntityVillageCameraShake(EntityType<?> type, Level world) 
+    public EntityCameraShake(EntityType<?> type, Level world) 
     {
         super(type, world);
     }
 
-    public EntityVillageCameraShake(Level world, Vec3 position, float radius, float magnitude, int duration, int fadeDuration) 
+    public EntityCameraShake(Level world, Vec3 position, float radius, float magnitude, int duration, int fadeDuration) 
     {
-        super(VillageEntities.VILLAGE_CAMERA_SHAKE.get(), world);
+        super(VillageEntities.CAMERA_SHAKE.get(), world);
         this.setRadius(radius);
         this.setMagnitude(magnitude);
         this.setDuration(duration);
@@ -138,7 +138,7 @@ public class EntityVillageCameraShake extends Entity
     {
         if(!world.isClientSide) 
         {
-            EntityVillageCameraShake cameraShake = new EntityVillageCameraShake(world, position, radius, magnitude, duration, fadeDuration);
+            EntityCameraShake cameraShake = new EntityCameraShake(world, position, radius, magnitude, duration, fadeDuration);
             world.addFreshEntity(cameraShake);
         }
     }

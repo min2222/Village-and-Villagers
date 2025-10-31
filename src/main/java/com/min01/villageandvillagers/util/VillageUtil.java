@@ -85,7 +85,6 @@ public class VillageUtil
         return new Vec3(x, y, z);
 	}
 	
-	//Chat GPT ahh;
 	public static Vec3 getCirclePosition(Entity entity, double range)
 	{
 	    double angle = entity.level.random.nextDouble() * Math.PI * 2;

@@ -39,7 +39,8 @@ public class SpecialVillagerTrades
 				}, 3, new VillagerTrades.ItemListing[]
 				{
 					new VillagerTrades.ItemsForEmeralds(Items.COOKIE, 3, 18, 10),
-					new VillagerTrades.EmeraldForItems(Blocks.MELON, 4, 12, 20)
+					new VillagerTrades.EmeraldForItems(Blocks.MELON, 4, 12, 20),
+					new VillagerTrades.ItemsForEmeralds(VillageItems.SCARECROW.get(), 15, 1, 20, 10) 
 				}, 4, new VillagerTrades.ItemListing[]
 				{
 					new VillagerTrades.ItemsForEmeralds(Blocks.CAKE, 1, 1, 12, 15),
@@ -47,7 +48,8 @@ public class SpecialVillagerTrades
 				}, 5, new VillagerTrades.ItemListing[]
 				{
 					new VillagerTrades.ItemsForEmeralds(Items.GOLDEN_CARROT, 3, 3, 30),
-					new VillagerTrades.ItemsForEmeralds(Items.GLISTERING_MELON_SLICE, 4, 3, 30)
+					new VillagerTrades.ItemsForEmeralds(Items.GLISTERING_MELON_SLICE, 4, 3, 30),
+					new VillagerTrades.ItemsForEmeralds(VillageItems.COWBELL.get(), 35, 1, 5, 40) 
 				})));
 		p_35633_.put(SpecialVillagerProfessions.TIME_KEEPER.get(), toIntMap(ImmutableMap.of(1, new VillagerTrades.ItemListing[]
 				{
@@ -69,11 +71,12 @@ public class SpecialVillagerTrades
 				})));
 		p_35633_.put(SpecialVillagerProfessions.ROBIN_HOOD.get(), toIntMap(ImmutableMap.of(1, new VillagerTrades.ItemListing[]
 				{
-					new VillagerTrades.ItemsForEmeralds(Items.ARROW, 1, 5, 200, 1),
-					new EmeraldForItems(Items.ARROW, 5, 200, 1, 1),
+					new VillagerTrades.ItemsForEmeralds(Items.ARROW, 1, 5, 1000, 1),
+					new EmeraldForItems(Items.ARROW, 5, 1000, 1, 1),
 				}, 2, new VillagerTrades.ItemListing[]
 				{
-					new VillagerTrades.ItemsForEmeralds(VillageItems.BOUNCY_ARROW.get(), 5, 3, 100, 5)
+					new VillagerTrades.ItemsForEmeralds(VillageItems.BOUNCY_ARROW.get(), 5, 3, 100, 5),
+					new VillagerTrades.ItemsForEmeralds(Items.BOW, 15, 1, 100, 10)
 				}, 3, new VillagerTrades.ItemListing[]
 				{
 					new VillagerTrades.ItemsForEmeralds(VillageItems.PIERCING_ARROW.get(), 10, 2, 50, 10)

@@ -14,5 +14,8 @@ public interface IAnimatable
 	
 	void setCanMove(boolean value);
 	
-	boolean isCombatMode();
+	default boolean isCombatMode()
+	{
+		return false;
+	}
 }

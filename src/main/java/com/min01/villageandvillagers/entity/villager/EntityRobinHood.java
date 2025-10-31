@@ -44,7 +44,7 @@ public class EntityRobinHood extends AbstractCombatVillager
 			}
 			if(this.canMove())
 			{
-				this.getNavigation().moveTo(this.getTarget(), this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
+				//this.getNavigation().moveTo(this.getTarget(), this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
 			}
 		}
 	}

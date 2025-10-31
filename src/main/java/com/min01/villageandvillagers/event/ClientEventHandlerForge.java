@@ -1,7 +1,7 @@
 package com.min01.villageandvillagers.event;
 
 import com.min01.villageandvillagers.VillageandVillagers;
-import com.min01.villageandvillagers.entity.EntityVillageCameraShake;
+import com.min01.villageandvillagers.entity.EntityCameraShake;
 import com.min01.villageandvillagers.util.VillageClientUtil;
 
 import net.minecraft.world.entity.player.Player;
@@ -22,7 +22,7 @@ public class ClientEventHandlerForge
         if(player != null)
         {
             float shakeAmplitude = 0.0F;
-            for(EntityVillageCameraShake cameraShake : player.level.getEntitiesOfClass(EntityVillageCameraShake.class, player.getBoundingBox().inflate(100.0))) 
+            for(EntityCameraShake cameraShake : player.level.getEntitiesOfClass(EntityCameraShake.class, player.getBoundingBox().inflate(100.0))) 
             {
                 if(cameraShake.distanceTo(player) < cameraShake.getRadius())
                 {
