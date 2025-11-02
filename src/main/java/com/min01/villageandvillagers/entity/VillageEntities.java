@@ -33,7 +33,7 @@ public class VillageEntities
 	public static final RegistryObject<EntityType<Entity>> CAMERA_SHAKE = registerEntity("camera_shake", createBuilder(EntityCameraShake::new, MobCategory.MISC).sized(0.0F, 0.0F));
 
 	public static final RegistryObject<EntityType<EntityScarecrow>> SCARECROW = registerEntity("scarecrow", createBuilder(EntityScarecrow::new, MobCategory.MISC).sized(0.5F, 2.125F));
-	public static final RegistryObject<EntityType<EntityHaybaleBarricade>> HAYBALE_BARRICADE = registerEntity("haybale_barricade", createBuilder(EntityHaybaleBarricade::new, MobCategory.MISC).sized(3.0F, 3.0F));
+	public static final RegistryObject<EntityType<EntityHaybaleBarricade>> HAYBALE_BARRICADE = registerEntity("haybale_barricade", createBuilder(EntityHaybaleBarricade::new, MobCategory.MISC).sized(1.5F, 3.0F));
 	public static final RegistryObject<EntityType<EntityRushingCow>> RUSHING_COW = registerEntity("rushing_cow", createBuilder(EntityRushingCow::new, MobCategory.MISC).sized(0.9F, 1.4F));
 	
 	public static final RegistryObject<EntityType<EntityTimeGear>> TIME_GEAR = registerEntity("time_gear", createBuilder(EntityTimeGear::new, MobCategory.MISC).sized(0.25F, 0.25F));

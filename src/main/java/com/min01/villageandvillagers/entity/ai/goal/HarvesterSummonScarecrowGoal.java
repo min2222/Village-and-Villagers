@@ -1,7 +1,7 @@
 package com.min01.villageandvillagers.entity.ai.goal;
 
 import com.min01.villageandvillagers.entity.VillageEntities;
-import com.min01.villageandvillagers.entity.misc.EntityHaybaleBarricade;
+import com.min01.villageandvillagers.entity.misc.EntityScarecrow;
 import com.min01.villageandvillagers.entity.villager.EntityHarvester;
 import com.min01.villageandvillagers.util.VillageUtil;
 
@@ -9,9 +9,9 @@ import net.minecraft.commands.arguments.EntityAnchorArgument.Anchor;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 
-public class HarvesterSummonBarricadeGoal extends BasicAnimationSkillGoal<EntityHarvester>
+public class HarvesterSummonScarecrowGoal extends BasicAnimationSkillGoal<EntityHarvester>
 {
-	public HarvesterSummonBarricadeGoal(EntityHarvester mob) 
+	public HarvesterSummonScarecrowGoal(EntityHarvester mob) 
 	{
 		super(mob);
 	}
@@ -27,20 +27,18 @@ public class HarvesterSummonBarricadeGoal extends BasicAnimationSkillGoal<Entity
 	@Override
 	public boolean canUse() 
 	{
-		return super.canUse() && this.mob.distanceTo(this.mob.getTarget()) >= 6.0F && this.mob.onGround();
+		return super.canUse() && this.mob.distanceTo(this.mob.getTarget()) <= 6.0F && this.mob.onGround();
 	}
 
 	@Override
 	protected void performSkill() 
 	{
 		Vec3 lookPos = VillageUtil.getLookPos(new Vec2(0.0F, this.mob.yBodyRot), this.mob.position(), 0.0F, 0.0F, 1.5F);
-		EntityHaybaleBarricade barricade = new EntityHaybaleBarricade(VillageEntities.HAYBALE_BARRICADE.get(), this.mob.level);
-		barricade.setOwner(this.mob);
-		barricade.setPos(VillageUtil.getGroundPos(this.mob.level, lookPos.x, this.mob.getY() + 5, lookPos.z).add(0.0F, 0.5F, 0.0F));
-		barricade.setAnimationState(1);
-		barricade.setAnimationTick(8);
-		barricade.setYRot(this.mob.yBodyRot);
-		this.mob.level.addFreshEntity(barricade);
+		EntityScarecrow scarecrow = new EntityScarecrow(VillageEntities.SCARECROW.get(), this.mob.level);
+		scarecrow.setPos(VillageUtil.getGroundPos(this.mob.level, lookPos.x, this.mob.getY() + 5, lookPos.z).add(0.0F, 0.5F, 0.0F));
+		scarecrow.setOwner(this.mob);
+		scarecrow.lookAt(Anchor.EYES, this.mob.getEyePosition());
+		this.mob.level.addFreshEntity(scarecrow);
 	}
 	
 	@Override
@@ -48,7 +46,6 @@ public class HarvesterSummonBarricadeGoal extends BasicAnimationSkillGoal<Entity
 	{
 		super.stop();
 		this.mob.setAnimationState(0);
-		this.mob.setCanMove(false);
 	}
 
 	@Override
@@ -66,6 +63,6 @@ public class HarvesterSummonBarricadeGoal extends BasicAnimationSkillGoal<Entity
 	@Override
 	protected int getSkillUsingInterval() 
 	{
-		return 300;
+		return 600;
 	}
 }

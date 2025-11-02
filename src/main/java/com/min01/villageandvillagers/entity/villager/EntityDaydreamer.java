@@ -1,6 +1,7 @@
 package com.min01.villageandvillagers.entity.villager;
 
 import com.min01.villageandvillagers.misc.SpecialVillagerProfessions;
+import com.min01.villageandvillagers.util.VillageUtil;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -21,7 +22,7 @@ public class EntityDaydreamer extends AbstractCombatVillager
     {
         return Mob.createMobAttributes()
     			.add(Attributes.MAX_HEALTH, 30.0F)
-    			.add(Attributes.MOVEMENT_SPEED, 0.75F)
+    			.add(Attributes.MOVEMENT_SPEED, 0.65F)
         		.add(Attributes.ATTACK_DAMAGE, 2.0F)
         		.add(Attributes.FOLLOW_RANGE, 48.0F);
     }
@@ -40,11 +41,11 @@ public class EntityDaydreamer extends AbstractCombatVillager
 		{
 			if(this.canLook())
 			{
-				this.getLookControl().setLookAt(this.getTarget(), 30.0F, 30.0F);
+				this.getLookControl().setLookAt(this.getTarget(), 100.0F, 100.0F);
 			}
 			if(this.canMove())
 			{
-				this.getNavigation().moveTo(this.getTarget(), this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
+				VillageUtil.runAway(this, this.getTarget().position());
 			}
 		}
 	}

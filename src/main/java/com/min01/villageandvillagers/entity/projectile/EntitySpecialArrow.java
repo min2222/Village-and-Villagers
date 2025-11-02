@@ -92,6 +92,7 @@ public class EntitySpecialArrow extends AbstractArrow
 					arrow.setPos(this.position().add(0, 0.5, 0));
 					arrow.setDeltaMovement(this.level.random.nextGaussian() * 0.2D, 0.4D, this.level.random.nextGaussian() * 0.2D);
 					arrow.currentAmount = this.currentAmount + 1;
+					arrow.pickup = Pickup.CREATIVE_ONLY;
 					this.level.addFreshEntity(arrow);
 				}
 			}

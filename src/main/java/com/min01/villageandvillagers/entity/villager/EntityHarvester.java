@@ -1,7 +1,9 @@
 package com.min01.villageandvillagers.entity.villager;
 
+import com.min01.villageandvillagers.entity.ai.goal.HarvesterCowRushGoal;
 import com.min01.villageandvillagers.entity.ai.goal.HarvesterMeleeAttackGoal;
 import com.min01.villageandvillagers.entity.ai.goal.HarvesterSummonBarricadeGoal;
+import com.min01.villageandvillagers.entity.ai.goal.HarvesterSummonScarecrowGoal;
 import com.min01.villageandvillagers.misc.SmoothAnimationState;
 import com.min01.villageandvillagers.misc.SpecialVillagerProfessions;
 
@@ -12,7 +14,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 
 public class EntityHarvester extends AbstractCombatVillager
 {
@@ -23,7 +24,6 @@ public class EntityHarvester extends AbstractCombatVillager
 	public EntityHarvester(EntityType<? extends Villager> p_35267_, Level p_35268_)
 	{
 		super(p_35267_, p_35268_);
-		this.posArray = new Vec3[1];
 	}
 	
     public static AttributeSupplier.Builder createAttributes()
@@ -39,8 +39,10 @@ public class EntityHarvester extends AbstractCombatVillager
     protected void registerGoals()
     {
     	super.registerGoals();
-    	this.goalSelector.addGoal(4, new HarvesterMeleeAttackGoal(this));
-    	this.goalSelector.addGoal(4, new HarvesterSummonBarricadeGoal(this));
+    	this.goalSelector.addGoal(0, new HarvesterMeleeAttackGoal(this));
+    	this.goalSelector.addGoal(0, new HarvesterSummonBarricadeGoal(this));
+    	this.goalSelector.addGoal(0, new HarvesterSummonScarecrowGoal(this));
+    	this.goalSelector.addGoal(0, new HarvesterCowRushGoal(this));
     }
 	
 	@Override
@@ -57,11 +59,10 @@ public class EntityHarvester extends AbstractCombatVillager
 		{
 			if(this.canLook())
 			{
-				this.getLookControl().setLookAt(this.getTarget(), 30.0F, 30.0F);
+				this.getLookControl().setLookAt(this.getTarget(), 100.0F, 100.0F);
 			}
 			if(this.canMove())
 			{
-				//TODO hide in barricade
 				this.getNavigation().moveTo(this.getTarget(), this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
 			}
 		}

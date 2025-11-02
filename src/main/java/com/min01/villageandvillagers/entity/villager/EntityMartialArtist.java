@@ -42,7 +42,7 @@ public class EntityMartialArtist extends AbstractCombatVillager
 		{
 			if(this.canMove())
 			{
-				this.getLookControl().setLookAt(this.getTarget(), 30.0F, 30.0F);
+				this.getLookControl().setLookAt(this.getTarget(), 100.0F, 100.0F);
 			}
 			if(this.canMove())
 			{

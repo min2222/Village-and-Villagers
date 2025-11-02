@@ -25,6 +25,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 
 public class EntityScarecrow extends AbstractOwnableCreature<LivingEntity>
 {
@@ -59,7 +60,7 @@ public class EntityScarecrow extends AbstractOwnableCreature<LivingEntity>
 		
 		if(this.tickCount % 20 == 0 && this.getOwner() != null)
 		{
-			List<Mob> list = this.level.getEntitiesOfClass(Mob.class, this.getBoundingBox().inflate(5.0F), t -> t.getTarget() == this.getOwner());
+			List<Mob> list = this.level.getEntitiesOfClass(Mob.class, this.getBoundingBox().inflate(5.0F), t -> t.getTarget() == this.getOwner() && !t.getType().is(Tags.EntityTypes.BOSSES));
 			list.forEach(t -> 
 			{
 				t.setTarget(this);
@@ -71,6 +72,22 @@ public class EntityScarecrow extends AbstractOwnableCreature<LivingEntity>
 			this.spawnAtLocation(VillageItems.SCARECROW.get());
 			this.discard();
 		}
+	}
+	
+	@Override
+	public boolean isAlliedTo(Entity p_20355_) 
+	{
+		if(p_20355_ == this.getOwner())
+		{
+			return true;
+		}
+		return super.isAlliedTo(p_20355_);
+	}
+	
+	@Override
+	protected void doPush(Entity p_20971_)
+	{
+		
 	}
 	
 	@Override
@@ -96,13 +113,6 @@ public class EntityScarecrow extends AbstractOwnableCreature<LivingEntity>
 	}
 	
 	@Override
-	public void die(DamageSource p_21014_) 
-	{
-		this.spawnAtLocation(VillageItems.SCARECROW.get());
-		super.die(p_21014_);
-	}
-	
-	@Override
 	public ItemStack getPickResult()
 	{
 		return VillageItems.SCARECROW.get().getDefaultInstance();
@@ -117,9 +127,9 @@ public class EntityScarecrow extends AbstractOwnableCreature<LivingEntity>
 	@Override
 	public boolean hurt(DamageSource p_19946_, float p_19947_) 
 	{
-		if(!p_19946_.is(DamageTypeTags.BYPASSES_INVULNERABILITY))
+		if(p_19946_.is(DamageTypeTags.IS_FIRE))
 		{
-			p_19947_ = p_19946_.is(DamageTypeTags.IS_FIRE) ? 2 : 1;
+			p_19947_ *= 2;
 		}
 		boolean flag = super.hurt(p_19946_, p_19947_);
 		if(flag)

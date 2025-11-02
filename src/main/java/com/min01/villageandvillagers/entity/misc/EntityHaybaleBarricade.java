@@ -51,12 +51,6 @@ public class EntityHaybaleBarricade extends AbstractOwnableEntity<EntityHarveste
 	}
 	
 	@Override
-	public boolean canBeCollidedWith() 
-	{
-		return true;
-	}
-	
-	@Override
 	public void tick() 
 	{
 		super.tick();
@@ -88,6 +82,10 @@ public class EntityHaybaleBarricade extends AbstractOwnableEntity<EntityHarveste
 			}
 			if(this.getAnimationState() == 2)
 			{
+				if(this.getOwner() != null)
+				{
+					this.getOwner().setCanMove(true);
+				}
 				this.discard();
 			}
 		}
@@ -113,9 +111,9 @@ public class EntityHaybaleBarricade extends AbstractOwnableEntity<EntityHarveste
 			int damage = p_19946_.is(DamageTypeTags.IS_FIRE) ? 2 : 1;
 			this.playSound(SoundEvents.GRASS_BREAK);
 			this.setDurability(this.getDurability() - damage);
-    		for(int i = 0; i < 20; i++)
+    		for(int i = 0; i < 40; i++)
     		{
-        		this.level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.HAY_BLOCK.defaultBlockState()), this.getX() + this.random.nextGaussian() * 0.1F, this.getEyeY(), this.getZ() + this.random.nextGaussian() * 0.1F, this.random.nextGaussian() * 0.1F, this.random.nextGaussian() * 0.1F, this.random.nextGaussian() * 0.1F);
+        		this.level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.HAY_BLOCK.defaultBlockState()), this.getX() + this.random.nextGaussian() * 0.5F, this.getY() + 0.5F, this.getZ() + this.random.nextGaussian() * 0.5F, this.random.nextGaussian() * 0.5F, this.random.nextGaussian() * 0.5F, this.random.nextGaussian() * 0.5F);
     		}
 		}
 		return p_19946_.is(DamageTypeTags.BYPASSES_INVULNERABILITY);
@@ -138,7 +136,7 @@ public class EntityHaybaleBarricade extends AbstractOwnableEntity<EntityHarveste
 	@Override
 	public Vec3 getClipPos(Vec3 from, Vec3 to, Entity entity) 
 	{
-    	Vec3 motion = VillageUtil.fromToVector(from, to, (float) from.distanceTo(this.getEyePosition()) - 3.5F);
+    	Vec3 motion = VillageUtil.fromToVector(from, to, (float) from.distanceTo(this.getEyePosition()) - 0.8F);
     	Vec3 pos = from.add(motion);
 		return pos;
 	}

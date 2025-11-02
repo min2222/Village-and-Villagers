@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 
 import org.joml.Math;
 
+import com.min01.tickrateapi.util.TickrateUtil;
 import com.min01.villageandvillagers.config.VillageConfig;
 import com.min01.villageandvillagers.entity.villager.AbstractCombatVillager;
 
@@ -18,6 +19,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.ai.util.LandRandomPos;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -51,10 +55,56 @@ public class VillageUtil
 		}
 	}
 	
+    public static void runAway(PathfinderMob mob, Vec3 pos)
+    {
+    	boolean flag = true;
+    	if(mob instanceof TamableAnimal animal)
+    	{
+    		flag = !animal.isInSittingPose();
+    	}
+    	if(flag)
+    	{
+            mob.setTarget(null);
+            mob.setLastHurtByMob(null);
+            if(mob.onGround())
+            {
+                Vec3 randomShake = new Vec3(mob.level.random.nextFloat() - 0.5F, 0, mob.level.random.nextFloat() - 0.5F).scale(0.1F);
+                mob.setDeltaMovement(mob.getDeltaMovement().multiply(0.7F, 1, 0.7F).add(randomShake));
+            }
+            Vec3 vec = LandRandomPos.getPosAway(mob, 16, 7, pos);
+            if(vec != null)
+            {
+                mob.getNavigation().moveTo(vec.x, vec.y, vec.z, 0.5F);
+            }
+    	}
+    }
+	
+    public static double getMeleeAttackRangeSqr(float width, LivingEntity target, float multiplier)
+    {
+    	return (double)(width * multiplier * width * multiplier + target.getBbWidth());
+    }
+    
+    public static double getMeleeAttackRangeSqr(Entity owner, LivingEntity target, float multiplier)
+    {
+    	return (double)(owner.getBbWidth() * multiplier * owner.getBbWidth() * multiplier + target.getBbWidth());
+    }
+    
+    public static boolean isWithinMeleeAttackRange(Vec3 pos, float width, LivingEntity target, float multiplier)
+    {
+    	double d0 = pos.distanceToSqr(target.getX(), target.getY(), target.getZ());
+    	return d0 <= getMeleeAttackRangeSqr(width, target, multiplier);
+    }
+
+    public static boolean isWithinMeleeAttackRange(Entity owner, LivingEntity target, float multiplier)
+    {
+    	double d0 = owner.distanceToSqr(target.getX(), target.getY(), target.getZ());
+    	return d0 <= getMeleeAttackRangeSqr(owner, target, multiplier);
+    }
+	
 	public static void setTickrateWithTime(Entity entity, int tickrate, int time)
 	{
-		entity.getPersistentData().putInt("ForceTickCount", time);
-		entity.getPersistentData().putInt("TickrateVV", tickrate);
+		entity.getPersistentData().putInt("ForceTickCountVV", time);
+		TickrateUtil.setTickrate(entity, tickrate);
 	}
 	
 	public static void getCurio(LivingEntity living, Item item, Consumer<ItemStack> consumer)

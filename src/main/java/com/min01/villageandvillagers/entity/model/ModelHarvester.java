@@ -3,6 +3,7 @@ package com.min01.villageandvillagers.entity.model;
 import com.min01.villageandvillagers.VillageandVillagers;
 import com.min01.villageandvillagers.entity.animation.HarvesterAnimation;
 import com.min01.villageandvillagers.entity.villager.EntityHarvester;
+import com.min01.villageandvillagers.item.VillageItems;
 import com.min01.villageandvillagers.util.VillageClientUtil;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -18,16 +19,17 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
 
 public class ModelHarvester extends HierarchicalModel<EntityHarvester>
 {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(VillageandVillagers.MODID, "harvester"), "main");
 	private final ModelPart root;
-	private final ModelPart body;
-	private final ModelPart upperbody;
+	public final ModelPart body;
+	public final ModelPart upperbody;
 	private final ModelPart head;
-	private final ModelPart arms_out;
-	private final ModelPart left_arm;
+	public final ModelPart arms_out;
+	public final ModelPart left_arm;
 	private final ModelPart right_arm;
 	private final ModelPart arms_crossed;
 	private final ModelPart right_leg;
@@ -110,6 +112,11 @@ public class ModelHarvester extends HierarchicalModel<EntityHarvester>
 		{
 			limbSwing = 0.0F;
 			limbSwingAmount = 0.0F;
+		}
+		
+		if(entity.getItemInHand(InteractionHand.OFF_HAND).is(VillageItems.COWBELL.get()))
+		{
+			this.left_arm.xRot += 5.0F;
 		}
 		
 		this.right_leg.xRot += Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount * 0.5F;

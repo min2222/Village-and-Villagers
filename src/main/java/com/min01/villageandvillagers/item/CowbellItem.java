@@ -10,6 +10,7 @@ import com.min01.villageandvillagers.misc.VillageArmPoses;
 import com.min01.villageandvillagers.util.VillageUtil;
 
 import net.minecraft.client.model.HumanoidModel.ArmPose;
+import net.minecraft.commands.arguments.EntityAnchorArgument.Anchor;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -51,6 +52,7 @@ public class CowbellItem extends Item
 			cow.setOwner(p_41433_);
 			cow.setPos(groundPos);
 			cow.setWantedPos(VillageUtil.getGroundPos(p_41432_, wantedPos.x, p_41433_.getY() + 10, wantedPos.z).add(0.0F, 1.0F, 0.0F));
+			cow.lookAt(Anchor.FEET, cow.getWantedPos());
 			p_41432_.addFreshEntity(cow);
 		}
 		

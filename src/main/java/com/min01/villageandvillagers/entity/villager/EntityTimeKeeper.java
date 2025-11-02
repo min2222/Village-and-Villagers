@@ -40,7 +40,14 @@ public class EntityTimeKeeper extends AbstractCombatVillager
 		super.tick();
 		if(this.getTarget() != null)
 		{
-			this.getLookControl().setLookAt(this.getTarget(), 30.0F, 30.0F);
+			if(this.canMove())
+			{
+				this.getLookControl().setLookAt(this.getTarget(), 100.0F, 100.0F);
+			}
+			if(this.canMove())
+			{
+				this.getNavigation().moveTo(this.getTarget(), this.getAttributeBaseValue(Attributes.MOVEMENT_SPEED));
+			}
 		}
 	}
 	

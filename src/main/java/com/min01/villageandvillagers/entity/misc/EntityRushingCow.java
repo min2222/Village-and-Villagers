@@ -54,7 +54,7 @@ public class EntityRushingCow extends Cow
 		
 		if(!this.getWantedPos().equals(Vec3.ZERO))
 		{
-			if(this.getWantedPos().subtract(this.position()).length() <= 2.5F || this.tickCount >= 200)
+			if(this.getWantedPos().subtract(this.position()).length() <= 2.5F || this.tickCount >= 200 || this.horizontalCollision)
 			{
 				this.discard();
 			}

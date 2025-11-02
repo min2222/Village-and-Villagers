@@ -103,16 +103,19 @@ public class EventHandlerForge
 		Iterable<Entity> all = VillageUtil.getAllEntities(event.level);
 		for(Entity entity : all)
 		{
-			if(!(entity instanceof LivingEntity) || !entity.getPersistentData().contains("ForceTickCount"))
+			if(!(entity instanceof LivingEntity) || !entity.getPersistentData().contains("ForceTickCountVV"))
 			{
 				continue;
 			}
-			int time = entity.getPersistentData().getInt("ForceTickCount");
-			entity.getPersistentData().putInt("ForceTickCount", time - 1);
-			TickrateUtil.setTickrate(entity, entity.getPersistentData().getInt("TickrateVV"));
+			int time = entity.getPersistentData().getInt("ForceTickCountVV");
 			if(time <= 0)
 			{
-				entity.getPersistentData().remove("ForceTickCount");
+				TickrateUtil.resetTickrate(entity);
+				entity.getPersistentData().remove("ForceTickCountVV");
+			}
+			else
+			{
+				entity.getPersistentData().putInt("ForceTickCountVV", time - 1);
 			}
 		}
 	}
@@ -133,7 +136,7 @@ public class EventHandlerForge
 						if(entity != null)
 						{
 							VillageUtil.setTickrateWithTime(entity, 0, 60);
-							player.getCooldowns().addCooldown(t.getItem(), 20 * 60);
+							player.getCooldowns().addCooldown(t.getItem(), 1200);
 						}
 						else
 						{
@@ -142,7 +145,7 @@ public class EventHandlerForge
 							{
 								VillageUtil.setTickrateWithTime(target, 0, 100);
 							});
-							player.getCooldowns().addCooldown(t.getItem(), 20 * 90);
+							player.getCooldowns().addCooldown(t.getItem(), 1800);
 						}
 					}
 				}

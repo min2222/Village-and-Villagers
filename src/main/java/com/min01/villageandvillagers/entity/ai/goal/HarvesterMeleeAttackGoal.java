@@ -1,12 +1,9 @@
 package com.min01.villageandvillagers.entity.ai.goal;
 
-import java.util.List;
-
 import com.min01.villageandvillagers.entity.villager.EntityHarvester;
 import com.min01.villageandvillagers.util.VillageUtil;
 
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.commands.arguments.EntityAnchorArgument.Anchor;
 
 public class HarvesterMeleeAttackGoal extends BasicAnimationSkillGoal<EntityHarvester>
 {
@@ -19,9 +16,11 @@ public class HarvesterMeleeAttackGoal extends BasicAnimationSkillGoal<EntityHarv
 	public void start() 
 	{
 		super.start();
+		this.mob.lookAt(Anchor.EYES, this.mob.getTarget().getEyePosition());
 		if(Math.random() <= 0.5F)
 		{
 			this.mob.setAnimationState(2);
+	    	this.skillWarmupDelay = this.adjustedTickDelay(14);
 		}
 		else
 		{
@@ -32,20 +31,18 @@ public class HarvesterMeleeAttackGoal extends BasicAnimationSkillGoal<EntityHarv
 	@Override
 	public boolean canUse() 
 	{
-		return super.canUse() && this.mob.distanceTo(this.mob.getTarget()) <= 4.0F;
+		return super.canUse() && VillageUtil.isWithinMeleeAttackRange(this.mob, this.mob.getTarget(), 3.5F);
 	}
 
 	@Override
 	protected void performSkill() 
 	{
-		if(this.mob.posArray[0] != null)
+		if(this.mob.getTarget() != null)
 		{
-			List<LivingEntity> list = this.mob.level.getEntitiesOfClass(LivingEntity.class, this.mob.getBoundingBox().inflate(1.5F));
-			list.removeIf(t -> t == this.mob || t.isAlliedTo(this.mob) || VillageUtil.distanceTo(t, this.mob.posArray[0]) > 2.5F);
-			list.forEach(t -> 
+			if(VillageUtil.isWithinMeleeAttackRange(this.mob, this.mob.getTarget(), 3.5F))
 			{
-				t.hurt(this.mob.damageSources().mobAttack(this.mob), (float) this.mob.getAttributeBaseValue(Attributes.ATTACK_DAMAGE));
-			});
+				this.mob.doHurtTarget(this.mob.getTarget());
+			}
 		}
 	}
 	
@@ -61,16 +58,16 @@ public class HarvesterMeleeAttackGoal extends BasicAnimationSkillGoal<EntityHarv
 	{
 		return 30;
 	}
-
-	@Override
-	protected int getSkillUsingInterval() 
-	{
-		return 60;
-	}
 	
 	@Override
 	protected int getSkillWarmupTime() 
 	{
-		return this.mob.getAnimationState() == 1 ? 16 : 14;
+		return 16;
+	}
+
+	@Override
+	protected int getSkillUsingInterval() 
+	{
+		return 40;
 	}
 }

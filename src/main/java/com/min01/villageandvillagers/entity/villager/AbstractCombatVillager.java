@@ -18,6 +18,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.behavior.VillagerGoalPackages;
@@ -25,7 +26,9 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
+import net.minecraft.world.entity.animal.AbstractGolem;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerData;
 import net.minecraft.world.entity.npc.VillagerProfession;
@@ -133,6 +136,16 @@ public abstract class AbstractCombatVillager extends AbstractAnimatableVillager
 	public Villager getBreedOffspring(ServerLevel p_150046_, AgeableMob p_150047_) 
 	{
 		return null;
+	}
+	
+	@Override
+	public boolean isAlliedTo(Entity p_20355_) 
+	{
+		if(p_20355_ instanceof AbstractCombatVillager || p_20355_ instanceof AbstractVillager || p_20355_ instanceof AbstractGolem)
+		{
+			return true;
+		}
+		return super.isAlliedTo(p_20355_);
 	}
 	
 	@Override
