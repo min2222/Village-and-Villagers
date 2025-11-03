@@ -27,7 +27,7 @@ public class HarvesterSummonBarricadeGoal extends BasicAnimationSkillGoal<Entity
 	@Override
 	public boolean canUse() 
 	{
-		return super.canUse() && this.mob.distanceTo(this.mob.getTarget()) >= 6.0F && this.mob.onGround();
+		return super.canUse() && this.mob.distanceTo(this.mob.getTarget()) <= 10.0F && this.mob.onGround();
 	}
 
 	@Override
@@ -48,7 +48,6 @@ public class HarvesterSummonBarricadeGoal extends BasicAnimationSkillGoal<Entity
 	{
 		super.stop();
 		this.mob.setAnimationState(0);
-		this.mob.setCanMove(false);
 	}
 
 	@Override

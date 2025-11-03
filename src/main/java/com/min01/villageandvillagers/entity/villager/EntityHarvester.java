@@ -17,6 +17,7 @@ import net.minecraft.world.level.Level;
 
 public class EntityHarvester extends AbstractCombatVillager
 {
+	public final SmoothAnimationState idleAnimationState = new SmoothAnimationState();
 	public final SmoothAnimationState stabAnimationState = new SmoothAnimationState();
 	public final SmoothAnimationState twoHandStabAnimationState = new SmoothAnimationState();
 	public final SmoothAnimationState stompAnimationState = new SmoothAnimationState();
@@ -51,6 +52,7 @@ public class EntityHarvester extends AbstractCombatVillager
 		super.tick();
 		if(this.level.isClientSide)
 		{
+			this.idleAnimationState.updateWhen(this.getAnimationState() == 0, this.tickCount);
 			this.stabAnimationState.updateWhen(this.isUsingSkill(1), this.tickCount);
 			this.twoHandStabAnimationState.updateWhen(this.isUsingSkill(2), this.tickCount);
 			this.stompAnimationState.updateWhen(this.isUsingSkill(3), this.tickCount);

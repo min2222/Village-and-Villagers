@@ -18,7 +18,6 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 
 public class ModelHarvester extends HierarchicalModel<EntityHarvester>
@@ -30,10 +29,7 @@ public class ModelHarvester extends HierarchicalModel<EntityHarvester>
 	private final ModelPart head;
 	public final ModelPart arms_out;
 	public final ModelPart left_arm;
-	private final ModelPart right_arm;
 	private final ModelPart arms_crossed;
-	private final ModelPart right_leg;
-	private final ModelPart left_leg;
 
 	public ModelHarvester(ModelPart root)
 	{
@@ -43,10 +39,7 @@ public class ModelHarvester extends HierarchicalModel<EntityHarvester>
 		this.head = this.upperbody.getChild("head");
 		this.arms_out = this.upperbody.getChild("arms_out");
 		this.left_arm = this.arms_out.getChild("left_arm");
-		this.right_arm = this.arms_out.getChild("right_arm");
 		this.arms_crossed = this.upperbody.getChild("arms_crossed");
-		this.right_leg = this.body.getChild("right_leg");
-		this.left_leg = this.body.getChild("left_leg");
 	}
 
 	public static LayerDefinition createBodyLayer() 
@@ -100,29 +93,23 @@ public class ModelHarvester extends HierarchicalModel<EntityHarvester>
 	public void setupAnim(EntityHarvester entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
 	{
 		this.root().getAllParts().forEach(ModelPart::resetPose);
+		
 		VillageClientUtil.animateHead(this.head, netHeadYaw, headPitch);
+
+		entity.idleAnimationState.animate(this, HarvesterAnimation.HARVESTER_IDLE, ageInTicks, limbSwingAmount);
 		entity.stabAnimationState.animate(this, HarvesterAnimation.HARVESTER_STAB, ageInTicks);
 		entity.twoHandStabAnimationState.animate(this, HarvesterAnimation.HARVESTER_TWO_HAND_STAB, ageInTicks);
 		entity.stompAnimationState.animate(this, HarvesterAnimation.HARVESTER_STOMP, ageInTicks);
 		
+		this.animateWalk(HarvesterAnimation.HARVESTER_WALK, limbSwing, limbSwingAmount, 2.5F, 2.5F);
+		
 		this.arms_crossed.visible = !entity.isCombatMode();
 		this.arms_out.visible = entity.isCombatMode();
-
-		if(entity.getAnimationState() != 0)
-		{
-			limbSwing = 0.0F;
-			limbSwingAmount = 0.0F;
-		}
 		
 		if(entity.getItemInHand(InteractionHand.OFF_HAND).is(VillageItems.COWBELL.get()))
 		{
 			this.left_arm.xRot += 5.0F;
 		}
-		
-		this.right_leg.xRot += Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount * 0.5F;
-		this.left_leg.xRot += Mth.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount * 0.5F;
-		this.right_arm.xRot += Mth.cos(limbSwing * 0.6662F + (float)Math.PI) * 2.0F * limbSwingAmount * 0.5F;
-		this.left_arm.xRot += Mth.cos(limbSwing * 0.6662F) * 2.0F * limbSwingAmount * 0.5F;
 	}
 	
 	@Override

@@ -41,7 +41,7 @@ public class EntityScarecrow extends AbstractOwnableCreature<LivingEntity>
     public static AttributeSupplier.Builder createAttributes()
     {
         return Mob.createMobAttributes()
-    			.add(Attributes.MAX_HEALTH, 200.0F)
+    			.add(Attributes.MAX_HEALTH, 100.0F)
     			.add(Attributes.MOVEMENT_SPEED, 0.0F)
         		.add(Attributes.ATTACK_DAMAGE, 0.0F)
         		.add(Attributes.FOLLOW_RANGE, 0.0F);

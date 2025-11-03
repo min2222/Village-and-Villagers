@@ -51,6 +51,12 @@ public class EntityHaybaleBarricade extends AbstractOwnableEntity<EntityHarveste
 	}
 	
 	@Override
+	public boolean canBeCollidedWith() 
+	{
+		return true;
+	}
+	
+	@Override
 	public void tick() 
 	{
 		super.tick();
@@ -82,10 +88,6 @@ public class EntityHaybaleBarricade extends AbstractOwnableEntity<EntityHarveste
 			}
 			if(this.getAnimationState() == 2)
 			{
-				if(this.getOwner() != null)
-				{
-					this.getOwner().setCanMove(true);
-				}
 				this.discard();
 			}
 		}

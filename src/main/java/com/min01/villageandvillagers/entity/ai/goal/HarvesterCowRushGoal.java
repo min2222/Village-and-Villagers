@@ -35,7 +35,7 @@ public class HarvesterCowRushGoal extends BasicAnimationSkillGoal<EntityHarveste
 	@Override
 	public boolean canUse() 
 	{
-		return super.canUse() && this.mob.distanceTo(this.mob.getTarget()) >= 8.0F && this.mob.onGround();
+		return super.canUse() && this.mob.distanceTo(this.mob.getTarget()) <= 8.0F && this.mob.onGround();
 	}
 
 	@Override
