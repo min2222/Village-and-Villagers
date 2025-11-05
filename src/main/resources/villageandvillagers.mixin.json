@@ -8,7 +8,6 @@
 		"MixinResource"
 	],
 	"client": [
-		"MixinLevelRenderer"
 	],
 	"server": [
 	],
